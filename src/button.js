@@ -1,6 +1,7 @@
 import { formDisplay } from "./loginForm";
 import {logOut} from './adminLogout';
 import { makeStudent, makeTeacher } from "./adminFunctionality";
+import { appendStudent, appendTeacher } from "./adminLoginPage";
 
 const btn = document.querySelector("#btn");
 const btnLogin = document.querySelector("#btnLogin");
@@ -138,5 +139,7 @@ const buttonClass = () => {
     teacherAdd.addEventListener('click',makeTeacher);
     btnOpenAdmin.addEventListener('click',openNavAdmin);
     btnCloseAdmin.addEventListener('click',closeNavAdmin);
+    teacherListAdmin.addEventListener('click',appendTeacher);
+    studentListAdmin.addEventListener('click',appendStudent);
 }
 export default buttonClass;

@@ -14,78 +14,7 @@
                 <p class="welcome-message"></p>
             </div>
         </header>
-        <main>
-            <div id = 'container'>
-            </div>
-        </main>
-        <button class="open-button teacher">Add Teacher</button>
-        <div class="form-popup" id="addTeacher">
-            <form action="/action_page.php" class="form-container" name = "addTeacher">
-                <h1>Add Teacher</h1>
-  
-                <label for="firstName"><b>First Name:</b></label>
-                <input type="text" name="firstName" required>
-
-                <label for="lastName"><b>Last Name:</b></label>
-                <input type="text" name="lastName" required>
-
-                <label for="teacherCode"><b>Teacher Code:</b></label>
-                <input type="text" name="teacherCode" required>
-  
-                <!-- <label for="pages"><b>Pages</b></label>
-                <input type="number" name="pages" required> -->
-                <!-- <div id = 'radio'>
-                    <b>Have you read it ?</b>
-                    <div>
-                        <input type="radio" id="yes" name="read" value="Read" checked>
-                        <label for="yes">Yes</label><br>
-                    </div>
-                    <div>
-                        <input type="radio" id="no" name="read" value="Not Read">
-                        <label for="no">No</label><br>
-                    </div>
-                </div> -->
-  
-                <button type="button" class="btn" id = "btnAddTeacher">Add Teacher</button>
-                <button type="button" class="btn cancel" id = 'teacherClose'>Close</button>
-            </form>
-        </div>
-        <button class="open-button student">Add Student</button>
-        <div class="form-popup" id="addStudent">
-            <form action="/action_page.php" class="form-container" name = "addStudent">
-                <h1>Add Student</h1>
-  
-                <label for="firstName"><b>First Name:</b></label>
-                <input type="text" name="firstName" required>
-
-                <label for="lastName"><b>Last Name:</b></label>
-                <input type="text" name="lastName" required>
-
-                <label for="year"><b>Year:</b></label>
-                <input type="text" name="year" required>
-
-                <label for="degree"><b>Degree:</b></label>
-                <input type="text" name="degree" required>
-  
-                <!-- <label for="pages"><b>Pages</b></label>
-                <input type="number" name="pages" required> -->
-                <!-- <div id = 'radio'>
-                    <b>Have you read it ?</b>
-                    <div>
-                        <input type="radio" id="yes" name="read" value="Read" checked>
-                        <label for="yes">Yes</label><br>
-                    </div>
-                    <div>
-                        <input type="radio" id="no" name="read" value="Not Read">
-                        <label for="no">No</label><br>
-                    </div>
-                </div> -->
-  
-                <button type="button" class="btn" id = "btnAddStudent">Add Student</button>
-                <button type="button" class="btn cancel" id = 'studentClose'>Close</button>
-            </form>
-        </div>
-        <button class="open-login-button"><img src = "https://cdn0.iconfinder.com/data/icons/mini-icon-2-2/16/login_in-512.png"></button>
+        <button class = 'open-login-button'><img src = "https://cdn0.iconfinder.com/data/icons/mini-icon-2-2/16/login_in-512.png" height="50px" width="50px"></button>
         <div class="login-form-popup" id="loginForm">
             <form action="/action_page.php" class="form-container-login" name = "loginForm">
                 <h1>Login</h1>
@@ -116,27 +45,50 @@
                 <button type="button" class="btnLogin cancelLogin">Close</button>
             </form>
         </div>
-        <!-- <button class="open-signup-button" onclick="openFormSignUp()">Sign Up</button>
-        <div class="signup-form-popup" id="signupForm">
-            <form action="/action_page.php" class="form-container-signup" name = "signupForm">
-                <h1>Sign Up</h1>
+
+        <main>
+            <div id = 'container'>
+            </div>
+        </main>
+        <button class="open-button teacher">Add Teacher</button>
+        <div class="form-popup" id="addTeacher">
+            <form action="/action_page.php" class="form-container" name = "addTeacher">
+                <h1>Add Teacher</h1>
   
-                <label for="fname"><b>First Name</b></label>
-                <input type="text" name="fname" required>
-                
-                <label for="lname"><b>Last Name</b></label>
-                <input type="text" name="lname" required>
+                <label for="firstName"><b>First Name:</b></label>
+                <input type="text" name="firstName" required>
 
-                <label for="username"><b>Username</b></label>
-                <input type="text" name="username" required>
+                <label for="lastName"><b>Last Name:</b></label>
+                <input type="text" name="lastName" required>
 
-                <label for="password"><b>Password</b></label>
-                <input type="password" name="password" required>
-
-                <button type="button" class="btnSignUp" id = "btnSignUp">Sign Up</button>
-                <button type="button" class="btnSignUp cancelSignUp" onclick="closeFormSignUp()">Close</button>
+                <label for="teacherCode"><b>Teacher Code:</b></label>
+                <input type="text" name="teacherCode" required>
+  
+                <button type="button" class="btn" id = "btnAddTeacher">Add Teacher</button>
+                <button type="button" class="btn cancel" id = 'teacherClose'>Close</button>
             </form>
-        </div> -->
+        </div>
+        <button class="open-button student">Add Student</button>
+        <div class="form-popup" id="addStudent">
+            <form action="/action_page.php" class="form-container" name = "addStudent">
+                <h1>Add Student</h1>
+  
+                <label for="firstName"><b>First Name:</b></label>
+                <input type="text" name="firstName" required>
+
+                <label for="lastName"><b>Last Name:</b></label>
+                <input type="text" name="lastName" required>
+
+                <label for="year"><b>Year:</b></label>
+                <input type="text" name="year" required>
+
+                <label for="degree"><b>Degree:</b></label>
+                <input type="text" name="degree" required>
+  
+                <button type="button" class="btn" id = "btnAddStudent">Add Student</button>
+                <button type="button" class="btn cancel" id = 'studentClose'>Close</button>
+            </form>
+        </div>
 
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <button id="logout-button"><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>

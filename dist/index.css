@@ -155,7 +155,7 @@ b,label,input {
     transition: 0.5s;
 }
 
-/* .book-card {
+.info-card {
     display: flex;
     flex-direction: column;
     background-color: rgba(0,0,0, 0.6);
@@ -168,14 +168,14 @@ b,label,input {
     padding: 1.5rem;
 }
 
-.book-detail {
+.info-detail {
     padding: 0 1.5rem;
     padding-bottom: 1.5rem;
     overflow-wrap: normal;
     color: white;
 }
 
-.book-card-tools {
+.info-card-tools {
     display: inline-flex;
     width: 100%;
     flex-direction: row;
@@ -216,26 +216,27 @@ b,label,input {
   width: 140px;
 }
 
-.book-card-tools button:hover {
+.info-card-tools button:hover {
   opacity: 1;
 }
 
-.book-card-tools button {
+.info-card-tools button {
   height: 50px;
   width: 33.33%;
-} */
+} 
 
-.open-login-button {
-  background-color: #555;
+.open-login-button{
+  background: none;
   color: white;
-  padding: 16px 20px;
   border: none;
+  padding: 0;
+  height: 50px;
   cursor: pointer;
   opacity: 0.8;
   position: fixed;
   top: 23px;
   right: 28px;
-  width: 140px;
+  width: 50px;
 }
 
 /* The popup form - hidden by default */

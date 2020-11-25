@@ -1,7 +1,10 @@
-import { teacherDatabase } from "./connectToFirebase";
+import { studentDatabase, teacherDatabase } from "./connectToFirebase";
 import { createStudent } from "./student";
 import { createTeacher } from "./teacher";
 const teacherClose = document.querySelector('#teacherClose');
+const studentClose = document.querySelector('#studentClose');
+const studentListAdmin = document.querySelector('.open-student-button');
+const teacherListAdmin = document.querySelector('.open-teacher-button');
 const makeStudent = () => {
     const studentForm = document.forms["addStudent"];
     console.log(studentForm);
@@ -12,6 +15,7 @@ const makeStudent = () => {
     console.log(fName,lName,year,degree);
     createStudent(fName,lName,year,degree);
     studentClose.click();
+    studentListAdmin.click();
 }
 
 const makeTeacher = () => {
@@ -24,11 +28,19 @@ const makeTeacher = () => {
     console.log(fName,lName,teacherCode);
     createTeacher(fName,lName,teacherCode);
     teacherClose.click();
+    teacherListAdmin.click();
 }
 
 const loadTeacherList = () => {
     let teachData = [...teacherDatabase];
-    return teacherDatabase;
+    console.log(teacherDatabase);
+    return teachData;
 }
 
-export {makeTeacher,makeStudent,loadTeacherList};
+const loadStudentList = () => {
+    let studData = [...studentDatabase];
+    console.log(studentDatabase);
+    return studData;
+}
+
+export {makeTeacher,makeStudent,loadTeacherList,loadStudentList};

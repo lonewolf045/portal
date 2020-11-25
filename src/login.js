@@ -13,7 +13,8 @@ const adminLogin = (username,password) => {
             }
         }
     }
-    console.log('Wrong Login Credentials');
+    //console.log('Wrong Login Credentials');
+    window.alert('Wrong Login Credentials');
 }
 
 const teacherLogin = (username,password) => {

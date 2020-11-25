@@ -1,9 +1,10 @@
 import buttonClass from './button';
 import {newAdmin} from './admin';
-import { importStudents, importUsers } from './connectToFirebase';
+import { importStudents, importTeachers, importUsers } from './connectToFirebase';
 import { formDisplay } from './loginForm';
 importUsers();
 importStudents();
+importTeachers();
 buttonClass();
 //formDisplay();
 newAdmin('admin','admin');

@@ -85,7 +85,7 @@
                 <button type="button" class="btn cancel" id = 'studentClose'>Close</button>
             </form>
         </div>
-        <button class="open-login-button">Login</button>
+        <button class="open-login-button"><img src = "https://cdn0.iconfinder.com/data/icons/mini-icon-2-2/16/login_in-512.png"></button>
         <div class="login-form-popup" id="loginForm">
             <form action="/action_page.php" class="form-container-login" name = "loginForm">
                 <h1>Login</h1>
@@ -189,12 +189,12 @@
             </form>
         </div>
 
-        <button class="openbtn" onclick="openNav()">&#9776;</button>
-        <div id="mySidepanel" class="sidepanel">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <button class="openbtn" id = 'openBtnAdmin'>&#9776;</button>
+        <div id="sidepanelAdmin" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" id = "closeNavAdmin">&times;</a>
             <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
-            <button class="open-upprofile-button" onclick="openFormProfUpdate()">Update Profile</button>
-            <button class="open-uppassword-button" onclick="openFormPassUpdate()">Update Password</button>
+            <button class="open-student-button">Students</button>
+            <button class="open-teacher-button">Teachers</button>
         </div>
 
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>

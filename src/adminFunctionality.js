@@ -1,3 +1,4 @@
+import { teacherDatabase } from "./connectToFirebase";
 import { createStudent } from "./student";
 import { createTeacher } from "./teacher";
 const teacherClose = document.querySelector('#teacherClose');
@@ -25,4 +26,9 @@ const makeTeacher = () => {
     teacherClose.click();
 }
 
-export {makeTeacher,makeStudent};
+const loadTeacherList = () => {
+    let teachData = [...teacherDatabase];
+    return teacherDatabase;
+}
+
+export {makeTeacher,makeStudent,loadTeacherList};

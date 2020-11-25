@@ -467,7 +467,7 @@ b,label,input {
   opacity: 1;
 }
 
-.open-uppassword-button {
+.open-teacher-button {
   display: none;
   background-color: #555;
   color: white;
@@ -607,7 +607,7 @@ button {
   margin-left: 50px;
 }
 
-.open-upprofile-button {
+.open-student-button {
   display: none;
   background-color: #555;
   color: white;

@@ -11,14 +11,16 @@ const teacherBtn = document.querySelector(".teacher");
 const studentBtn = document.querySelector(".student");
 const passUpdateBtn = document.querySelector(".open-uppassword-button");
 const btnPassUpdate = document.querySelector("#btnPassUpdate");
-const btnOpen = document.querySelector('.openbtn');
+const btnOpenAdmin = document.querySelector('#openBtnAdmin');
 const btnProfUpdate = document.querySelector("#btnProfUpdate");
 const profUpdateBtn = document.querySelector('.open-upprofile-button');
 const teacherClose = document.querySelector('#teacherClose');
 const studentClose = document.querySelector('#studentClose');
 const teacherAdd = document.querySelector('#btnAddTeacher');
 const studentAdd = document.querySelector('#btnAddStudent');
-
+const btnCloseAdmin = document.querySelector('#closeNavAdmin');
+const studentListAdmin = document.querySelector('.open-student-button');
+const teacherListAdmin = document.querySelector('.open-teacher-button');
 
 function openFormTeacher() {
     document.getElementById("addTeacher").style.display = "block";
@@ -77,18 +79,18 @@ function closeFormLogin() {
 //   }
   
   /* Set the width of the sidebar to 250px (show it) */
-//   function openNav() {
-//     document.getElementById("mySidepanel").style.width = "280px";
-//     document.getElementById("container").style.left = "280px";
-//     document.getElementById("head").style.left = "40%";
-//   }
+  function openNavAdmin() {
+    document.getElementById("sidepanelAdmin").style.width = "280px";
+    document.getElementById("container").style.left = "280px";
+    document.getElementById("head").style.left = "40%";
+  }
   
   /* Set the width of the sidebar to 0 (hide it) */
-//   function closeNav() {
-//     document.getElementById("mySidepanel").style.width = "0";
-//     document.getElementById("container").style.left = "0";
-//     document.getElementById("head").style.left = "30%";
-//   }
+  function closeNavAdmin() {
+    document.getElementById("sidepanelAdmin").style.width = "0";
+    document.getElementById("container").style.left = "0";
+    document.getElementById("head").style.left = "30%";
+  }
   
 //   function openFormProfUpdate() {
 //     document.getElementById("profUpdateForm").style.display = "block";
@@ -124,19 +126,17 @@ function clearFormFieldsLogin() {
 //   }
 
 const buttonClass = () => {
-    const button = () => {
-        loginBtn.addEventListener('click',openFormLogin);
-        closeLogin.addEventListener('click',closeFormLogin);
-        btnLogin.addEventListener('click',formDisplay);
-        teacherBtn.addEventListener('click',openFormTeacher);
-        teacherClose.addEventListener('click',closeFormTeacher);
-        studentBtn.addEventListener('click',openFormStudent);
-        studentClose.addEventListener('click',closeFormStudent);
-        btnLogout.addEventListener('click',logOut);
-        studentAdd.addEventListener('click',makeStudent);
-        teacherAdd.addEventListener('click',makeTeacher);
-    }
-    button();
+    loginBtn.addEventListener('click',openFormLogin);
+    closeLogin.addEventListener('click',closeFormLogin);
+    btnLogin.addEventListener('click',formDisplay);
+    teacherBtn.addEventListener('click',openFormTeacher);
+    teacherClose.addEventListener('click',closeFormTeacher);
+    studentBtn.addEventListener('click',openFormStudent);
+    studentClose.addEventListener('click',closeFormStudent);
+    btnLogout.addEventListener('click',logOut);
+    studentAdd.addEventListener('click',makeStudent);
+    teacherAdd.addEventListener('click',makeTeacher);
+    btnOpenAdmin.addEventListener('click',openNavAdmin);
+    btnCloseAdmin.addEventListener('click',closeNavAdmin);
 }
 export default buttonClass;
-//export {button};

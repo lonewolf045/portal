@@ -2,6 +2,7 @@ const btnLogout = document.querySelector("#logout-button");
 const loginBtn = document.querySelector(".open-login-button");
 const formBtn = document.querySelector('.teacher');
 const studentBtn = document.querySelector(".student");
+const btnOpenAdmin = document.querySelector('#openBtnAdmin');
 const welcomeMessage = function (user) {
     const use = document.querySelector(".welcome-message");
     use.innerHTML = "Welcome, " + user;
@@ -16,6 +17,7 @@ const changeButton = () => {
     btnLogout.style.display = "block";
     formBtn.style.display = "block";
     studentBtn.style.display = "block";
+    btnOpenAdmin.style.display = "block";
 }
 
 

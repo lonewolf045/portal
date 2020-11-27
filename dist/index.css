@@ -26,6 +26,12 @@
   right: 28px;
 }
 
+.course {
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+}
+
 .teacher {
   position: fixed;
   bottom: 23px;
@@ -609,6 +615,20 @@ button {
 }
 
 .open-student-button {
+  display: none;
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  /*position: fixed;
+  bottom: 23px;
+  right: 318px;*/
+  width: 280px;
+}
+
+.open-group-button {
   display: none;
   background-color: #555;
   color: white;

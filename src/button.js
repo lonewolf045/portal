@@ -2,6 +2,7 @@ import { formDisplay } from "./loginForm";
 import {logOut} from './adminLogout';
 import { makeStudent, makeTeacher } from "./adminFunctionality";
 import { appendStudent, appendTeacher } from "./adminLoginPage";
+import { makeCourse } from "./teacherFunctionality";
 
 const btn = document.querySelector("#btn");
 const btnLogin = document.querySelector("#btnLogin");
@@ -22,6 +23,10 @@ const studentAdd = document.querySelector('#btnAddStudent');
 const btnCloseAdmin = document.querySelector('#closeNavAdmin');
 const studentListAdmin = document.querySelector('.open-student-button');
 const teacherListAdmin = document.querySelector('.open-teacher-button');
+const courseBtn = document.querySelector(".course");
+const courseClose = document.querySelector("#courseClose");
+const courseAdd = document.querySelector('#btnAddCourse');
+
 
 function openFormTeacher() {
     document.getElementById("addTeacher").style.display = "block";
@@ -29,7 +34,7 @@ function openFormTeacher() {
   
 function closeFormTeacher() {
     document.getElementById("addTeacher").style.display = "none";
-    clearFormFields();
+    clearFormFieldsTeacher();
 }
 
 function openFormStudent() {
@@ -38,7 +43,7 @@ function openFormStudent() {
   
 function closeFormStudent() {
     document.getElementById("addStudent").style.display = "none";
-    clearFormFields();
+    clearFormFieldsStudent();
 }
   
 function openFormLogin() {
@@ -48,6 +53,15 @@ function openFormLogin() {
 function closeFormLogin() {
     document.getElementById("loginForm").style.display = "none";
     clearFormFieldsLogin();
+}
+
+function openFormCourse() {
+    document.getElementById("addCourse").style.display = "block";
+}
+  
+function closeFormCourse() {
+    document.getElementById("addCourse").style.display = "none";
+    clearFormFieldsCourse();
 }
   
 //   function openFormSignUp() {
@@ -102,10 +116,18 @@ function closeFormLogin() {
 //     clearFormFieldsProfUpdate();
 //   }
   
-function clearFormFields() {
+function clearFormFieldsTeacher() {
      document.forms["addTeacher"].reset();
 }
-  
+
+function clearFormFieldsStudent() {
+    document.forms["addStudent"].reset();
+}
+
+function clearFormFieldsCourse() {
+    document.forms["addCourse"].reset();
+}
+
 function clearFormFieldsLogin() {
     document.forms["loginForm"].reset();
 }
@@ -141,5 +163,8 @@ const buttonClass = () => {
     btnCloseAdmin.addEventListener('click',closeNavAdmin);
     teacherListAdmin.addEventListener('click',appendTeacher);
     studentListAdmin.addEventListener('click',appendStudent);
+    courseBtn.addEventListener('click',openFormCourse);
+    courseClose.addEventListener('click',closeFormCourse);
+    courseAdd.addEventListener('click',makeCourse);
 }
 export default buttonClass;

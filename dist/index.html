@@ -90,6 +90,28 @@
             </form>
         </div>
 
+        <button class="open-button course">Add Course</button>
+        <div class="form-popup" id="addCourse">
+            <form action="/action_page.php" class="form-container" name = "addCourse">
+                <h1>Add Course</h1>
+  
+                <label for="courseName"><b>Course Name:</b></label>
+                <input type="text" name="courseName" required>
+
+                <label for="courseCode"><b>Course Code:</b></label>
+                <input type="text" name="courseCode" required>
+
+                <label for="teacherCode"><b>Teacher Code:</b></label>
+                <input type="text" name="teacherCode" required>
+
+                <!-- <label for="degree"><b>Degree:</b></label>
+                <input type="text" name="degree" required> -->
+  
+                <button type="button" class="btn" id = "btnAddCourse">Add Course</button>
+                <button type="button" class="btn cancel" id = 'courseClose'>Close</button>
+            </form>
+        </div>
+
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <button id="logout-button"><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
         
@@ -147,6 +169,7 @@
             <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
             <button class="open-student-button">Students</button>
             <button class="open-teacher-button">Teachers</button>
+            <button class="open-group-button">Groups</button>
         </div>
 
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>

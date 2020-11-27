@@ -3,6 +3,7 @@ const btnLogout = document.querySelector("#logout-button");
 const teacherBtn = document.querySelector(".teacher");
 const studentBtn = document.querySelector(".student");
 const container = document.querySelector("#container");
+const btnOpenAdmin = document.querySelector('#openBtnAdmin');
 
 const logOut = () => {
     console.log("Clicked");
@@ -20,6 +21,7 @@ const logOut = () => {
     //btnOpen.style.display = "none";
     //profUpdateBtn.style.display = "none";
     //closeNav();
+    btnOpenAdmin.style.display = "none";
 }
 
 export {logOut};

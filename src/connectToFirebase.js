@@ -15,6 +15,8 @@ let db = firebase.database();
 let dataRefUsers = db.ref().child('users');
 let dataRefStudents = db.ref().child('Students');
 let dataRefTeachers = db.ref().child('Teachers');
+let dataRefCourses = db.ref().child('Courses');
+let dataRefGroups = db.ref().child('Groups');
 let databaseData = "";
 let userDatabaseData = "";
 let userDatabase = [];
@@ -22,6 +24,11 @@ let studentDatabase = [];
 let studentDatabaseData = "";
 let teacherDatabase = [];
 let teacherDatabaseData = "";
+let courseDatabase = [];
+let courseDatabaseData = "";
+let groupDatabase = [];
+let groupDatabaseData = "";
+
 const importUsers = () => {
   dataRefUsers.on("value", function (snapshot) {
       userDatabaseData = snapshot.val();
@@ -46,5 +53,21 @@ const importTeachers = () => {
     console.log(teacherDatabase);
   });
 }
+const importCourses = () => {
+  dataRefCourses.on("value", function (snapshot) {
+    courseDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+    courseDatabase = Object.values(courseDatabaseData);
+    console.log(courseDatabase);
+  });
+}
+const importGroups = () => {
+  dataRefGroups.on("value", function (snapshot) {
+    groupDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+    groupDatabase = Object.values(groupDatabaseData);
+    console.log(groupDatabase);
+  });
+}
 
-export {importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase};
+export {importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase};

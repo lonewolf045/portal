@@ -1,6 +1,6 @@
 const btnLogout = document.querySelector("#logout-button");
 const loginBtn = document.querySelector(".open-login-button");
-//const formBtn = document.querySelector('.teacher');
+const courseBtn = document.querySelector('.course');
 //const studentBtn = document.querySelector(".student");
 const welcomeMessage = function (user) {
     const use = document.querySelector(".welcome-message");
@@ -15,8 +15,7 @@ const loginTeacherDOM = (username) => {
 const changeButton = () => {
     loginBtn.style.display = "none";
     btnLogout.style.display = "block";
-    //formBtn.style.display = "block";
-    //studentBtn.style.display = "block";
+    courseBtn.style.display = "block";
 }
 
 

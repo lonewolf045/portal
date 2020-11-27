@@ -58,7 +58,7 @@ const appendStudent = () => {
     container.innerHTML = "";
     let studentList = loadStudentList();
     console.log(studentList);
-    let studentDOM = studentList.map(x => teacherListMaker(x.firstName,x.lastName,x.degree,x.year));
+    let studentDOM = studentList.map(x => studentListMaker(x.firstName,x.lastName,x.degree,x.year));
     console.log(studentDOM);
     studentDOM.forEach(function(x) {
         container.appendChild(x);

@@ -1,10 +1,15 @@
-import { studentDatabase, teacherDatabase } from "./connectToFirebase";
+import { groupDatabase, studentDatabase, teacherDatabase } from "./connectToFirebase";
+import { createGroup } from "./group";
 import { createStudent } from "./student";
 import { createTeacher } from "./teacher";
 const teacherClose = document.querySelector('#teacherClose');
 const studentClose = document.querySelector('#studentClose');
 const studentListAdmin = document.querySelector('.open-student-button');
 const teacherListAdmin = document.querySelector('.open-teacher-button');
+const groupClose = document.querySelector("#groupClose");
+const groupListAdmin = document.querySelector('.open-group-button');
+
+
 const makeStudent = () => {
     const studentForm = document.forms["addStudent"];
     console.log(studentForm);
@@ -31,6 +36,16 @@ const makeTeacher = () => {
     teacherListAdmin.click();
 }
 
+const makeGroup = () => {
+    const groupForm = document.forms["addGroup"];
+    console.log(groupForm);
+    let gName = groupForm["groupName"].value;
+    console.log(gName);
+    createGroup(gName);
+    groupClose.click();
+    groupListAdmin.click();
+}
+
 const loadTeacherList = () => {
     let teachData = [...teacherDatabase];
     console.log(teacherDatabase);
@@ -43,4 +58,10 @@ const loadStudentList = () => {
     return studData;
 }
 
-export {makeTeacher,makeStudent,loadTeacherList,loadStudentList};
+const loadGroupList = () => {
+    let grData = [...groupDatabase];
+    console.log(grData);
+    return grData;
+}
+
+export {makeTeacher,makeStudent,loadTeacherList,loadStudentList,makeGroup,loadGroupList};

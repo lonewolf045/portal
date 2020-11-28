@@ -70,4 +70,14 @@ const importGroups = () => {
   });
 }
 
-export {importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase};
+const updateGroup = (index,data) => {
+  let arrayKeys = Object.keys(groupDatabaseData);
+  let refUpdate = db.ref().child('Groups/'+arrayKeys[index]);
+  let refSet = refUpdate.push();
+  refUpdate.update({
+    groupStudent:data
+  });
+  importGroups();
+}
+
+export {importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup};

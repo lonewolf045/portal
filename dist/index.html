@@ -50,7 +50,7 @@
             <div id = 'container'>
             </div>
         </main>
-        <button class="open-button teacher">Add Teacher</button>
+        <button class="open-button teacher">+</button>
         <div class="form-popup" id="addTeacher">
             <form action="/action_page.php" class="form-container" name = "addTeacher">
                 <h1>Add Teacher</h1>
@@ -68,7 +68,7 @@
                 <button type="button" class="btn cancel" id = 'teacherClose'>Close</button>
             </form>
         </div>
-        <button class="open-button student">Add Student</button>
+        <button class="open-button student">+</button>
         <div class="form-popup" id="addStudent">
             <form action="/action_page.php" class="form-container" name = "addStudent">
                 <h1>Add Student</h1>
@@ -90,7 +90,7 @@
             </form>
         </div>
 
-        <button class="open-button course">Add Course</button>
+        <button class="open-button course">+</button>
         <div class="form-popup" id="addCourse">
             <form action="/action_page.php" class="form-container" name = "addCourse">
                 <h1>Add Course</h1>
@@ -109,6 +109,19 @@
   
                 <button type="button" class="btn" id = "btnAddCourse">Add Course</button>
                 <button type="button" class="btn cancel" id = 'courseClose'>Close</button>
+            </form>
+        </div>
+
+        <button class="open-button group">+</button>
+        <div class="form-popup" id="addGroup">
+            <form action="/action_page.php" class="form-container" name = "addGroup">
+                <h1>Add Group</h1>
+  
+                <label for="groupName"><b>Group Name:</b></label>
+                <input type="text" name="groupName" required>
+
+                <button type="button" class="btn" id = "btnAddGroup">Add Group</button>
+                <button type="button" class="btn cancel" id = 'groupClose'>Close</button>
             </form>
         </div>
 

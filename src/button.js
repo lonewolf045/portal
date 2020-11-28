@@ -1,7 +1,7 @@
 import { formDisplay } from "./loginForm";
 import {logOut} from './adminLogout';
-import { makeStudent, makeTeacher } from "./adminFunctionality";
-import { appendStudent, appendTeacher } from "./adminLoginPage";
+import { makeGroup, makeStudent, makeTeacher } from "./adminFunctionality";
+import { appendGroup, appendStudent, appendTeacher } from "./adminLoginPage";
 import { makeCourse } from "./teacherFunctionality";
 
 const btn = document.querySelector("#btn");
@@ -26,6 +26,10 @@ const teacherListAdmin = document.querySelector('.open-teacher-button');
 const courseBtn = document.querySelector(".course");
 const courseClose = document.querySelector("#courseClose");
 const courseAdd = document.querySelector('#btnAddCourse');
+const groupBtn = document.querySelector(".group");
+const groupListAdmin = document.querySelector('.open-group-button');
+const groupAdd = document.querySelector("#btnAddGroup");
+const groupClose = document.querySelector('#groupClose');
 
 
 function openFormTeacher() {
@@ -62,6 +66,15 @@ function openFormCourse() {
 function closeFormCourse() {
     document.getElementById("addCourse").style.display = "none";
     clearFormFieldsCourse();
+}
+
+function openFormGroup() {
+    document.getElementById("addGroup").style.display = "block";
+}
+  
+function closeFormGroup() {
+    document.getElementById("addGroup").style.display = "none";
+    clearFormFieldsGroup();
 }
   
 //   function openFormSignUp() {
@@ -128,6 +141,10 @@ function clearFormFieldsCourse() {
     document.forms["addCourse"].reset();
 }
 
+function clearFormFieldsGroup() {
+    document.forms["addGroup"].reset();
+}
+
 function clearFormFieldsLogin() {
     document.forms["loginForm"].reset();
 }
@@ -163,8 +180,12 @@ const buttonClass = () => {
     btnCloseAdmin.addEventListener('click',closeNavAdmin);
     teacherListAdmin.addEventListener('click',appendTeacher);
     studentListAdmin.addEventListener('click',appendStudent);
+    groupListAdmin.addEventListener('click',appendGroup);
     courseBtn.addEventListener('click',openFormCourse);
     courseClose.addEventListener('click',closeFormCourse);
     courseAdd.addEventListener('click',makeCourse);
+    groupBtn.addEventListener('click',openFormGroup);
+    groupClose.addEventListener('click',closeFormGroup);
+    groupAdd.addEventListener('click',makeGroup);
 }
 export default buttonClass;

@@ -1,12 +1,12 @@
 import { importUsers, userDatabase, db, importStudents, studentDatabase } from "./connectToFirebase";
 
-const student = (firstName,lastName,year,degree,username) => {
-    return {firstName,lastName,year,degree,username};
+const student = (firstName,lastName,year,degree,dept,username) => {
+    return {firstName,lastName,year,degree,username,dept};
 };
 
-const createStudent = (firstName,lastName,year,degree) => {
+const createStudent = (firstName,lastName,year,degree,dept) => {
     let username = firstName.toLowerCase()+lastName+year;
-    let newStudent = student(firstName,lastName,year,degree,username);
+    let newStudent = student(firstName,lastName,year,degree,dept,username);
     let dataRef = db.ref().child('Students');
     let newReference = dataRef.push();
     newReference.set(newStudent);

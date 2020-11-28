@@ -57,6 +57,13 @@
   right: 28px;
 }
 
+.assignment {
+  position: fixed;
+  bottom:23px;
+  right:28px;
+  z-index: 15;
+}
+
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
@@ -427,7 +434,7 @@ b,label,input {
   font-size: 150%;
 }
 /*Initially Hidden*/
-#logout-button {
+.logout-button {
   display: none;
   background: none;
   color: white;
@@ -506,7 +513,7 @@ b,label,input {
   opacity: 1;
 }
 
-.open-teacher-button {
+.open-nav-button {
   display: none;
   background-color: #555;
   color: white;

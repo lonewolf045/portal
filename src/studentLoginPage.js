@@ -1,4 +1,4 @@
-const btnLogout = document.querySelector("#logout-button");
+const btnLogout = document.querySelector("#logout-button-student");
 const loginBtn = document.querySelector(".open-login-button");
 
 

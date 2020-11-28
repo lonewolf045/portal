@@ -1,7 +1,10 @@
 import { loginAdminDOM } from './adminLoginPage';
-import {userDatabase} from './connectToFirebase';
+import {importCourses, userDatabase} from './connectToFirebase';
 import {loginTeacherDOM} from './teacherLoginPage';
 import {loginStudentDOM} from './studentLoginPage';
+import {user,course} from './index';
+
+
 const adminLogin = (username,password) => {
     for(let i = 0; i < userDatabase.length; i++) {
         //console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
@@ -23,7 +26,10 @@ const teacherLogin = (username,password) => {
         if(userDatabase[i].Type === 'Teacher') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
+                user = username;
+                console.log(user);
                 loginTeacherDOM(username);
+                importCourses(user);
                 return;
             }
         }

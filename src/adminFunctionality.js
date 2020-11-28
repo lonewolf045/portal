@@ -17,8 +17,9 @@ const makeStudent = () => {
     let lName = studentForm["lastName"].value;
     let year = studentForm["year"].value;
     let degree = studentForm["degree"].value;
-    console.log(fName,lName,year,degree);
-    createStudent(fName,lName,year,degree);
+    let dept = studentForm["dept"].value;
+    console.log(fName,lName,year,degree,dept);
+    createStudent(fName,lName,year,degree,dept);
     studentClose.click();
     studentListAdmin.click();
 }

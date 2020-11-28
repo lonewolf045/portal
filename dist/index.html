@@ -84,6 +84,9 @@
 
                 <label for="degree"><b>Degree:</b></label>
                 <input type="text" name="degree" required>
+
+                <label for="dept"><b>Department:</b></label>
+                <input type="text" name="dept" required>
   
                 <button type="button" class="btn" id = "btnAddStudent">Add Student</button>
                 <button type="button" class="btn cancel" id = 'studentClose'>Close</button>
@@ -125,8 +128,26 @@
             </form>
         </div>
 
+        <button class="open-button assignment">+</button>
+        <div class="form-popup" id="addAssignment">
+            <form action="/action_page.php" class="form-container" name = "addAssignment">
+                <h1>Add Assignment</h1>
+  
+                <label for="assignmentDetail"><b>Detail:</b></label>
+                <textarea name="assignmentDetail" required></textarea>
+
+                <label for="dueDate"><b>Due Date:</b></label>
+                <input type="date" name="dueDate" required>
+
+                <button type="button" class="btn" id = "btnAddAssignment">Add Assignment</button>
+                <button type="button" class="btn cancel" id = 'assignmentClose'>Close</button>
+            </form>
+        </div>
+
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-        <button id="logout-button"><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+        <button id="logout-button-admin" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+        <button id="logout-button-teach" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+        <button id="logout-button-student" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
         
         <div class="update-form-popup" id="updateForm">
             <form action="/action_page.php" class="form-container-update" name = "updateForm">
@@ -180,9 +201,18 @@
         <div id="sidepanelAdmin" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" id = "closeNavAdmin">&times;</a>
             <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
-            <button class="open-student-button">Students</button>
-            <button class="open-teacher-button">Teachers</button>
-            <button class="open-group-button">Groups</button>
+            <button class="open-student-button open-nav-button">Students</button>
+            <button class="open-teacher-button open-nav-button">Teachers</button>
+            <button class="open-group-button open-nav-button">Groups</button>
+        </div>
+
+        <button class="openbtn" id = 'openBtnTeach'>&#9776;</button>
+        <div id="sidepanelTeach" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" id = "closeNavTeach">&times;</a>
+            <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
+            <button class="open-course-button open-nav-button">Courses</button>
+            <button class="open-assignment-button open-nav-button">Assignments</button>
+            <!-- <button class="open-group-button">Groups</button> -->
         </div>
 
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>

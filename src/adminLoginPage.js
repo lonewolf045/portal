@@ -1,7 +1,7 @@
 import { loadGroupList, loadStudentList, loadTeacherList } from "./adminFunctionality";
 import { groupDatabase, importGroups, studentDatabase, updateGroup } from "./connectToFirebase";
 
-const btnLogout = document.querySelector("#logout-button");
+const btnLogout = document.querySelector("#logout-button-admin");
 const loginBtn = document.querySelector(".open-login-button");
 const formBtn = document.querySelector('.teacher');
 const studentBtn = document.querySelector(".student");

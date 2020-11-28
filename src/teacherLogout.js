@@ -1,10 +1,10 @@
 const loginBtn = document.querySelector(".open-login-button");
-const btnLogout = document.querySelector("#logout-button");
+const btnLogout = document.querySelector("#logout-button-teach");
 const courseBtn = document.querySelector(".course");
 const container = document.querySelector("#container");
+const btnOpenTeach = document.querySelector("#openBtnTeach");
 
-
-const logOut = () => {
+const logOutTeacher = () => {
     console.log("Clicked");
     const use = document.querySelector(".welcome-message");
     use.innerHTML = "";
@@ -20,7 +20,7 @@ const logOut = () => {
     //btnOpen.style.display = "none";
     //profUpdateBtn.style.display = "none";
     //closeNav();
-    //btnOpenAdmin.style.display = "none";
+    btnOpenTeach.style.display = "none";
 }
 
-export {logOut};
+export {logOutTeacher};

@@ -1,12 +1,16 @@
 import { formDisplay } from "./loginForm";
-import {logOut} from './adminLogout';
+import {logOut, logOutAdmin} from './adminLogout';
 import { makeGroup, makeStudent, makeTeacher } from "./adminFunctionality";
 import { appendGroup, appendStudent, appendTeacher } from "./adminLoginPage";
-import { makeCourse } from "./teacherFunctionality";
+import { makeAssignment, makeCourse } from "./teacherFunctionality";
+import { logOutTeacher } from "./teacherLogout";
+import { appendAssignment, appendCourses } from "./teacherLoginPage";
 
 const btn = document.querySelector("#btn");
 const btnLogin = document.querySelector("#btnLogin");
-const btnLogout = document.querySelector("#logout-button");
+const btnLogoutTeach = document.querySelector("#logout-button-teach");
+const btnLogoutAdmin = document.querySelector("#logout-button-admin");
+const btnLogoutStudent = document.querySelector("#logout-button-student");
 const loginBtn = document.querySelector(".open-login-button");
 const closeLogin = document.querySelector(".cancelLogin");
 const teacherBtn = document.querySelector(".teacher");
@@ -30,6 +34,13 @@ const groupBtn = document.querySelector(".group");
 const groupListAdmin = document.querySelector('.open-group-button');
 const groupAdd = document.querySelector("#btnAddGroup");
 const groupClose = document.querySelector('#groupClose');
+const btnOpenTeach = document.querySelector('#openBtnTeach');
+const closeOpenTeach = document.querySelector('#closeNavTeach');
+const courseListTeach = document.querySelector('.open-course-button');
+const assignmentBtn = document.querySelector('.assignment');
+const assignListTeach = document.querySelector('.open-assignment-button');
+const assignmentClose = document.querySelector('#assignmentClose');
+const assignmentAdd = document.querySelector('#btnAddAssignment');
 
 
 function openFormTeacher() {
@@ -76,6 +87,15 @@ function closeFormGroup() {
     document.getElementById("addGroup").style.display = "none";
     clearFormFieldsGroup();
 }
+
+function openFormAssignment() {
+    document.getElementById("addAssignment").style.display = "block";
+}
+  
+function closeFormAssignment() {
+    document.getElementById("addAssignment").style.display = "none";
+    clearFormFieldsAssignment();
+}
   
 //   function openFormSignUp() {
 //     closeForm();
@@ -119,6 +139,19 @@ function closeFormGroup() {
     document.getElementById("container").style.left = "0";
     document.getElementById("head").style.left = "30%";
   }
+
+  function openNavTeach() {
+    document.getElementById("sidepanelTeach").style.width = "280px";
+    document.getElementById("container").style.left = "280px";
+    document.getElementById("head").style.left = "40%";
+  }
+  
+  /* Set the width of the sidebar to 0 (hide it) */
+  function closeNavTeach() {
+    document.getElementById("sidepanelTeach").style.width = "0";
+    document.getElementById("container").style.left = "0";
+    document.getElementById("head").style.left = "30%";
+  }
   
 //   function openFormProfUpdate() {
 //     document.getElementById("profUpdateForm").style.display = "block";
@@ -143,6 +176,10 @@ function clearFormFieldsCourse() {
 
 function clearFormFieldsGroup() {
     document.forms["addGroup"].reset();
+}
+
+function clearFormFieldsAssignment() {
+    document.forms["addAssignment"].reset();
 }
 
 function clearFormFieldsLogin() {
@@ -173,7 +210,9 @@ const buttonClass = () => {
     teacherClose.addEventListener('click',closeFormTeacher);
     studentBtn.addEventListener('click',openFormStudent);
     studentClose.addEventListener('click',closeFormStudent);
-    btnLogout.addEventListener('click',logOut);
+    btnLogoutAdmin.addEventListener('click',logOutAdmin);
+    btnLogoutTeach.addEventListener('click',logOutTeacher);
+    btnLogoutStudent.addEventListener('click',logOutAdmin);
     studentAdd.addEventListener('click',makeStudent);
     teacherAdd.addEventListener('click',makeTeacher);
     btnOpenAdmin.addEventListener('click',openNavAdmin);
@@ -187,5 +226,12 @@ const buttonClass = () => {
     groupBtn.addEventListener('click',openFormGroup);
     groupClose.addEventListener('click',closeFormGroup);
     groupAdd.addEventListener('click',makeGroup);
+    btnOpenTeach.addEventListener('click',openNavTeach);
+    closeOpenTeach.addEventListener('click',closeNavTeach);
+    courseListTeach.addEventListener('click',appendCourses);
+    assignmentBtn.addEventListener('click',openFormAssignment);
+    assignListTeach.addEventListener('click',appendAssignment);
+    assignmentClose.addEventListener('click',closeFormAssignment);
+    assignmentAdd.addEventListener('click',makeAssignment);
 }
 export default buttonClass;

@@ -1,11 +1,11 @@
 const loginBtn = document.querySelector(".open-login-button");
-const btnLogout = document.querySelector("#logout-button");
+const btnLogout = document.querySelector("#logout-button-admin");
 const teacherBtn = document.querySelector(".teacher");
 const studentBtn = document.querySelector(".student");
 const container = document.querySelector("#container");
 const btnOpenAdmin = document.querySelector('#openBtnAdmin');
 
-const logOut = () => {
+const logOutAdmin = () => {
     console.log("Clicked");
     const use = document.querySelector(".welcome-message");
     use.innerHTML = "";
@@ -24,4 +24,4 @@ const logOut = () => {
     btnOpenAdmin.style.display = "none";
 }
 
-export {logOut};
+export {logOutAdmin};

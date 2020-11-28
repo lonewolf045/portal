@@ -1,6 +1,10 @@
+import { createAssignment } from "./assignment";
+import { assignmentDatabase, courseDatabase } from "./connectToFirebase";
+
 const { createCourse } = require("./course");
 
 const courseClose = document.querySelector('#courseClose');
+const assignmentClose = document.querySelector('#assignmentClose');
 const makeCourse = () => {
     const courseForm = document.forms["addCourse"];
     console.log(courseForm);
@@ -12,4 +16,25 @@ const makeCourse = () => {
     courseClose.click();
 }
 
-export {makeCourse};
+const makeAssignment = () => {
+    const assignForm = document.forms["addAssignment"];
+    let detail = assignForm["assignmentDetail"].value;
+    let dueDate = assignForm["dueDate"].value;
+    console.log(detail,dueDate);
+    createAssignment(detail,dueDate);
+    assignmentClose.click();
+}
+
+const loadCourseList = () => {
+    let courseData = [...courseDatabase];
+    console.log(courseData);
+    return courseData;
+}
+
+const loadAssignList = () => {
+    let assignData = [...assignmentDatabase];
+    console.log(assignData);
+    return assignData;
+}
+
+export {makeCourse,loadCourseList,makeAssignment,loadAssignList};

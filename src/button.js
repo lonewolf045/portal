@@ -41,6 +41,18 @@ const assignmentBtn = document.querySelector('.assignment');
 const assignListTeach = document.querySelector('.open-assignment-button');
 const assignmentClose = document.querySelector('#assignmentClose');
 const assignmentAdd = document.querySelector('#btnAddAssignment');
+const closeBlacklayer = document.querySelector('#closeBlacklayer');
+const container = document.querySelector('#container');
+
+
+
+function closeBlacklayerList() {
+    const blacklayer = document.querySelector('.listMaker');
+    //container.innerHTML = "";
+    //courseListTeach.click();
+    closeBlacklayer.style.display = "none";
+    blacklayer.remove();
+}
 
 
 function openFormTeacher() {
@@ -233,5 +245,6 @@ const buttonClass = () => {
     assignListTeach.addEventListener('click',appendAssignment);
     assignmentClose.addEventListener('click',closeFormAssignment);
     assignmentAdd.addEventListener('click',makeAssignment);
+    closeBlacklayer.addEventListener('click',closeBlacklayerList);
 }
 export default buttonClass;

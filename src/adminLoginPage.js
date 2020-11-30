@@ -133,6 +133,9 @@ const groupClick = (gName,e) => {
         blackLayer.appendChild(x);
     });
     container.appendChild(blackLayer);
+    closeBlacklayer.style.display = "block";
+    closeBlacklayer.style.zIndex = "15";
+    closeBlacklayer.style.fontSize = "75px";
 }
 
 const studentSelection = (x,gName) => {

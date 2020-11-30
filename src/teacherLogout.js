@@ -1,3 +1,5 @@
+import { resetCurrentUser } from "./session";
+
 const loginBtn = document.querySelector(".open-login-button");
 const btnLogout = document.querySelector("#logout-button-teach");
 const courseBtn = document.querySelector(".course");
@@ -21,6 +23,7 @@ const logOutTeacher = () => {
     //profUpdateBtn.style.display = "none";
     //closeNav();
     btnOpenTeach.style.display = "none";
+    resetCurrentUser();
 }
 
 export {logOutTeacher};

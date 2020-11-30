@@ -1,4 +1,4 @@
-import { user } from "./login";
+import { user } from "./index";
 
 const { importCourses, courseDatabase,db, returnReference } = require("./connectToFirebase");
 

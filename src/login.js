@@ -3,6 +3,7 @@ import {importCourses, userDatabase} from './connectToFirebase';
 import {loginTeacherDOM} from './teacherLoginPage';
 import {loginStudentDOM} from './studentLoginPage';
 import {user,course} from './index';
+import { setAdmin, setStudent, setTeach } from './session';
 
 
 const adminLogin = (username,password) => {
@@ -11,6 +12,7 @@ const adminLogin = (username,password) => {
         if(userDatabase[i].Type === 'Admin') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
+                setAdmin(username,password);
                 loginAdminDOM(username);
                 return;
             }
@@ -28,6 +30,7 @@ const teacherLogin = (username,password) => {
                 console.log('Success');
                 user = username;
                 console.log(user);
+                setTeach(username,password);
                 loginTeacherDOM(username);
                 importCourses(user);
                 return;
@@ -43,6 +46,7 @@ const studentLogin = (username,password) => {
         if(userDatabase[i].Type === 'Student') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
+                setStudent(username,password);
                 loginStudentDOM(username);
                 return;
             }

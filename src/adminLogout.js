@@ -1,3 +1,5 @@
+import { resetCurrentUser } from "./session";
+
 const loginBtn = document.querySelector(".open-login-button");
 const btnLogout = document.querySelector("#logout-button-admin");
 const teacherBtn = document.querySelector(".teacher");
@@ -22,6 +24,7 @@ const logOutAdmin = () => {
     //profUpdateBtn.style.display = "none";
     //closeNav();
     btnOpenAdmin.style.display = "none";
+    resetCurrentUser();
 }
 
 export {logOutAdmin};

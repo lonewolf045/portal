@@ -8,6 +8,7 @@ const loginBtn = document.querySelector(".open-login-button");
 const courseBtn = document.querySelector('.course');
 const assignmentBtn = document.querySelector('.assignment');
 //let course;
+const closeBlacklayer = document.querySelector('#closeBlacklayer');
 const navTeach = document.querySelector('#openBtnTeach');
 const container = document.querySelector('#container');
 //const studentBtn = document.querySelector(".student");
@@ -64,6 +65,9 @@ const courseClick = (cName) => {
         blackLayer.appendChild(x);
     });
     container.appendChild(blackLayer);
+    closeBlacklayer.style.display = "block";
+    closeBlacklayer.style.zIndex = "15";
+    closeBlacklayer.style.fontSize = "75px";
 }
 
 const groupSelection = (x,cName) => {
@@ -143,6 +147,9 @@ const courseAssignClick = (cName) => {
         blackLayer.appendChild(x);
     });
     container.appendChild(blackLayer);
+    closeBlacklayer.style.display = "block";
+    closeBlacklayer.style.zIndex = "15";
+    closeBlacklayer.style.fontSize = "75px";
 }
 
 const groupAssignmentShow = (x) => {

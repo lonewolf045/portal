@@ -33,59 +33,80 @@ let groupDatabaseData = "";
 let assignmentDatabase = [];
 let assignmentDatabaseData = "";
 
-const importUsers = () => {
-  dataRefUsers.on("value", function (snapshot) {
-      userDatabaseData = snapshot.val();
-      console.log(snapshot.val());
-      userDatabase = Object.values(userDatabaseData);
-      console.log(userDatabase);
+
+const onDataUser = (snapshot) => {
+  userDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  userDatabase = Object.values(userDatabaseData);
+  console.log(userDatabase);
+}
+
+const onDataStudent = (snapshot) => {
+  studentDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  studentDatabase = Object.values(studentDatabaseData);
+  console.log(studentDatabase);
+}
+
+const onDataTeacher = (snapshot) => {
+  teacherDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  teacherDatabase = Object.values(teacherDatabaseData);
+  console.log(teacherDatabase);
+}
+
+const onDataCourses = (snapshot) => {
+  courseDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+    courseDatabase = Object.values(courseDatabaseData);
+    console.log(courseDatabase);
+}
+
+const onDataGroups = (snapshot) => {
+  groupDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+    groupDatabase = Object.values(groupDatabaseData);
+    console.log(groupDatabase);
+}
+
+const onDataAssignment = (snapshot) => {
+  assignmentDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+    assignmentDatabase = Object.values(assignmentDatabaseData);
+    console.log(assignmentDatabase);
+}
+const getData = (ref) => {
+  return new Promise((resolve, reject) => {
+    const onError = error => reject(error);
+    const onData = snap => resolve(snap);
+
+    ref.on("value", onData, onError);
   });
+};
+const importUsers = () => {
+  //dataRefUsers.on("value", function (snapshot) {
+  return getData(dataRefUsers).then(onDataUser);
 }
 const importStudents = () => {
-  dataRefStudents.on("value", function (snapshot) {
-    studentDatabaseData = snapshot.val();
-    console.log(snapshot.val());
-    studentDatabase = Object.values(studentDatabaseData);
-    console.log(studentDatabase);
-  });
+  return getData(dataRefStudents).then(onDataStudent);
 }
 const importTeachers = () => {
-  dataRefTeachers.on("value", function (snapshot) {
-    teacherDatabaseData = snapshot.val();
-    console.log(snapshot.val());
-    teacherDatabase = Object.values(teacherDatabaseData);
-    console.log(teacherDatabase);
-  });
+  return getData(dataRefTeachers).then(onDataTeacher);
 }
 const importCourses = (uname) => {
   let ref = returnReference(uname);
   dataRefCourses = db.ref().child('Teachers/' + ref + '/Courses');
-  dataRefCourses.on("value", function (snapshot) {
-    courseDatabaseData = snapshot.val();
-    console.log(snapshot.val());
-    courseDatabase = Object.values(courseDatabaseData);
-    console.log(courseDatabase);
-  });
+  return getData(dataRefCourses).then(onDataCourses);
 }
 const importGroups = () => {
-  dataRefGroups.on("value", function (snapshot) {
-    groupDatabaseData = snapshot.val();
-    console.log(snapshot.val());
-    groupDatabase = Object.values(groupDatabaseData);
-    console.log(groupDatabase);
-  });
+  return getData(dataRefGroups).then(onDataGroups);
 }
 
 const importAssignments = (uname,cname) => {
   let ref = returnReference(uname);
   let ref2 = returnCourseKey(uname,cname);
   let dataRefAssignments = db.ref().child('Teachers/' + ref + '/Courses/'+ref2+'/Assignments');
-  dataRefAssignments.on("value", function (snapshot) {
-    assignmentDatabaseData = snapshot.val();
-    console.log(snapshot.val());
-    assignmentDatabase = Object.values(assignmentDatabaseData);
-    console.log(assignmentDatabase);
-  });
+  return getData(dataRefAssignments).then(onDataAssignment);
 }
 
 const updateGroup = (index,data) => {

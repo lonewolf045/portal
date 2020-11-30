@@ -6,25 +6,6 @@ import { loadCurrentSession } from './session';
 //import {user} from './login';
 
 let user,course;
-// function importDatabase () {
-//     importUsers();
-//     importStudents();
-//     importTeachers();
-//     //importCourses();
-//     importGroups();
-//     buttonClass();
-// };
-// function loadSession () {
-//     loadCurrentSession();
-//     console.log(user);
-// }
-// importDatabase().then(loadSession);
-//importDatabase();
-//loadCurrentSession();
-//loadDatabase.then(() => {loadCurrentSession();});
 Promise.all([importUsers(),importStudents(),importTeachers(),importGroups()]).then(loadCurrentSession);
 buttonClass();
-//console.log(user);
-//formDisplay();
-//newAdmin('admin','admin');
 export {user,course};

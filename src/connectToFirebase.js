@@ -19,6 +19,7 @@ let dataRefStudents = db.ref().child('Students');
 let dataRefTeachers = db.ref().child('Teachers');
 let dataRefCourses = db.ref().child('Courses');
 let dataRefGroups = db.ref().child('Groups');
+let dataRefDepartments = db.ref().child('Departments');
 let databaseData = "";
 let userDatabaseData = "";
 let userDatabase = [];
@@ -32,6 +33,8 @@ let groupDatabase = [];
 let groupDatabaseData = "";
 let assignmentDatabase = [];
 let assignmentDatabaseData = "";
+let departmentDatabase = [];
+let departmentDatabaseData = "";
 
 
 const onDataUser = (snapshot) => {
@@ -75,6 +78,14 @@ const onDataAssignment = (snapshot) => {
     assignmentDatabase = Object.values(assignmentDatabaseData);
     console.log(assignmentDatabase);
 }
+
+const onDataDepartment = (snapshot) => {
+  departmentDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  departmentDatabase = Object.values(departmentDatabaseData);
+  console.log(departmentDatabase);
+}
+
 const getData = (ref) => {
   return new Promise((resolve, reject) => {
     const onError = error => reject(error);
@@ -107,6 +118,10 @@ const importAssignments = (uname,cname) => {
   let ref2 = returnCourseKey(uname,cname);
   let dataRefAssignments = db.ref().child('Teachers/' + ref + '/Courses/'+ref2+'/Assignments');
   return getData(dataRefAssignments).then(onDataAssignment);
+}
+
+const importDepartment = () => {
+  return getData(dataRefDepartments).then(onDataDepartment);
 }
 
 const updateGroup = (index,data) => {
@@ -158,4 +173,4 @@ let returnCourseKey = (uname,cname) => {
   return arrayKeys[i];
 }
 
-export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase};
+export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment};

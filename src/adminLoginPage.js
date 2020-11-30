@@ -64,13 +64,13 @@ const appendStudent = () => {
     container.innerHTML = "";
     let studentList = loadStudentList();
     console.log(studentList);
-    let studentDOM = studentList.map(x => studentListMaker(x.firstName,x.lastName,x.degree,x.year));
+    let studentDOM = studentList.map(x => studentListMaker(x.firstName,x.lastName,x.degree,x.year,x.dept));
     console.log(studentDOM);
     studentDOM.forEach(function(x) {
         container.appendChild(x);
     });
 }
-const studentListMaker = (fName,lName,degree,year) => {
+const studentListMaker = (fName,lName,degree,year,dept) => {
     const card = document.createElement('div');
     card.classList.add('info-card');
     const firstName = document.createElement('div');
@@ -81,14 +81,18 @@ const studentListMaker = (fName,lName,degree,year) => {
     deg.classList.add('info-detail');
     const y = document.createElement('div');
     y.classList.add('info-detail');
+    const dep = document.createElement('div');
+    dep.classList.add('info-detail');
     firstName.innerHTML = fName;
     lastName.innerHTML = lName;
     deg.innerHTML = degree;
     y.innerHTML = year;
+    dep.innerHTML = dept;
     card.appendChild(firstName);
     card.appendChild(lastName);
     card.appendChild(deg);
     card.appendChild(y);
+    card.appendChild(dep);
     console.log(card);
     return card;
 }
@@ -143,15 +147,18 @@ const studentSelection = (x,gName) => {
     const lName = document.createElement('div');
     const year = document.createElement('div');
     const degree = document.createElement('div');
+    const dept = document.createElement('div');
     fName.innerHTML = x.firstName;
     lName.innerHTML = x.lastName;
     year.innerHTML = x.year;
     degree.innerHTML = x.degree;
+    dept.innerHTML = x.dept;
     const list = document.createElement('div');
     list.appendChild(fName);
     list.appendChild(lName);
     list.appendChild(year);
     list.appendChild(degree);
+    list.appendChild(dept);
     console.log(list);
     for(let i = 0; i < groupDatabase.length;i++) {
         if(groupDatabase[i].groupName === gName && groupDatabase[i].groupStudent !== undefined) {

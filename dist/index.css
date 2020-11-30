@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dosis&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 
-*{box-sizing: border-box;}
+* {
+  box-sizing: border-box;
+}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
@@ -18,7 +20,7 @@
   opacity: 0.8;
   
   width: 280px; */
-  display:none;
+  display: none;
   background: white;
   position: fixed;
   bottom: 80px;
@@ -59,8 +61,8 @@
 
 .assignment {
   position: fixed;
-  bottom:23px;
-  right:28px;
+  bottom: 23px;
+  right: 28px;
   z-index: 15;
 }
 
@@ -70,12 +72,12 @@
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .listMaker {
@@ -83,20 +85,20 @@
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -106,7 +108,8 @@
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=number] {
+.form-container input[type="text"],
+.form-container input[type="number"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -115,20 +118,21 @@
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=number]:focus {
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -138,14 +142,15 @@
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover,
+.open-button:hover {
   opacity: 1;
 }
 
 #radio {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
 }
 
 #heading-container {
@@ -165,87 +170,92 @@
   transition: 0.5s;
 }
 
-
 #heading {
-    font-size: xx-large;
-    font-size: 280%;
+  font-size: xx-large;
+  font-size: 280%;
 }
 
 #heading-caption {
-    font-style: italic;
-    font-size: large;
-    font-size: 150%;
+  font-style: italic;
+  font-size: large;
+  font-size: 150%;
 }
 
 body {
-    background-image : linear-gradient( 115deg, rgba(	199,144,129, 0.8), rgba(223,165,121, 0.7) );
-    font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(
+    115deg,
+    rgba(199, 144, 129, 0.8),
+    rgba(223, 165, 121, 0.7)
+  );
+  font-family: "Montserrat", sans-serif;
 }
 
-b,label,input {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.125rem;
+b,
+label,
+input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
 }
 
 #container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 1rem;
-    margin: 0 auto;
-    max-width: 90%;
-    color: white;
-    position: absolute;
-    top: 30%;
-    padding: 30px;
-    transition: 0.5s;
+  display: flex;
+  margin: 0 auto;
+  max-width: 100%;
+  color: white;
+  position: absolute;
+  top: 30%;
+  padding: 30px;
+  transition: 0.5s;
+  flex-wrap: wrap;
 }
 
 .info-card {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0,0,0, 0.6);
-    border-radius: 2.5%;
-    width: 140px;
-    margin: 10px;
-    align-items: stretch;
-    border: 1rem;
-    padding-top: 1.5rem;
-    padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 2.5%;
+  width: 100%;
+  margin: 10px;
+  align-items: stretch;
+  border: 1rem;
+  padding-top: 1.5rem;
+  padding: 1.5rem;
 }
 
 .info-detail {
-    padding: 0 1.5rem;
-    padding-bottom: 1.5rem;
-    overflow-wrap: normal;
-    color: white;
+  width: 20%;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+  overflow-wrap: normal;
+  color: white;
 }
 
 .info-card-tools {
-    display: inline-flex;
-    width: 100%;
-    flex-direction: row;
-    margin-top: auto;
+  display: inline-flex;
+  width: 100%;
+  flex-direction: row;
+  margin-top: auto;
 }
 
 .read {
-    background-color: greenyellow;
-    border: none;
-    height: 100%;
-    opacity: 0.6;
+  background-color: greenyellow;
+  border: none;
+  height: 100%;
+  opacity: 0.6;
 }
 
 .not-read {
-    background-color: red;
-    border: none;
-    height: 100%;
-    opacity: 0.6;
+  background-color: red;
+  border: none;
+  height: 100%;
+  opacity: 0.6;
 }
 
 .delete {
-    background-color: sandybrown;
-    border: none;
-    height: 100%;
-    opacity: 0.6;
+  background-color: sandybrown;
+  border: none;
+  height: 100%;
+  opacity: 0.6;
 }
 
 .update {
@@ -268,9 +278,9 @@ b,label,input {
 .info-card-tools button {
   height: 50px;
   width: 33.33%;
-} 
+}
 
-.open-login-button{
+.open-login-button {
   background: none;
   color: white;
   border: none;
@@ -290,20 +300,20 @@ b,label,input {
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container-login {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -313,7 +323,8 @@ b,label,input {
 }
 
 /* Full-width input fields */
-.form-container-login input[type=text] , .form-container-login input[type=password] {
+.form-container-login input[type="text"],
+.form-container-login input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -322,20 +333,21 @@ b,label,input {
 }
 
 /* When the inputs get focus, do something */
-.form-container-login input[type=text]:focus , .form-container-login input[type=password]:focus {
+.form-container-login input[type="text"]:focus,
+.form-container-login input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container-login .btnLogin {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -345,7 +357,8 @@ b,label,input {
 }
 
 /* Add some hover effects to buttons */
-.form-container-login .btnLogin:hover, .open-login-button:hover {
+.form-container-login .btnLogin:hover,
+.open-login-button:hover {
   opacity: 1;
 }
 
@@ -368,20 +381,20 @@ b,label,input {
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container-signup {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -391,7 +404,8 @@ b,label,input {
 }
 
 /* Full-width input fields */
-.form-container-signup input[type=text], .form-container-signup input[type=password]{
+.form-container-signup input[type="text"],
+.form-container-signup input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -400,20 +414,21 @@ b,label,input {
 }
 
 /* When the inputs get focus, do something */
-.form-container-signup input[type=text]:focus, .form-container-signup input[type=password]:focus {
+.form-container-signup input[type="text"]:focus,
+.form-container-signup input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container-signup .btnSignUp {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -423,7 +438,8 @@ b,label,input {
 }
 
 /* Add some hover effects to buttons */
-.form-container-signup .btnSignUp:hover, .open-signup-button:hover {
+.form-container-signup .btnSignUp:hover,
+.open-signup-button:hover {
   opacity: 1;
 }
 
@@ -443,7 +459,7 @@ b,label,input {
   height: 50px;
   cursor: pointer;
   opacity: 0.8;
-  position: fixed;
+  position: absolute;
   top: 23px;
   right: 28px;
   width: 50px;
@@ -454,20 +470,20 @@ b,label,input {
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container-update {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -477,7 +493,8 @@ b,label,input {
 }
 
 /* Full-width input fields */
-.form-container-update input[type=text], .form-container-update input[type=number]{
+.form-container-update input[type="text"],
+.form-container-update input[type="number"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -486,20 +503,21 @@ b,label,input {
 }
 
 /* When the inputs get focus, do something */
-.form-container-update input[type=text]:focus, .form-container-update input[type=number]:focus {
+.form-container-update input[type="text"]:focus,
+.form-container-update input[type="number"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container-update .btnUpdate {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -533,20 +551,20 @@ b,label,input {
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container-passupdate {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -556,7 +574,7 @@ b,label,input {
 }
 
 /* Full-width input fields */
-.form-container-passupdate input[type=password]{
+.form-container-passupdate input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -565,20 +583,20 @@ b,label,input {
 }
 
 /* When the inputs get focus, do something */
-.form-container-passupdate input[type=password]:focus {
+.form-container-passupdate input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container-passupdate .btnPassUpdate {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -588,13 +606,13 @@ b,label,input {
 }
 
 /* Add some hover effects to buttons */
-.form-container-passupdate .btnPassUpdate:hover, .open-uppassword-button:hover {
+.form-container-passupdate .btnPassUpdate:hover,
+.open-uppassword-button:hover {
   opacity: 1;
 }
 
-
 button {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .openbtn {
@@ -629,7 +647,8 @@ button {
 }
 
 /* The sidepanel links */
-.sidepanel button, .sidepanel a {
+.sidepanel button,
+.sidepanel a {
   background: none;
   padding: 8px 8px 8px 8px;
   text-decoration: none;
@@ -640,7 +659,8 @@ button {
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidepanel a:hover, .sidepanel button:hover  {
+.sidepanel a:hover,
+.sidepanel button:hover {
   color: #f1f1f1;
 }
 
@@ -687,20 +707,20 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Add styles to the form container */
 .form-container-profupdate {
   max-width: 300px;
   padding: 10px;
-  background-color: rgba(155,255,255,0.5);
-  border: 3px solid rgba(145,245,240,0.5);
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -710,7 +730,7 @@ button {
 }
 
 /* Full-width input fields */
-.form-container-profupdate input[type=text]{
+.form-container-profupdate input[type="text"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -719,20 +739,20 @@ button {
 }
 
 /* When the inputs get focus, do something */
-.form-container-profupdate input[type=text]:focus {
+.form-container-profupdate input[type="text"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container-profupdate .btnProfUpdate {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -742,6 +762,7 @@ button {
 }
 
 /* Add some hover effects to buttons */
-.form-container-profupdate .btnProfUpdate:hover, .open-upprofile-button:hover {
+.form-container-profupdate .btnProfUpdate:hover,
+.open-upprofile-button:hover {
   opacity: 1;
 }

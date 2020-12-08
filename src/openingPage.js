@@ -2,6 +2,7 @@ import buttonClass from './button';
 import { formDisplay } from './loginForm';
 import './openingPage.css';
 const openingPage = () => {
+    document.querySelector("#container").innerHTML = "";
     const header = headingOpeningPage();
     document.querySelector("#container").appendChild(header);
     const form = homePageForm();

@@ -88,20 +88,36 @@ body {
 }
 
 #addButton {
-  background: lightslategrey;
+  display: flex;
+  background: rgba(119,136,153,0.6);
+  font-family: 'Raleway';
   position: fixed;
   bottom: 80px;
   right: 80px;
   width: 80px;
   height: 80px;
-  text-align: center;
+  /* text-align: center; */
+  /* border-style: none; */
   border-radius: 50%;
-  padding: 6px 6px;
-  font-size: 50px;
+  /* padding: 6px 6px; */
+  font-size: 80px;
+  font-weight: lighter;
   cursor: pointer;
   position: fixed;
   bottom: 23px;
   right: 28px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+#addButton:hover {
+  box-shadow:0px 0px 0px 3px lightgray;
+  opacity: 1;
+}
+
+#addButton:active {
+  outline: none;
 }
 
 .blacklayer {
@@ -129,6 +145,10 @@ body {
   flex-direction: row;
 }
 
+#backArrow:active {
+  outline: none;
+}
+
 .info-card {
   min-width: 20%;
   max-width: 30%;
@@ -142,4 +162,45 @@ body {
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.form-container #btnAdd {
+  background-color: lightsalmon;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container #btnAdd:hover {
+  opacity: 1;
+}
+
+.form-container #btnClose {
+  background-color: crimson;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container #btnClose:hover {
+  opacity: 1;
+}
+
+.default {
+  display: none;
+  position: fixed;
+  top:11vh;
+  right: 1vw;
+}
+
+.visible {
+  display: block;
 }

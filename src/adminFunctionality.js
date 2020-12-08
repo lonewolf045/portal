@@ -1,3 +1,4 @@
+import { user } from "./index";
 import { groupDatabase, studentDatabase, teacherDatabase } from "./connectToFirebase";
 import { createGroup } from "./group";
 import { createStudent } from "./student";
@@ -47,6 +48,23 @@ const makeGroup = () => {
     groupListAdmin.click();
 }
 
+const backArrow = (menuFunction) => {
+    const backArrowDiv = document.createElement('button');
+    const backArrowImage = document.createElement('img');
+    backArrowDiv.id = "backArrow";
+    backArrowImage.id = "backArrowImage";
+    backArrowImage.src = "https://www.pinclipart.com/picdir/big/130-1304091_left-svg-icon-free-icon-back-arrow-png.png";
+    backArrowImage.width = "60";
+    backArrowImage.height = "40";
+    backArrowDiv.appendChild(backArrowImage);
+    backArrowDiv.addEventListener('click',() => {
+        
+        menuFunction();
+        console.log('Clicked back');
+    });
+    return backArrowDiv;
+}
+
 const loadTeacherList = () => {
     let teachData = [...teacherDatabase];
     console.log(teacherDatabase);
@@ -65,4 +83,4 @@ const loadGroupList = () => {
     return grData;
 }
 
-export {makeTeacher,makeStudent,loadTeacherList,loadStudentList,makeGroup,loadGroupList};
+export {backArrow,makeTeacher,makeStudent,loadTeacherList,loadStudentList,makeGroup,loadGroupList};

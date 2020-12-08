@@ -3,8 +3,11 @@ import './adminPage.css';
 import {degreeDatabase, departmentDatabase, importDegree, importDepartment} from './connectToFirebase';
 import { createDepartment } from './department';
 import { createDegree } from './degree';
+import {addDegMenu,addDeptMenu} from './adminForms';
+import {backArrow} from './adminFunctionality';
+import { profileMenu } from './adminProfileMenu';
 
-const adminPage = (user) => {
+const adminPage = () => {
     let header = headingAdminPage(user);
     let profilePic = profileAdmin(user);
     header.appendChild(profilePic);
@@ -12,6 +15,8 @@ const adminPage = (user) => {
     document.querySelector("#container").appendChild(header);
     let adminMenuDiv = adminMenu();
     document.querySelector("#container").appendChild(adminMenuDiv);
+    let profilePicMenu = profileMenu(); 
+    document.querySelector("#container").appendChild(profilePicMenu);
 }
 
 const headingAdminPage = (user) => {
@@ -48,7 +53,11 @@ const profileAdmin = (user) => {
     profilePic.innerHTML = user.username.toUpperCase().charAt(0);
     console.log(profilePic.innerHTML);
     profilePic.id = "profilePic";
+    
     profilePicDiv.appendChild(profilePic);
+    profilePicDiv.addEventListener('click',() => {
+        document.querySelector('.default').classList.toggle('visible');
+    });
     return profilePicDiv;
 }
 
@@ -63,88 +72,9 @@ const adminMenu = () => {
     return adminMenuDiv;
 }
 
-const addDeptMenu = () => {
-    console.log('Menu Open');
-    const deptMenu = document.createElement('div');
-    deptMenu.classList.add("blacklayer");
-    const formContainer = document.createElement('div');
-    formContainer.id = "deptForm";
-    formContainer.classList.add("dept-form-popup");
-    const form = document.createElement('form');
-    form.classList.add('form-container');
-    form.name = "deptForm";
-    const formHeading = document.createElement('h1');
-    formHeading.id = 'formHeading';
-    formHeading.innerHTML = "Department";
-    const departmentLabel = document.createElement('label');
-    departmentLabel.htmlFor = "departmentName";
-    departmentLabel.innerHTML = "<b>Name:</b>";
-    const departmentField = document.createElement('input');
-    departmentField.type = "text";
-    departmentField.name = "departmentName";
-    departmentField.required = true;
-    const codeLabel = document.createElement('label');
-    codeLabel.htmlFor = "deptCode";
-    codeLabel.innerHTML = "<b>Code:</b>";
-    const codeField = document.createElement('input');
-    codeField.type = "text";
-    codeField.name = "deptCode";
-    codeField.required = true;
-    form.appendChild(formHeading);
-    form.appendChild(departmentLabel);
-    form.appendChild(departmentField);
-    form.appendChild(codeLabel);
-    form.appendChild(codeField);
-    const btnClose = document.createElement('button');
-    btnClose.type = 'button';
-    btnClose.innerHTML = "Close";
-    btnClose.id = "btnClose";
-    btnClose.classList.add('btnClose');
-    btnClose.addEventListener('click',() => {
-        deptMenu.remove();
-    });
-    
-    const btnAdd = document.createElement('button');
-    btnAdd.type = "button";
-    btnAdd.innerHTML = "Add";
-    btnAdd.id = "btnAdd";
-    btnAdd.classList.add('btnAdd');
-    btnAdd.addEventListener('click',() => {
-        console.log('Clicked');
-        if(departmentField.value && codeField.value) {
-            Promise.resolve(createDepartment(departmentField.value,codeField.value)).then(importDepartment).then(makeDeptMenu);
-            console.log('Here');
-            
-            btnClose.click();
-        }
-        else {
-            window.alert('Fill missing details');
-        }
-    });
-    
-    form.appendChild(btnAdd);
-    form.appendChild(btnClose);
-    formContainer.appendChild(form);
-    deptMenu.appendChild(formContainer);
-    return deptMenu;
-}
 
-const backArrow = (menuFunction) => {
-    const backArrowDiv = document.createElement('button');
-    const backArrowImage = document.createElement('img');
-    backArrowDiv.id = "backArrow";
-    backArrowImage.id = "backArrowImage";
-    backArrowImage.src = "https://www.pinclipart.com/picdir/big/130-1304091_left-svg-icon-free-icon-back-arrow-png.png";
-    backArrowImage.width = "60";
-    backArrowImage.height = "40";
-    backArrowDiv.appendChild(backArrowImage);
-    backArrowDiv.addEventListener('click',() => {
-        
-        menuFunction(user);
-        console.log('Clicked back');
-    });
-    return backArrowDiv;
-}
+
+
 
 const makeDeptMenu = () => {
     console.log('Open');
@@ -157,7 +87,7 @@ const makeDeptMenu = () => {
     deptDOM.forEach(function(x) {
         adminMenuDiv.appendChild(x);
     });
-    let deptAddButton = document.createElement('button');
+    let deptAddButton = document.createElement('div');
     deptAddButton.id = 'addButton';
     deptAddButton.innerHTML = '+';
     deptAddButton.addEventListener('click',() => {
@@ -191,7 +121,7 @@ const deptNameClick = (dept) => {
     importDegree(dept.deptCode).then(()=> {makeDegMenu(dept)});
 }
 
-const makeDegMenu = (dept) => {
+const makeDegMenu = (deg) => {
     console.log('Open');
     const adminMenuDiv = document.querySelector('#adminMenu');
     adminMenuDiv.innerHTML = "";
@@ -202,7 +132,7 @@ const makeDegMenu = (dept) => {
     degDOM.forEach(function(x) {
         adminMenuDiv.appendChild(x);
     });
-    let degAddButton = document.createElement('button');
+    let degAddButton = document.createElement('div');
     degAddButton.id = 'addButton';
     degAddButton.innerHTML = '+';
     degAddButton.addEventListener('click',() => {
@@ -213,73 +143,26 @@ const makeDegMenu = (dept) => {
 }
 
 const degListMaker = (deg) => {
-
+    const card = document.createElement('div');
+    card.classList.add('info-card');
+    const degName = document.createElement('div');
+    degName.classList.add('info-detail');
+    const degCode = document.createElement('div');
+    degCode.classList.add('info-detail');
+    degName.innerHTML = deg.degName;
+    degCode.innerHTML = deg.degShort;
+    card.appendChild(degName);
+    card.appendChild(degCode);
+    // card.addEventListener('click',() => {
+    //     adminDept = dept;
+    //     deptNameClick(dept);
+    // })
+    console.log(card);
+    return card;
 }
 
-const addDegMenu = () => {
-    //console.log('Menu Open');
-    const degMenu = document.createElement('div');
-    degMenu.classList.add("blacklayer");
-    const formContainer = document.createElement('div');
-    formContainer.id = "degForm";
-    formContainer.classList.add("deg-form-popup");
-    const form = document.createElement('form');
-    form.classList.add('form-container');
-    form.name = "degForm";
-    const formHeading = document.createElement('h1');
-    formHeading.id = 'formHeading';
-    formHeading.innerHTML = "Degree";
-    const degreeLabel = document.createElement('label');
-    degreeLabel.htmlFor = "degreeName";
-    degreeLabel.innerHTML = "<b>Name:</b>";
-    const degreeField = document.createElement('input');
-    degreeField.type = "text";
-    degreeField.name = "degreeName";
-    degreeField.required = true;
-    const codeLabel = document.createElement('label');
-    codeLabel.htmlFor = "degCode";
-    codeLabel.innerHTML = "<b>Abbreviation:</b>";
-    const codeField = document.createElement('input');
-    codeField.type = "text";
-    codeField.name = "degCode";
-    codeField.required = true;
-    form.appendChild(formHeading);
-    form.appendChild(degreeLabel);
-    form.appendChild(degreeField);
-    form.appendChild(codeLabel);
-    form.appendChild(codeField);
-    const btnClose = document.createElement('button');
-    btnClose.type = 'button';
-    btnClose.innerHTML = "Close";
-    btnClose.id = "btnClose";
-    btnClose.classList.add('btnClose');
-    btnClose.addEventListener('click',() => {
-        degMenu.remove();
-    });
-    
-    const btnAdd = document.createElement('button');
-    btnAdd.type = "button";
-    btnAdd.innerHTML = "Add";
-    btnAdd.id = "btnAdd";
-    btnAdd.classList.add('btnAdd');
-    btnAdd.addEventListener('click',() => {
-        console.log('Clicked');
-        if(degreeField.value && codeField.value) {
-            Promise.resolve(createDegree(degreeField.value,codeField.value)).then(() => {importDegree(adminDept.deptCode)}).then(makeDegMenu);
-            console.log('Here');
-            
-            btnClose.click();
-        }
-        else {
-            window.alert('Fill missing details');
-        }
-    });
-    
-    form.appendChild(btnAdd);
-    form.appendChild(btnClose);
-    formContainer.appendChild(form);
-    degMenu.appendChild(formContainer);
-    return degMenu;
-}
+
+
+
 
 export {adminPage};

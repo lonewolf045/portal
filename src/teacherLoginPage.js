@@ -129,9 +129,11 @@ const courseAssignListMaker = (x) => {
     card.appendChild(cCode);
     card.addEventListener('click',() => {
         course = x.courseName;
-        importAssignments(user,course);
-        console.log(assignmentDatabase);
+        importAssignments(user,course).then(() => {
+            console.log(assignmentDatabase);
         courseAssignClick(x.courseName);
+        });
+        
     });
     return card;
 }

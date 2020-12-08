@@ -50,6 +50,7 @@ function closeBlacklayerList() {
     const blacklayer = document.querySelector('.listMaker');
     //container.innerHTML = "";
     //courseListTeach.click();
+    blacklayer.innerHTML = "";
     closeBlacklayer.style.display = "none";
     blacklayer.remove();
 }

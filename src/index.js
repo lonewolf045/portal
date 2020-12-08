@@ -1,11 +1,8 @@
-import buttonClass from './button';
-import {newAdmin} from './admin';
-import { courseDatabase, importCourses, importGroups, importStudents, importTeachers, importUsers, userDatabase } from './connectToFirebase';
-import { formDisplay } from './loginForm';
+import { courseDatabase, importCourses, importDepartment, importGroups, importStudents, importTeachers, importUsers, userDatabase } from './connectToFirebase';
 import { loadCurrentSession } from './session';
+import { openingPage } from './openingPage';
 //import {user} from './login';
 
-let user,course;
-Promise.all([importUsers(),importStudents(),importTeachers(),importGroups()]).then(loadCurrentSession);
-buttonClass();
-export {user,course};
+let user,course,adminDept,adminDeg;
+Promise.all([importUsers(),importStudents(),importTeachers(),importGroups(),importDepartment()]).then(loadCurrentSession);
+export {user,course,adminDept,adminDeg};

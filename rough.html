@@ -1,0 +1,226 @@
+        <!-- <header id = 'heading-container'>
+             <div id = "head">
+                <h1 id = 'heading'>Omega</h1>
+                <p id = 'heading-caption'>Ultimate Portal</p>
+                <p class="welcome-message"></p>
+            </div>
+            <button id="logout-button-admin" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+            <button id="logout-button-teach" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+            <button id="logout-button-student" class = 'logout-button'><img src = "https://www.pngfind.com/pngs/b/339-3396821_logout-button-png.png" alt = "Logout" width = "50px" height = "50px"></button>
+        </header> -->
+        <!-- <button class = 'open-login-button'><img src = "https://cdn0.iconfinder.com/data/icons/mini-icon-2-2/16/login_in-512.png" height="50px" width="50px"></button>
+        <div class="login-form-popup" id="loginForm">
+            <form action="/action_page.php" class="form-container-login" name = "loginForm">
+                <h1>Login</h1>
+  
+                <label for="username"><b>Username</b></label>
+                <input type="text" name="username" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" name="password" required>
+
+                <div id = 'radio'>
+                    <b>Access Type:</b>
+                    <div>
+                        <input type="radio" id="admin" name="type" value="Admin" checked>
+                        <label for="admin">Admin</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="teacher" name="type" value="Teacher">
+                        <label for="teacher">Teacher</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="student" name="type" value="Student">
+                        <label for="student">Student</label><br>
+                    </div>
+                </div>
+
+                <button type="button" class="btnLogin" id = "btnLogin">Login</button>
+                <button type="button" class="btnLogin cancelLogin">Close</button>
+            </form>
+        </div>
+
+        <main>
+            <div id = 'container'>
+            </div>
+        </main>
+        <button class="open-button teacher">+</button>
+        <div class="form-popup" id="addTeacher">
+            <form action="/action_page.php" class="form-container" name = "addTeacher">
+                <h1>Add Teacher</h1>
+  
+                <label for="firstName"><b>First Name:</b></label>
+                <input type="text" name="firstName" required>
+
+                <label for="lastName"><b>Last Name:</b></label>
+                <input type="text" name="lastName" required>
+
+                <label for="teacherCode"><b>Teacher Code:</b></label>
+                <input type="text" name="teacherCode" required>
+  
+                <button type="button" class="btn" id = "btnAddTeacher">Add Teacher</button>
+                <button type="button" class="btn cancel" id = 'teacherClose'>Close</button>
+            </form>
+        </div>
+        <button class="open-button student">+</button>
+        <div class="form-popup" id="addStudent">
+            <form action="/action_page.php" class="form-container" name = "addStudent">
+                <h1>Add Student</h1>
+  
+                <label for="firstName"><b>First Name:</b></label>
+                <input type="text" name="firstName" required>
+
+                <label for="lastName"><b>Last Name:</b></label>
+                <input type="text" name="lastName" required>
+
+                <label for="year"><b>Year:</b></label>
+                <input type="text" name="year" required>
+
+                <label for="degree"><b>Degree:</b></label>
+                <input type="text" name="degree" required>
+
+                <label for="dept"><b>Department:</b></label>
+                <input type="text" name="dept" required>
+  
+                <button type="button" class="btn" id = "btnAddStudent">Add Student</button>
+                <button type="button" class="btn cancel" id = 'studentClose'>Close</button>
+            </form>
+        </div>
+
+        <button class="open-button course">+</button>
+        <div class="form-popup" id="addCourse">
+            <form action="/action_page.php" class="form-container" name = "addCourse">
+                <h1>Add Course</h1>
+  
+                <label for="courseName"><b>Course Name:</b></label>
+                <input type="text" name="courseName" required>
+
+                <label for="courseCode"><b>Course Code:</b></label>
+                <input type="text" name="courseCode" required>
+
+                <label for="teacherCode"><b>Teacher Code:</b></label>
+                <input type="text" name="teacherCode" required>
+
+                <!-- <label for="degree"><b>Degree:</b></label>
+                <input type="text" name="degree" required> -->
+  
+                <button type="button" class="btn" id = "btnAddCourse">Add Course</button>
+                <button type="button" class="btn cancel" id = 'courseClose'>Close</button>
+            </form>
+        </div>
+
+        <button class="open-button group">+</button>
+        <div class="form-popup" id="addGroup">
+            <form action="/action_page.php" class="form-container" name = "addGroup">
+                <h1>Add Group</h1>
+  
+                <label for="groupName"><b>Group Name:</b></label>
+                <input type="text" name="groupName" required>
+
+                <button type="button" class="btn" id = "btnAddGroup">Add Group</button>
+                <button type="button" class="btn cancel" id = 'groupClose'>Close</button>
+            </form>
+        </div>
+
+        <button class="open-button assignment">+</button>
+        <div class="form-popup" id="addAssignment">
+            <form action="/action_page.php" class="form-container" name = "addAssignment">
+                <h1>Add Assignment</h1>
+  
+                <label for="assignmentDetail"><b>Detail:</b></label>
+                <textarea name="assignmentDetail" required></textarea>
+
+                <label for="dueDate"><b>Due Date:</b></label>
+                <input type="date" name="dueDate" required>
+
+                <button type="button" class="btn" id = "btnAddAssignment">Add Assignment</button>
+                <button type="button" class="btn cancel" id = 'assignmentClose'>Close</button>
+            </form>
+        </div>
+
+        <button class="open-button department">+</button>
+        <div class="form-popup" id="addDepartment">
+            <form class="form-container" name = "addDepartment">
+                <h1>Add Department</h1>
+  
+                <label for="departmentName"><b>Name:</b></label>
+                <input type = 'text' name="departmentName" required></input>
+
+                <label for="departmentCode"><b>Code:</b></label>
+                <input type="text" name="departmentCode" required>
+
+                <button type="submit" class="btn" id = "btnAddDepartment">Add</button>
+                <button type="button" class="btn cancel" id = 'departmentClose'>Close</button>
+            </form>
+        </div>
+
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        
+        <button id="closeBlacklayer" class = 'logout-button'>&times;</button>
+
+
+        <div class="update-form-popup" id="updateForm">
+            <form action="/action_page.php" class="form-container-update" name = "updateForm">
+                <h1>Update Book</h1>
+  
+                <label for="title"><b>Title</b></label>
+                <input type="text" name="title">
+
+                <label for="author"><b>Author</b></label>
+                <input type="text" name="author">
+  
+                <label for="pages"><b>Pages</b></label>
+                <input type="number" name="pages">
+
+                <button type="button" class="btnUpdate" id = "btnUpdate">Update Book Details</button>
+                <button type="button" class="btnUpdate cancelUpdate" onclick="closeFormUpdate()">Close</button>
+            </form>
+        </div>
+        
+        <div class="passupdate-form-popup" id="passUpdateForm">
+            <form action="/action_page.php" class="form-container-passupdate" name = "passUpdateForm">
+                <h1>Update Password</h1>
+  
+                <label for="currpass"><b>Current Password</b></label>
+                <input type="password" name="currpass" required>
+
+                <label for="newpass"><b>New Password</b></label>
+                <input type="password" name="newpass" required>
+
+                <button type="button" class="btnPassUpdate" id = "btnPassUpdate">Update</button>
+                <button type="button" class="btnPassUpdate cancelPassUpdate" onclick="closeFormPassUpdate()">Close</button>
+            </form>
+        </div>
+
+        <div class="profupdate-form-popup" id="profUpdateForm">
+            <form action="/action_page.php" class="form-container-profupdate" name = "profUpdateForm">
+                <h1>Update Profile</h1>
+  
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" name="fname" required>
+                
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" name="lname" required>
+
+                <button type="button" class="btnProfUpdate" id = "btnProfUpdate">Update Profile</button>
+                <button type="button" class="btnProfUpdate cancelProfUpdate" onclick="closeFormProfUpdate()">Close</button>
+            </form>
+        </div>
+
+        <button class="openbtn" id = 'openBtnAdmin'>&#9776;</button>
+        <div id="sidepanelAdmin" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" id = "closeNavAdmin">&times;</a>
+            <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
+            <button class="open-student-button open-nav-button">Students</button>
+            <button class="open-teacher-button open-nav-button">Teachers</button>
+            <button class="open-group-button open-nav-button">Groups</button>
+        </div>
+
+        <button class="openbtn" id = 'openBtnTeach'>&#9776;</button>
+        <div id="sidepanelTeach" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" id = "closeNavTeach">&times;</a>
+            <!-- <button class="open-button" onclick="openForm()">Add New Book</button> -->
+            <button class="open-course-button open-nav-button">Courses</button>
+            <button class="open-assignment-button open-nav-button">Assignments</button>
+            <!-- <button class="open-group-button">Groups</button> -->
+        </div> -->

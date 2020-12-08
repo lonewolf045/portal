@@ -1,4 +1,4 @@
-import { importDepartment } from "./connectToFirebase";
+import { importDepartment,db } from "./connectToFirebase";
 
 const department = (deptName,deptCode,degrees) => {
     return {deptName,deptCode,degrees};

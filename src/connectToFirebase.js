@@ -35,6 +35,8 @@ let assignmentDatabase = [];
 let assignmentDatabaseData = "";
 let departmentDatabase = [];
 let departmentDatabaseData = "";
+let degreeDatabase = [];
+let degreeDatabaseData = "";
 
 
 const onDataUser = (snapshot) => {
@@ -44,11 +46,21 @@ const onDataUser = (snapshot) => {
   console.log(userDatabase);
 }
 
+const onErrorUser = () => {
+  userDatabaseData = "";
+  userDatabase = [];
+}
+
 const onDataStudent = (snapshot) => {
   studentDatabaseData = snapshot.val();
   console.log(snapshot.val());
   studentDatabase = Object.values(studentDatabaseData);
   console.log(studentDatabase);
+}
+
+const onErrorStudent = () => {
+  studentDatabaseData = "";
+  studentDatabase = [];
 }
 
 const onDataTeacher = (snapshot) => {
@@ -58,11 +70,21 @@ const onDataTeacher = (snapshot) => {
   console.log(teacherDatabase);
 }
 
+const onErrorTeacher = () => {
+  teacherDatabaseData = "";
+  teacherDatabase = [];
+}
+
 const onDataCourses = (snapshot) => {
   courseDatabaseData = snapshot.val();
     console.log(snapshot.val());
     courseDatabase = Object.values(courseDatabaseData);
     console.log(courseDatabase);
+}
+
+const onErrorCourses = () => {
+  courseDatabaseData = "";
+  courseDatabase = [];
 }
 
 const onDataGroups = (snapshot) => {
@@ -72,6 +94,11 @@ const onDataGroups = (snapshot) => {
     console.log(groupDatabase);
 }
 
+const onErrorGroups = () => {
+  groupDatabaseData = "";
+  groupDatabase = [];
+}
+
 const onDataAssignment = (snapshot) => {
   assignmentDatabaseData = snapshot.val();
     console.log(snapshot.val());
@@ -79,11 +106,33 @@ const onDataAssignment = (snapshot) => {
     console.log(assignmentDatabase);
 }
 
+const onErrorAssignment = () => {
+  assignmentDatabaseData = "";
+  assignmentDatabase = [];
+}
+
 const onDataDepartment = (snapshot) => {
   departmentDatabaseData = snapshot.val();
   console.log(snapshot.val());
   departmentDatabase = Object.values(departmentDatabaseData);
   console.log(departmentDatabase);
+}
+
+const onErrorDepartment = () => {
+  departmentDatabaseData = "";
+  departmentDatabase = [];
+}
+
+const onDataDegree = (snapshot) => {
+  degreeDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  degreeDatabase = Object.values(degreeDatabaseData);
+  console.log(departmentDatabase);
+}
+
+const onErrorDegree = () => {
+  degreeDatabaseData = "";
+  degreeDatabase = [];
 }
 
 const getData = (ref) => {
@@ -96,32 +145,37 @@ const getData = (ref) => {
 };
 const importUsers = () => {
   //dataRefUsers.on("value", function (snapshot) {
-  return getData(dataRefUsers).then(onDataUser);
+  return getData(dataRefUsers).then(onDataUser).catch(onErrorUser);
 }
 const importStudents = () => {
-  return getData(dataRefStudents).then(onDataStudent);
+  return getData(dataRefStudents).then(onDataStudent).catch(onErrorStudent);
 }
 const importTeachers = () => {
-  return getData(dataRefTeachers).then(onDataTeacher);
+  return getData(dataRefTeachers).then(onDataTeacher).catch(onErrorTeacher);
 }
 const importCourses = (uname) => {
   let ref = returnReference(uname);
   dataRefCourses = db.ref().child('Teachers/' + ref + '/Courses');
-  return getData(dataRefCourses).then(onDataCourses);
+  return getData(dataRefCourses).then(onDataCourses).catch(onErrorCourses);
 }
 const importGroups = () => {
-  return getData(dataRefGroups).then(onDataGroups);
+  return getData(dataRefGroups).then(onDataGroups).catch(onErrorGroups);
 }
 
 const importAssignments = (uname,cname) => {
   let ref = returnReference(uname);
   let ref2 = returnCourseKey(uname,cname);
   let dataRefAssignments = db.ref().child('Teachers/' + ref + '/Courses/'+ref2+'/Assignments');
-  return getData(dataRefAssignments).then(onDataAssignment);
+  return getData(dataRefAssignments).then(onDataAssignment).catch(onErrorAssignment);
 }
 
 const importDepartment = () => {
-  return getData(dataRefDepartments).then(onDataDepartment);
+  return getData(dataRefDepartments).then(onDataDepartment).catch(onErrorDepartment);
+}
+
+const importDegree = (deptCode) => {
+  let ref = db.ref().child('Departments/'+deptCode+'/Degrees');
+  return getData(ref).then(onDataDegree).catch(onErrorDegree);
 }
 
 const updateGroup = (index,data) => {
@@ -173,4 +227,4 @@ let returnCourseKey = (uname,cname) => {
   return arrayKeys[i];
 }
 
-export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment};
+export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase};

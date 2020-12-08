@@ -1,11 +1,14 @@
 import { adminLogin,teacherLogin,studentLogin } from "./login";
 
-const loginForm = document.forms['loginForm'];
-const closeLogin = document.querySelector(".cancelLogin");
+
 const formDisplay = () => {
+    const loginForm = document.forms['loginForm'];
+    console.log("Trying");
+    console.log(loginForm);
     let username = loginForm["username"].value;
     let password = loginForm["password"].value;
     let type = loginForm["type"].value;
+    document.querySelector('#container').innerHTML = "";
     if(type === "Admin") {
         adminLogin(username,password);
     } else if(type === "Teacher") {
@@ -13,7 +16,7 @@ const formDisplay = () => {
     } else if(type === "Student") {
         studentLogin(username,password);
     }
-    closeLogin.click();
-}
 
+    //closeLogin.click();
+}
 export {formDisplay};

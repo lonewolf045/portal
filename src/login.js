@@ -4,27 +4,30 @@ import {loginTeacherDOM} from './teacherLoginPage';
 import {loginStudentDOM} from './studentLoginPage';
 import {user,course} from './index';
 import { setAdmin, setStudent, setTeach } from './session';
+import { adminPage } from './adminPage';
 
 
 const adminLogin = (username,password) => {
     for(let i = 0; i < userDatabase.length; i++) {
-        //console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
+        console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
         if(userDatabase[i].Type === 'Admin') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
+                user = userDatabase[i];
                 setAdmin(username,password);
-                loginAdminDOM(username);
+                //loginAdminDOM(username);
+                adminPage(userDatabase[i]);
                 return;
             }
         }
     }
-    //console.log('Wrong Login Credentials');
+    console.log('Wrong Login Credentials');
     window.alert('Wrong Login Credentials');
 }
 
 const teacherLogin = (username,password) => {
     for(let i = 0; i < userDatabase.length; i++) {
-        //console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
+        console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
         if(userDatabase[i].Type === 'Teacher') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
@@ -42,7 +45,7 @@ const teacherLogin = (username,password) => {
 
 const studentLogin = (username,password) => {
     for(let i = 0; i < userDatabase.length; i++) {
-        //console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
+        console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
         if(userDatabase[i].Type === 'Student') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');

@@ -3,6 +3,6 @@ import { loadCurrentSession } from './session';
 import { openingPage } from './openingPage';
 //import {user} from './login';
 
-let user,course,adminDept,adminDeg;
+let user,course,adminDept,adminDeg,adminBatch;
 Promise.all([importUsers(),importStudents(),importTeachers(),importGroups(),importDepartment()]).then(loadCurrentSession);
-export {user,course,adminDept,adminDeg};
+export {user,course,adminDept,adminDeg,adminBatch};

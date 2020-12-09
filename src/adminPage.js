@@ -1,9 +1,9 @@
-import { adminDept, user } from './index';
+import { adminDeg, adminDept, user,adminBatch } from './index';
 import './adminPage.css';
-import {degreeDatabase, departmentDatabase, importDegree, importDepartment} from './connectToFirebase';
+import {batchDegreeDatabase, degreeDatabase, departmentDatabase, importDegree, importDegreeBatches, importDepartment} from './connectToFirebase';
 import { createDepartment } from './department';
 import { createDegree } from './degree';
-import {addDegMenu,addDeptMenu} from './adminForms';
+import {addBatchMenu, addDegMenu,addDeptMenu} from './adminForms';
 import {backArrow} from './adminFunctionality';
 import { profileMenu } from './adminProfileMenu';
 
@@ -153,10 +153,54 @@ const degListMaker = (deg) => {
     degCode.innerHTML = deg.degShort;
     card.appendChild(degName);
     card.appendChild(degCode);
-    // card.addEventListener('click',() => {
-    //     adminDept = dept;
-    //     deptNameClick(dept);
-    // })
+    card.addEventListener('click',() => {
+        adminDeg = deg;
+        degNameClick();
+    })
+    console.log(card);
+    return card;
+}
+
+const degNameClick = () => {
+    importDegreeBatches(adminDept.deptCode,adminDeg.degShort).then(() => {makeBatchMenu()});
+
+}
+
+const makeBatchMenu = () => {
+    const adminMenuDiv = document.querySelector('#adminMenu');
+    adminMenuDiv.innerHTML = "";
+    let backButton = backArrow(makeDegMenu);
+    adminMenuDiv.appendChild(backButton);
+    let batchList = [...batchDegreeDatabase];
+    let batchDOM = batchList.map(x => batchListMaker(x));
+    batchDOM.forEach((x) => {
+        adminMenuDiv.appendChild(x);
+    });
+    let batchAddButton = document.createElement('div');
+    batchAddButton.id = 'addButton';
+    batchAddButton.innerHTML = '+';
+    batchAddButton.addEventListener('click',() => {
+        let batchMenu = addBatchMenu();
+        document.querySelector('#container').appendChild(batchMenu);
+    });
+    adminMenuDiv.appendChild(batchAddButton);
+}
+
+const batchListMaker = (batch) => {
+    const card = document.createElement('div');
+    card.classList.add('info-card');
+    const batchName = document.createElement('div');
+    batchName.classList.add('info-detail');
+    const batchCode = document.createElement('div');
+    batchCode.classList.add('info-detail');
+    batchName.innerHTML = batch.batchName;
+    batchCode.innerHTML = batch.batchCode;
+    card.appendChild(batchName);
+    card.appendChild(batchCode);
+    card.addEventListener('click',() => {
+        adminBatch = batch;
+        //degNameClick();
+    })
     console.log(card);
     return card;
 }
@@ -165,4 +209,4 @@ const degListMaker = (deg) => {
 
 
 
-export {adminPage};
+export {adminPage,makeDegMenu,makeBatchMenu,makeDeptMenu};

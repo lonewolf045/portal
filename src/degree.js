@@ -11,7 +11,7 @@ const createDegree = (degName,degShort) => {
     let degCode = degShort.split('.').join("");
     let dataRef = db.ref().child('Departments/'+adminDept.deptCode+'/Degrees/'+degCode);
     dataRef.set(newDegree);
-    importDegree();
+    importDegree(adminDept.deptCode);
 };
 
 export {createDegree};

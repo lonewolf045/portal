@@ -199,6 +199,11 @@ body {
   position: fixed;
   top:11vh;
   right: 1vw;
+  max-width: 200px;
+  padding: 3%;
+  background-color: rgba(155, 255, 255, 0.5);
+  border: 3px solid rgba(145, 245, 240, 0.5);
+  margin: 0;
 }
 
 .visible {

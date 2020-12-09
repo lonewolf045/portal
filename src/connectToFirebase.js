@@ -37,7 +37,8 @@ let departmentDatabase = [];
 let departmentDatabaseData = "";
 let degreeDatabase = [];
 let degreeDatabaseData = "";
-
+let batchDegreeDatabase = [];
+let batchDegreeDatabaseData = "";
 
 const onDataUser = (snapshot) => {
   userDatabaseData = snapshot.val();
@@ -135,6 +136,18 @@ const onErrorDegree = () => {
   degreeDatabase = [];
 }
 
+const onDataBatchesDegree = (snapshot) => {
+  batchDegreeDatabaseData = snapshot.val();
+  console.log(snapshot.val());
+  batchDegreeDatabase = Object.values(batchDegreeDatabaseData);
+  console.log(batchDegreeDatabase);
+}
+
+const onErrorBatchesDegree = () => {
+  batchDegreeDatabaseData = "";
+  batchDegreeDatabase = [];
+}
+
 const getData = (ref) => {
   return new Promise((resolve, reject) => {
     const onError = error => reject(error);
@@ -176,6 +189,12 @@ const importDepartment = () => {
 const importDegree = (deptCode) => {
   let ref = db.ref().child('Departments/'+deptCode+'/Degrees');
   return getData(ref).then(onDataDegree).catch(onErrorDegree);
+}
+
+const importDegreeBatches = (deptCode,degCode) => {
+  let code = degCode.split(".").join("");
+  let ref = db.ref().child('Departments/'+deptCode+'/Degrees/'+code+'/Batches');
+  return getData(ref).then(onDataBatchesDegree).catch(onErrorBatchesDegree);
 }
 
 const updateGroup = (index,data) => {
@@ -227,4 +246,4 @@ let returnCourseKey = (uname,cname) => {
   return arrayKeys[i];
 }
 
-export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase};
+export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase};

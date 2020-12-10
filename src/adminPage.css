@@ -204,8 +204,35 @@ body {
   background-color: rgba(155, 255, 255, 0.5);
   border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
+  cursor: pointer;
 }
 
 .visible {
   display: block;
+}
+
+button {
+  outline: none;
+}
+
+.list-tab {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 2.5%;
+  width: 100%;
+  margin: 10px;
+  align-items: stretch;
+  border: 1rem;
+  padding-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 15px 50px 30px;
+}
+
+.list-detail {
+  width: 16%;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+  overflow-wrap: normal;
+  color: white;
 }

@@ -1,15 +1,19 @@
+import { adminBatch, adminDeg, adminDept } from "./index";
 import { importUsers, userDatabase, db, importStudents, studentDatabase } from "./connectToFirebase";
 
-const student = (firstName,lastName,year,degree,dept,username) => {
-    return {firstName,lastName,year,degree,username,dept};
+const student = (firstName,lastName,batch,degree,dept,username,password) => {
+    return {firstName,lastName,batch,degree,username,dept,password};
 };
 
-const createStudent = (firstName,lastName,year,degree,dept) => {
-    let username = firstName.toLowerCase()+lastName+year;
-    let newStudent = student(firstName,lastName,year,degree,dept,username);
-    let dataRef = db.ref().child('Students');
-    let newReference = dataRef.push();
-    newReference.set(newStudent);
+const createStudent = (firstName,lastName) => {
+    let password = "student123";
+    let username = firstName.toLowerCase()+lastName+adminBatch.batchCode;
+    let newStudent = student(firstName,lastName,adminBatch.batchName,adminDeg.degName,adminDept.deptName,username,password);
+    let degCode = adminDeg.degShort.split(".").join("");
+    let dataRef = db.ref().child('Departments/'+adminDept.deptCode+'/Degrees/'+degCode+'/Batches/'+adminBatch.batchCode+'/Students/'+username);
+    //let dataRef = db.ref().child('Students');
+    //let newReference = dataRef.push();
+    dataRef.set(newStudent);
     let userRef = db.ref().child('users');
     let userReference = userRef.push();
     userReference.set({
@@ -18,7 +22,7 @@ const createStudent = (firstName,lastName,year,degree,dept) => {
         password: 'student123'
     });
     importUsers();
-    importStudents();
+    importStudents(adminDept.deptCode,adminDeg.degShort,adminBatch.batchCode);
     //console.log(userDatabase,studentDatabase);
 }
 

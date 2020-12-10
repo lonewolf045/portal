@@ -4,5 +4,5 @@ import { openingPage } from './openingPage';
 //import {user} from './login';
 
 let user,course,adminDept,adminDeg,adminBatch;
-Promise.all([importUsers(),importStudents(),importTeachers(),importGroups(),importDepartment()]).then(loadCurrentSession);
+Promise.all([importUsers(),importTeachers(),importGroups(),importDepartment()]).then(loadCurrentSession);
 export {user,course,adminDept,adminDeg,adminBatch};

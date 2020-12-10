@@ -1,7 +1,11 @@
 import { createBatch } from "./batch";
-import {makeDegMenu,makeDeptMenu,makeBatchMenu} from './adminPage';
-import { importDegreeBatches } from "./connectToFirebase";
-import {adminDeg,adminDept} from './index';
+import {makeDegMenu,makeDeptMenu,makeBatchMenu, makeStudentMenu} from './adminPage';
+import { importDegreeBatches, importStudents,importDegree,importDepartment } from "./connectToFirebase";
+import {adminBatch, adminDeg,adminDept} from './index';
+import { studentLogin } from "./login";
+import { createStudent } from "./student";
+import {createDegree} from "./degree";
+import {createDepartment} from "./department";
 
 const addDegMenu = () => {
     //console.log('Menu Open');
@@ -201,4 +205,68 @@ const addBatchMenu = () => {
     return batchMenu;
 }
 
-export {addDegMenu,addDeptMenu,addBatchMenu};
+const addStudentMenu = () => {
+    const studentMenu = document.createElement('div');
+    studentMenu.classList.add('blacklayer');
+    const formContainer = document.createElement('div');
+    formContainer.id = "studentForm";
+    formContainer.classList.add("student-form-popup");
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+    form.name = "studentForm";
+    const formHeading = document.createElement('h1');
+    formHeading.id = 'formHeading';
+    formHeading.innerHTML = "Student:";
+    const firstNameLabel = document.createElement('label');
+    const lastNameLabel = document.createElement('label');
+    //const userName = document.createElement('label');
+    firstNameLabel.htmlFor = "firstName";
+    firstNameLabel.innerHTML = "<b>First Name:</b>";
+    lastNameLabel.htmlFor = "lastName";
+    lastNameLabel.innerHTML = "<b>Last Name:</b>";
+    const firstNameField = document.createElement('input');
+    const lastNameField = document.createElement('input');
+    firstNameField.type = "text";
+    lastNameField.type = "text";
+    firstNameField.name = "firstName";
+    lastNameField.name = "lastName";
+    firstNameField.required = true;
+    lastNameField.required = true;
+    form.appendChild(firstNameLabel);
+    form.appendChild(firstNameField);
+    form.appendChild(lastNameLabel);
+    form.appendChild(lastNameField);
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        studentMenu.remove();
+    });
+    const btnAdd = document.createElement('button');
+    btnAdd.type = "button";
+    btnAdd.innerHTML = "Add";
+    btnAdd.id = "btnAdd";
+    btnAdd.classList.add('btnAdd');
+    btnAdd.addEventListener('click',() => {
+        console.log('Clicked');
+        if(firstNameField.value && lastNameField.value) {
+            Promise.resolve(createStudent(firstNameField.value,lastNameField.value)).then(() => {importStudents(adminDept.deptCode,adminDeg.degShort,adminBatch.batchCode)}).then(makeStudentMenu);
+            console.log('Here');
+            
+            btnClose.click();
+        }
+        else {
+            window.alert('Fill missing details');
+        }
+    });
+    
+    form.appendChild(btnAdd);
+    form.appendChild(btnClose);
+    formContainer.appendChild(form);
+    studentMenu.appendChild(formContainer);
+    return studentMenu;
+}
+
+export {addDegMenu,addDeptMenu,addBatchMenu,addStudentMenu};

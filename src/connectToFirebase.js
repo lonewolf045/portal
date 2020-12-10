@@ -1,4 +1,4 @@
-import { user,course } from "./index";
+import { user,course, adminDept, adminDeg, adminBatch } from "./index";
 
 var firebaseConfig = {
     apiKey: "AIzaSyDI7nXtkFGzhjnvqfPuHm6xIAJoebeK1tA",
@@ -160,8 +160,10 @@ const importUsers = () => {
   //dataRefUsers.on("value", function (snapshot) {
   return getData(dataRefUsers).then(onDataUser).catch(onErrorUser);
 }
-const importStudents = () => {
-  return getData(dataRefStudents).then(onDataStudent).catch(onErrorStudent);
+const importStudents = (deptCode,degCode,batchCode) => {
+  let code = degCode.split(".").join("");
+  let ref = db.ref().child('Departments/'+deptCode+'/Degrees/'+code+'/Batches/'+batchCode+'/Students');
+  return getData(ref).then(onDataStudent).catch(onErrorStudent);
 }
 const importTeachers = () => {
   return getData(dataRefTeachers).then(onDataTeacher).catch(onErrorTeacher);

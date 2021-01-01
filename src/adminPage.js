@@ -3,6 +3,7 @@ import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
 import {makeDeptMenu} from './adminDepartment';
 import { makeDeptMenuTeach } from './adminTeacher';
+import { addStudentClick } from './adminStudent';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -20,8 +21,10 @@ const adminPage = () => {
     let sideMenuDiv = sideMenu();
     subContainer.appendChild(sideMenuDiv);
 
-    let adminMenuDiv = adminMenu();
-    subContainer.appendChild(adminMenuDiv);
+    let workWindow = document.createElement('div');
+    workWindow.id = "workWindow";
+    subContainer.appendChild(workWindow);
+    
     document.querySelector("#container").appendChild(subContainer);
 }
 
@@ -39,8 +42,10 @@ const headingAdminPage = (user) => {
     omegaIcon.appendChild(iconImage);
     omegaHeading.innerHTML = "Omega";
     omegaHeading.id = "omegaHeading";
+    omegaHeading.classList.add('none');
     omegaLine.innerHTML += ",the new Alpha,right now in Beta";
     omegaLine.id = "omegaLine";
+    omegaLine.classList.add('none');
     headingContainer.id = "headingContainer";
     header.id = "header";
     headingContainer.appendChild(omegaIcon);
@@ -96,6 +101,9 @@ const sideMenu = () => {
     const viewStudent = document.createElement('div');
     addStudent.innerHTML = "Add Student";
     viewStudent.innerHTML= "View Students";
+    addStudent.classList.add('option');
+    viewStudent.classList.add('option');
+    addStudent.addEventListener('click',addStudentClick);
     studentMenu.appendChild(addStudent);
     studentMenu.appendChild(viewStudent);
     studentMenu.classList.add('content');
@@ -115,23 +123,23 @@ const sideMenu = () => {
     return sideMenuDiv;
 }
 
-const activateSideMenu = () => {
-    var coll = document.getElementsByClassName("collapsible");
-    console.log(coll);
-    var i;
+// const activateSideMenu = () => {
+//     var coll = document.getElementsByClassName("collapsible");
+//     console.log(coll);
+//     var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
-}
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.maxHeight){
+//       content.style.maxHeight = null;
+//     } else {
+//       content.style.maxHeight = content.scrollHeight + "px";
+//     } 
+//   });
+// }
+// }
 
 
 export {adminPage};

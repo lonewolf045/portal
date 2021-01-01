@@ -10,6 +10,34 @@ const studentDegNameClick = () => {
     importDegree(adminDept.deptCode).then(()=> {makeDegMenu(adminDeg)});
 }
 
+const addStudentClick = () => {
+    let workWindow = document.querySelector('#workWindow');
+    workWindow.innerHTML = "";
+    
+    let studentAddButton = document.createElement('div');
+    studentAddButton.id = 'addButton';
+    studentAddButton.innerHTML = `<i class="fas fa-plus"></i>`;
+    studentAddButton.addEventListener('click',() => {
+        let studentMenu = addStudentMenu();
+        document.querySelector('#container').appendChild(studentMenu);
+    });
+
+    let studentUploadButton = document.createElement('div');
+    studentUploadButton.id = "uploadButton";
+    studentUploadButton.innerHTML = `<i class="fas fa-file-upload"></i>`;
+    studentUploadButton.addEventListener('click',() => {
+        let uploadMenu = uploadStudentForm();
+        document.querySelector('#container').appendChild(uploadMenu);
+    });
+
+    workWindow.appendChild(studentAddButton);
+    workWindow.appendChild(studentUploadButton);
+}
+
+const viewStudentClick = () => {
+    
+}
+
 const makeDegMenu = (deg) => {
     console.log('Open');
     const adminMenuDiv = document.querySelector('#adminMenu');
@@ -159,4 +187,4 @@ const studentListMaker = (student) => {
 
 
 
-export {studentDegNameClick,makeDegMenu,makeBatchMenu,makeStudentMenu};
+export {studentDegNameClick,makeDegMenu,makeBatchMenu,makeStudentMenu,addStudentClick};

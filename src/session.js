@@ -1,4 +1,5 @@
-import { loginAdminDOM } from "./adminLoginPage";
+
+import { reject } from "lodash";
 import { importCourses } from "./connectToFirebase";
 //myStorage = window.sessionStorage;
 import {user} from './index';
@@ -36,22 +37,23 @@ const resetCurrentUser = () => {
 }
 
 const loadCurrentSession = () => {
-        if(sessionStorage.currentUser === undefined) {
-            openingPage();
-        }
-            //reject();
-        let curruser = JSON.parse(sessionStorage.currentUser);
-        console.log(curruser);
-        if(curruser.type === 'admin') {
-            console.log('admin');
-            adminLogin(curruser.username,curruser.password);
-        } else if (curruser.type === 'teacher') {
-            //user = curruser.username;
-            teacherLogin(curruser.username,curruser.password);
-            //importCourses(user);
-        } else if (curruser.type === 'student') {
-            studentLogin(curruser.username,curruser.password);
-        }
+    if(sessionStorage.currentUser === undefined) {
+        openingPage();
+        return;
+    }
+        //reject();
+    let curruser = JSON.parse(sessionStorage.currentUser);
+    console.log(curruser);
+    if(curruser.type === 'admin') {
+        console.log('admin');
+        adminLogin(curruser.username,curruser.password);
+    } else if (curruser.type === 'teacher') {
+        //user = curruser.username;
+        teacherLogin(curruser.username,curruser.password);
+        //importCourses(user);
+    } else if (curruser.type === 'student') {
+        studentLogin(curruser.username,curruser.password);
+    }
 }
 
 

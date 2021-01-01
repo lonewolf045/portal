@@ -1,10 +1,10 @@
-import { loginAdminDOM } from './adminLoginPage';
+
 import {importCourses, userDatabase} from './connectToFirebase';
-import {loginTeacherDOM} from './teacherLoginPage';
 import {loginStudentDOM} from './studentLoginPage';
 import {user,course} from './index';
 import { setAdmin, setStudent, setTeach } from './session';
 import { adminPage } from './adminPage';
+import { teacherPage } from './teacherPage';
 
 
 const adminLogin = (username,password) => {
@@ -34,8 +34,9 @@ const teacherLogin = (username,password) => {
                 user = username;
                 console.log(user);
                 setTeach(username,password);
-                loginTeacherDOM(username);
-                importCourses(user);
+                //loginTeacherDOM(username);
+                //importCourses(user);
+                teacherPage(userDatabase[i]);
                 return;
             }
         }

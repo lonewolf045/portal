@@ -1,11 +1,12 @@
 import { createBatch } from "./batch";
-import {makeDegMenu,makeDeptMenu,makeBatchMenu, makeStudentMenu} from './adminPage';
-import { importDegreeBatches, importStudents,importDegree,importDepartment } from "./connectToFirebase";
+import {makeDegMenu,makeBatchMenu, makeStudentMenu} from './adminStudent';
+import { importDegreeBatches, importStudents,importDegree,importDepartment, handleFileUploadChange, handleFileUploadSubmit } from "./connectToFirebase";
 import {adminBatch, adminDeg,adminDept} from './index';
 import { studentLogin } from "./login";
 import { createStudent } from "./student";
 import {createDegree} from "./degree";
 import {createDepartment} from "./department";
+import {makeDeptMenu} from './adminDepartment';
 
 const addDegMenu = () => {
     //console.log('Menu Open');
@@ -269,4 +270,50 @@ const addStudentMenu = () => {
     return studentMenu;
 }
 
-export {addDegMenu,addDeptMenu,addBatchMenu,addStudentMenu};
+const uploadStudentForm = () => {
+    const uploadMenu = document.createElement('div');
+    uploadMenu.classList.add('blacklayer');
+    const formContainer = document.createElement('div');
+    formContainer.id = "uploadForm";
+    formContainer.classList.add("upload-form-popup");
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+    form.name = "uploadForm";
+    const formHeading = document.createElement('h1');
+    formHeading.id = 'formHeading';
+    formHeading.innerHTML = "Upload Student";
+    const uploadLabel = document.createElement('label');
+    uploadLabel.htmlFor = "uploadInput";
+    uploadLabel.innerHTML = "<b>File:</b>";
+    const uploadInput = document.createElement('input');
+    uploadInput.type = "file";
+    uploadInput.classList.add('upload-select');
+    uploadInput.accept = 'csv/*';
+    uploadInput.addEventListener('change',handleFileUploadChange);
+    
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('file-submit');
+    submitButton.innerHTML = "Upload";
+    submitButton.classList.add('btnAdd');
+    submitButton.id = "btnAdd";
+    submitButton.type = "button";
+    submitButton.addEventListener('click',handleFileUploadSubmit);
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        uploadMenu.remove();
+    });
+    form.appendChild(formHeading);
+    form.appendChild(uploadLabel);
+    form.appendChild(uploadInput);
+    form.appendChild(submitButton);
+    form.appendChild(btnClose);
+    formContainer.appendChild(form);
+    uploadMenu.appendChild(formContainer);
+    return uploadMenu;
+}
+
+export {addDegMenu,addDeptMenu,addBatchMenu,addStudentMenu,uploadStudentForm};

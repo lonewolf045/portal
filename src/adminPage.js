@@ -1,11 +1,8 @@
-import { adminDeg, adminDept, user,adminBatch } from './index';
+import { user } from './index';
 import './adminPage.css';
-import {batchDegreeDatabase, degreeDatabase, departmentDatabase, importDegree, importDegreeBatches, importDepartment, importStudents, studentDatabase} from './connectToFirebase';
-import { createDepartment } from './department';
-import { createDegree } from './degree';
-import {addBatchMenu, addDegMenu,addDeptMenu,addStudentMenu} from './adminForms';
-import {backArrow} from './adminFunctionality';
 import { profileMenu } from './adminProfileMenu';
+import {makeDeptMenu} from './adminDepartment';
+import { makeDeptMenuTeach } from './adminTeacher';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -13,10 +10,19 @@ const adminPage = () => {
     header.appendChild(profilePic);
     document.querySelector('#container').innerHTML = "";
     document.querySelector("#container").appendChild(header);
-    let adminMenuDiv = adminMenu();
-    document.querySelector("#container").appendChild(adminMenuDiv);
+    
     let profilePicMenu = profileMenu(); 
     document.querySelector("#container").appendChild(profilePicMenu);
+
+    let subContainer = document.createElement('div');
+    subContainer.classList.add('sub-container');
+
+    let sideMenuDiv = sideMenu();
+    subContainer.appendChild(sideMenuDiv);
+
+    let adminMenuDiv = adminMenu();
+    subContainer.appendChild(adminMenuDiv);
+    document.querySelector("#container").appendChild(subContainer);
 }
 
 const headingAdminPage = (user) => {
@@ -65,200 +71,67 @@ const adminMenu = () => {
     const adminMenuDiv = document.createElement('div');
     adminMenuDiv.id = "adminMenu";
     const studentMenuTab = document.createElement('div');
-    studentMenuTab.innerHTML = 'Students';
+    studentMenuTab.innerHTML = 'View Departments';
     studentMenuTab.id = "department";
     studentMenuTab.addEventListener('click',makeDeptMenu);
+    // const teachMenuTab = document.createElement('div');
+    // teachMenuTab.innerHTML = 'Teachers';
+    // teachMenuTab.id = "teacher";
+    // teachMenuTab.addEventListener('click',makeDeptMenuTeach);
     adminMenuDiv.appendChild(studentMenuTab);
+    // adminMenuDiv.appendChild(teachMenuTab);
     return adminMenuDiv;
 }
 
-
-
-
-
-const makeDeptMenu = () => {
-    console.log('Open');
-    const adminMenuDiv = document.querySelector('#adminMenu');
-    adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(adminPage);
-    adminMenuDiv.appendChild(backButton);
-    let deptList = [...departmentDatabase];
-    let deptDOM = deptList.map(x => deptListMaker(x));
-    deptDOM.forEach(function(x) {
-        adminMenuDiv.appendChild(x);
+const sideMenu = () => {
+    const sideMenuDiv = document.createElement('div');
+    sideMenuDiv.id= "sideMenu";
+    const studentTab = document.createElement('div');
+    studentTab.innerHTML = "Student";
+    const studentMenu = document.createElement('div');
+    //studentMenu.innerHTML = 'Student';
+    const studentMenuTab = document.createElement('div');
+    studentMenuTab.innerHTML = 'Student';
+    const addStudent = document.createElement('div');
+    const viewStudent = document.createElement('div');
+    addStudent.innerHTML = "Add Student";
+    viewStudent.innerHTML= "View Students";
+    studentMenu.appendChild(addStudent);
+    studentMenu.appendChild(viewStudent);
+    studentMenu.classList.add('content');
+    studentMenuTab.classList.add('collapsible');
+    studentMenuTab.addEventListener('click', (e) => {
+            e.target.classList.toggle("active");
+            var content = e.target.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
     });
-    let deptAddButton = document.createElement('div');
-    deptAddButton.id = 'addButton';
-    deptAddButton.innerHTML = '+';
-    deptAddButton.addEventListener('click',() => {
-        let deptMenu = addDeptMenu();
-        document.querySelector('#container').appendChild(deptMenu);
-    });
-    adminMenuDiv.appendChild(deptAddButton);
-    
+    sideMenuDiv.appendChild(studentMenuTab);
+    sideMenuDiv.appendChild(studentMenu);
+    sideMenuDiv.id = "sideMenuDiv";
+    return sideMenuDiv;
 }
 
-const deptListMaker = (dept) => {
-    const card = document.createElement('div');
-    card.classList.add('info-card');
-    const deptName = document.createElement('div');
-    deptName.classList.add('info-detail');
-    const deptCode = document.createElement('div');
-    deptCode.classList.add('info-detail');
-    deptName.innerHTML = dept.deptName;
-    deptCode.innerHTML = dept.deptCode;
-    card.appendChild(deptName);
-    card.appendChild(deptCode);
-    card.addEventListener('click',() => {
-        adminDept = dept;
-        deptNameClick(dept);
-    })
-    console.log(card);
-    return card;
+const activateSideMenu = () => {
+    var coll = document.getElementsByClassName("collapsible");
+    console.log(coll);
+    var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
 }
-
-const deptNameClick = (dept) => {
-    importDegree(dept.deptCode).then(()=> {makeDegMenu(dept)});
-}
-
-const makeDegMenu = (deg) => {
-    console.log('Open');
-    const adminMenuDiv = document.querySelector('#adminMenu');
-    adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeDeptMenu);
-    adminMenuDiv.appendChild(backButton);
-    let degList = [...degreeDatabase];
-    let degDOM = degList.map(x => degListMaker(x));
-    degDOM.forEach(function(x) {
-        adminMenuDiv.appendChild(x);
-    });
-    let degAddButton = document.createElement('div');
-    degAddButton.id = 'addButton';
-    degAddButton.innerHTML = '+';
-    degAddButton.addEventListener('click',() => {
-        let degMenu = addDegMenu();
-        document.querySelector('#container').appendChild(degMenu);
-    });
-    adminMenuDiv.appendChild(degAddButton);
-}
-
-const degListMaker = (deg) => {
-    const card = document.createElement('div');
-    card.classList.add('info-card');
-    const degName = document.createElement('div');
-    degName.classList.add('info-detail');
-    const degCode = document.createElement('div');
-    degCode.classList.add('info-detail');
-    degName.innerHTML = deg.degName;
-    degCode.innerHTML = deg.degShort;
-    card.appendChild(degName);
-    card.appendChild(degCode);
-    card.addEventListener('click',() => {
-        adminDeg = deg;
-        degNameClick();
-    })
-    console.log(card);
-    return card;
-}
-
-const degNameClick = () => {
-    importDegreeBatches(adminDept.deptCode,adminDeg.degShort).then(() => {makeBatchMenu()});
-
-}
-
-const makeBatchMenu = () => {
-    const adminMenuDiv = document.querySelector('#adminMenu');
-    adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeDegMenu);
-    adminMenuDiv.appendChild(backButton);
-    let batchList = [...batchDegreeDatabase];
-    let batchDOM = batchList.map(x => batchListMaker(x));
-    batchDOM.forEach((x) => {
-        adminMenuDiv.appendChild(x);
-    });
-    let batchAddButton = document.createElement('div');
-    batchAddButton.id = 'addButton';
-    batchAddButton.innerHTML = '+';
-    batchAddButton.addEventListener('click',() => {
-        let batchMenu = addBatchMenu();
-        document.querySelector('#container').appendChild(batchMenu);
-    });
-    adminMenuDiv.appendChild(batchAddButton);
-}
-
-const batchListMaker = (batch) => {
-    const card = document.createElement('div');
-    card.classList.add('info-card');
-    const batchName = document.createElement('div');
-    batchName.classList.add('info-detail');
-    const batchCode = document.createElement('div');
-    batchCode.classList.add('info-detail');
-    batchName.innerHTML = batch.batchName;
-    batchCode.innerHTML = batch.batchCode;
-    card.appendChild(batchName);
-    card.appendChild(batchCode);
-    card.addEventListener('click',() => {
-        adminBatch = batch;
-        batchNameClick();
-    })
-    console.log(card);
-    return card;
-}
-
-const batchNameClick = () => {
-    importStudents(adminDept.deptCode,adminDeg.degShort,adminBatch.batchCode).then(() => {makeStudentMenu()});
-}
-
-const makeStudentMenu = () => {
-    const adminMenuDiv = document.querySelector('#adminMenu');
-    adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeBatchMenu);
-    adminMenuDiv.appendChild(backButton);
-    let studentList = [...studentDatabase];
-    console.log(studentList);
-    let studentDOM = studentList.map(x => studentListMaker(x));
-    studentDOM.forEach(function(x) {
-        adminMenuDiv.appendChild(x);
-    });
-    let studentAddButton = document.createElement('div');
-    studentAddButton.id = 'addButton';
-    studentAddButton.innerHTML = '+';
-    studentAddButton.addEventListener('click',() => {
-        let studentMenu = addStudentMenu();
-        document.querySelector('#container').appendChild(studentMenu);
-    });
-    adminMenuDiv.appendChild(studentAddButton);
-}
-
-const studentListMaker = (student) => {
-    const card = document.createElement('div');
-    card.classList.add('list-tab');
-    const firstName = document.createElement('div');
-    firstName.classList.add('list-detail');
-    const lastName = document.createElement('div');
-    lastName.classList.add('list-detail');
-    const batchName = document.createElement('div');
-    batchName.classList.add('list-detail');
-    const degName = document.createElement('div');
-    degName.classList.add('list-detail');
-    const deptName = document.createElement('div');
-    deptName.classList.add('list-detail');
-    firstName.innerHTML = student.firstName;
-    lastName.innerHTML = student.lastName;
-    batchName.innerHTML = student.batch;
-    degName.innerHTML = student.degree;
-    deptName.innerHTML = student.dept;
-    card.appendChild(firstName);
-    card.appendChild(lastName);
-    card.appendChild(batchName);
-    card.appendChild(degName);
-    card.appendChild(deptName);
-    console.log(card);
-    return card;
 }
 
 
-
-
-
-export {adminPage,makeDegMenu,makeBatchMenu,makeDeptMenu,makeStudentMenu};
+export {adminPage};

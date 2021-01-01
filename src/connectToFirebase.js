@@ -1,4 +1,5 @@
 import { user,course, adminDept, adminDeg, adminBatch } from "./index";
+import { loadCSVToDataStudent } from "./student";
 
 var firebaseConfig = {
     apiKey: "AIzaSyDI7nXtkFGzhjnvqfPuHm6xIAJoebeK1tA",
@@ -13,6 +14,8 @@ var firebaseConfig = {
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+let storageService = firebase.storage();
+let storageRef = storageService.ref();
 let db = firebase.database();
 let dataRefUsers = db.ref().child('users');
 let dataRefStudents = db.ref().child('Students');
@@ -20,7 +23,6 @@ let dataRefTeachers = db.ref().child('Teachers');
 let dataRefCourses = db.ref().child('Courses');
 let dataRefGroups = db.ref().child('Groups');
 let dataRefDepartments = db.ref().child('Departments');
-let databaseData = "";
 let userDatabaseData = "";
 let userDatabase = [];
 let studentDatabase = [];
@@ -248,4 +250,60 @@ let returnCourseKey = (uname,cname) => {
   return arrayKeys[i];
 }
 
-export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase};
+let selectedFile;
+const handleFileUploadChange = (e) => {
+  selectedFile = e.target.files[0];
+}
+const handleFileUploadSubmit = (e) => {
+  console.log('Upload Click');
+  const uploadTask = storageRef.child(`csv/${selectedFile.name}`).put(selectedFile).then(() => {
+    storageRef.child(`csv/${selectedFile.name}`).getDownloadURL().then((url) => readStudentFile(url));
+  })
+}
+
+const readStudentFile = (fileUrl) => {
+    //let fileUrl = `omega-portal-du.appspot.com/csv/${fileName}`;
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", fileUrl);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = showData(rawFile.responseText);
+                console.log(allText);
+                loadCSVToDataStudent(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+function showData(data) {
+  let rows = data.split(/\r?\n/);
+  let rowNum;
+  let cells;
+  let csvData = [];
+
+  for (rowNum = 1; rowNum < rows.length; ++rowNum) {
+    cells = rows[rowNum].split(",");
+    csvData.push(cells);
+  }
+  return csvData;
+}
+
+
+
+let storeStudent = (student) => {
+  dataRefStudents.child(student.enroll).set(student);
+  let userRef = db.ref().child('users');
+  let userReference = userRef.push();
+  userReference.set({
+      Type: 'Student',
+      username:   student.username,
+      password: 'student123'
+  });
+}
+
+export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent};

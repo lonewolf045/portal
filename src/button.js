@@ -1,7 +1,7 @@
 import { formDisplay } from "./loginForm";
 import {logOut, logOutAdmin} from './adminLogout';
 import { makeGroup, makeStudent, makeTeacher } from "./adminFunctionality";
-import { appendGroup, appendStudent, appendTeacher } from "./adminLoginPage";
+// import { appendGroup, appendStudent, appendTeacher } from "./adminLoginPage";
 import { makeAssignment, makeCourse } from "./teacherFunctionality";
 import { logOutTeacher } from "./teacherLogout";
 import { appendAssignment, appendCourses } from "./teacherLoginPage";

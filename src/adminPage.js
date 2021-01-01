@@ -4,6 +4,7 @@ import { profileMenu } from './adminProfileMenu';
 import {makeDeptMenu} from './adminDepartment';
 import { makeDeptMenuTeach } from './adminTeacher';
 import { addStudentClick, viewStudentClick } from './adminStudent';
+import { importStudents } from './connectToFirebase';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -104,7 +105,7 @@ const sideMenu = () => {
     addStudent.classList.add('option');
     viewStudent.classList.add('option');
     addStudent.addEventListener('click',addStudentClick);
-    viewStudent.addEventListener('click',viewStudentClick);
+    viewStudent.addEventListener('click',() => {importStudents().then(viewStudentClick)});
     studentMenu.appendChild(addStudent);
     studentMenu.appendChild(viewStudent);
     studentMenu.classList.add('content');

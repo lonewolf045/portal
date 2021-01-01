@@ -41,6 +41,9 @@ const viewStudentClick = () => {
     workWindow.appendChild(bar);
     let selector = selectField();
     workWindow.appendChild(selector);
+    let listOfData = [...studentDatabase];
+    let list = listOfStudent(listOfData);
+    workWindow.appendChild(list);
 }
 
 const selectBar = () => {
@@ -58,15 +61,15 @@ const selectField = () => {
     label1.innerHTML = '<b>Choose a field: </b>';
     const options = [
         {
-            value: 'lastname',
+            value: 'lastName',
             label: 'By Lastname'
         },
         {
-            value: 'firstname',
+            value: 'firstName',
             label: 'By Firstname'
         },
         {
-            value: 'department',
+            value: 'dept',
             label: 'By Department'
         },
         {
@@ -78,7 +81,7 @@ const selectField = () => {
             label: 'By Batch'
         },
         {
-            value: 'enrollment',
+            value: 'enroll',
             label: 'By Enrollment Number'
         }
     ];
@@ -119,6 +122,90 @@ const selectField = () => {
     viewForm.appendChild(dropDown);
     viewForm.appendChild(paraDiv);
     return viewForm;
+}
+
+const listOfStudent = (listOfStudents) => {
+    let list = document.createElement('div');
+    list .id = 'list';
+    let listTitle = makeListHeader();
+    list.appendChild(listTitle);
+    listOfStudents.forEach(x => {
+        let element = makeListRow(x);
+        list.appendChild(element);
+    });
+    return list;
+}
+
+const makeListHeader = () =>{
+    const enroll = document.createElement('div');
+    const firstName = document.createElement('div');
+    const lastName = document.createElement('div');
+    const batch = document.createElement('div');
+    const dept = document.createElement('div');
+    const degree = document.createElement('div');
+    enroll.classList.add('title');
+    firstName.classList.add('title');
+    lastName.classList.add('title');
+    batch.classList.add('title');
+    dept.classList.add('title');
+    degree.classList.add('title');
+    enroll.classList.add('enroll');
+    firstName.classList.add('firstName');
+    lastName.classList.add('lastName');
+    batch.classList.add('batch');
+    dept.classList.add('dept');
+    degree.classList.add('degree');
+    enroll.innerHTML = 'Enrollment No.';
+    firstName.innerHTML = 'First Name';
+    lastName.innerHTML = 'Last Name';
+    batch.innerHTML = 'Batch';
+    dept.innerHTML = 'Department';
+    degree.innerHTML = 'Degree';
+    const title = document.createElement('div');
+    title.id = 'titleRow';
+    title.appendChild(enroll);
+    title.appendChild(firstName);
+    title.appendChild(lastName);
+    title.appendChild(batch);
+    title.appendChild(dept);
+    title.appendChild(degree);
+    return title;
+}
+
+const makeListRow = (x) => {
+    const enroll = document.createElement('div');
+    const firstName = document.createElement('div');
+    const lastName = document.createElement('div');
+    const batch = document.createElement('div');
+    const dept = document.createElement('div');
+    const degree = document.createElement('div');
+    enroll.classList.add('element');
+    firstName.classList.add('element');
+    lastName.classList.add('element');
+    batch.classList.add('element');
+    dept.classList.add('element');
+    degree.classList.add('element');
+    enroll.classList.add('enroll');
+    firstName.classList.add('firstName');
+    lastName.classList.add('lastName');
+    batch.classList.add('batch');
+    dept.classList.add('dept');
+    degree.classList.add('degree');
+    enroll.innerHTML = x.enroll;
+    firstName.innerHTML = x.firstName;
+    lastName.innerHTML = x.lastName;
+    batch.innerHTML = x.batch;
+    dept.innerHTML = x.dept;
+    degree.innerHTML = x.degree;
+    const element = document.createElement('div');
+    element.id = 'elementRow';
+    element.appendChild(enroll);
+    element.appendChild(firstName);
+    element.appendChild(lastName);
+    element.appendChild(batch);
+    element.appendChild(dept);
+    element.appendChild(degree);
+    return element;
 }
 
 const makeDegMenu = (deg) => {

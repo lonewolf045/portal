@@ -3,7 +3,7 @@ import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
 import {makeDeptMenu} from './adminDepartment';
 import { makeDeptMenuTeach } from './adminTeacher';
-import { addStudentClick } from './adminStudent';
+import { addStudentClick, viewStudentClick } from './adminStudent';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -104,6 +104,7 @@ const sideMenu = () => {
     addStudent.classList.add('option');
     viewStudent.classList.add('option');
     addStudent.addEventListener('click',addStudentClick);
+    viewStudent.addEventListener('click',viewStudentClick);
     studentMenu.appendChild(addStudent);
     studentMenu.appendChild(viewStudent);
     studentMenu.classList.add('content');

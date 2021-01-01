@@ -35,7 +35,90 @@ const addStudentClick = () => {
 }
 
 const viewStudentClick = () => {
-    
+    let workWindow = document.querySelector('#workWindow');
+    workWindow.innerHTML = "";
+    let bar = selectBar();
+    workWindow.appendChild(bar);
+    let selector = selectField();
+    workWindow.appendChild(selector);
+}
+
+const selectBar = () => {
+    const bar = document.createElement('div');
+    bar.id = 'paraBar';
+    return bar;
+}
+
+const selectField = () => {
+    const viewForm = document.createElement('form');
+    viewForm.name = "viewForm";
+    viewForm.id = "viewForm";
+    const label1 = document.createElement('label');
+    label1.for ='selector';
+    label1.innerHTML = '<b>Choose a field: </b>';
+    const options = [
+        {
+            value: 'lastname',
+            label: 'By Lastname'
+        },
+        {
+            value: 'firstname',
+            label: 'By Firstname'
+        },
+        {
+            value: 'department',
+            label: 'By Department'
+        },
+        {
+            value: 'degree',
+            label: 'By Degree'
+        },
+        {
+            value: 'batch',
+            label: 'By Batch'
+        },
+        {
+            value: 'enrollment',
+            label: 'By Enrollment Number'
+        }
+    ];
+    const dropDown = document.createElement('select');
+    dropDown.name = 'selector';
+    dropDown.id = 'selector';
+    dropDown.innerHTML = `<option value = "" disable selected>Choose an option</option>`;
+    options.forEach(x => {
+        const op = document.createElement('option');
+        op.value = x.value;
+        op.innerHTML = x.label;
+        dropDown.appendChild(op);
+    });
+    const paraDiv = document.createElement('div');
+    paraDiv.id = 'paraDiv';
+    const paraLabel = document.createElement('label');
+    paraLabel.innerHTML = 'Enter the parameter:';
+    paraLabel.for = 'parameter';
+    const paraInput = document.createElement('input');
+    paraInput.type = 'text';
+    paraInput.name = 'parameter';
+    paraInput.id = 'parameter';
+    const goButton = document.createElement('button');
+    goButton.type = 'button';
+    goButton.innerHTML = 'Go';
+    goButton.id = 'btnGo';
+    goButton.name = "btnGo";
+    paraInput.addEventListener('change',()=> {
+        goButton.style.display = "block";
+    });
+    paraDiv.appendChild(paraLabel);
+    paraDiv.appendChild(paraInput);
+    paraDiv.appendChild(goButton);
+    dropDown.addEventListener('input',() => {
+        paraDiv.style.display = "block";
+    })
+    viewForm.appendChild(label1);
+    viewForm.appendChild(dropDown);
+    viewForm.appendChild(paraDiv);
+    return viewForm;
 }
 
 const makeDegMenu = (deg) => {
@@ -187,4 +270,4 @@ const studentListMaker = (student) => {
 
 
 
-export {studentDegNameClick,makeDegMenu,makeBatchMenu,makeStudentMenu,addStudentClick};
+export {studentDegNameClick,makeDegMenu,makeBatchMenu,makeStudentMenu,addStudentClick,viewStudentClick};

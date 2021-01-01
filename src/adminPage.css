@@ -342,4 +342,57 @@ button {
 #workWindow {
   width: 80%;
   min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#paraDiv {
+  display: none;
+  margin-top: 2.5%;
+  width: 100%;
+}
+
+#btnGo {
+  display: none;
+  background-color: #777777;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  margin: 2.5% auto;
+  opacity: 0.8;
+}
+
+#btnGo:hover {
+  opacity: 1;
+}
+
+#viewForm {
+  width: 100%;
+  padding: 2%;
+}
+
+#viewForm label {
+  margin-right: 2.5%;
+  margin-bottom: 2.5%;
+  font-weight: bold;
+}
+
+#viewForm select {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
+}
+
+#viewForm option {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
+}
+
+
+
+#paraBar {
+  min-height: 3%;
+  width: 100%;
+  background-color: lightslategray;
 }

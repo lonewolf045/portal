@@ -1,4 +1,5 @@
 import { user,course, adminDept, adminDeg, adminBatch } from "./index";
+import { importFail, importSuccess, loader } from "./randomFeatures";
 import { loadCSVToDataStudent } from "./student";
 
 var firebaseConfig = {
@@ -162,9 +163,8 @@ const importUsers = () => {
   //dataRefUsers.on("value", function (snapshot) {
   return getData(dataRefUsers).then(onDataUser).catch(onErrorUser);
 }
-const importStudents = (deptCode,degCode,batchCode) => {
-  let code = degCode.split(".").join("");
-  let ref = db.ref().child('Departments/'+deptCode+'/Degrees/'+code+'/Batches/'+batchCode+'/Students');
+const importStudents = () => {
+  let ref = dataRefStudents;
   return getData(ref).then(onDataStudent).catch(onErrorStudent);
 }
 const importTeachers = () => {
@@ -254,10 +254,23 @@ let selectedFile;
 const handleFileUploadChange = (e) => {
   selectedFile = e.target.files[0];
 }
+
 const handleFileUploadSubmit = (e) => {
   console.log('Upload Click');
   const uploadTask = storageRef.child(`csv/${selectedFile.name}`).put(selectedFile).then(() => {
-    storageRef.child(`csv/${selectedFile.name}`).getDownloadURL().then((url) => readStudentFile(url));
+    storageRef.child(`csv/${selectedFile.name}`).getDownloadURL().then((url) => {
+      document.getElementById('uploadForm').remove();
+      document.querySelector('.blacklayer').appendChild(loader());  
+      readStudentFile(url)
+    }).then(() => {
+      console.log('Tata');
+      document.querySelector("#loader").remove();
+      document.querySelector(".blacklayer").appendChild(importSuccess());
+    }).catch(() => {
+      console.log('Shit');
+      document.querySelector("#loader").remove();
+      document.querySelector(".blacklayer").appendChild(importFail());
+    });
   })
 }
 
@@ -274,6 +287,9 @@ const readStudentFile = (fileUrl) => {
                 var allText = showData(rawFile.responseText);
                 console.log(allText);
                 loadCSVToDataStudent(allText);
+                Promise.resolve();
+            } else {
+              Promise.reject();
             }
         }
     }
@@ -298,7 +314,7 @@ function showData(data) {
 let storeStudent = (student) => {
   dataRefStudents.child(student.enroll).set(student);
   let userRef = db.ref().child('users');
-  let userReference = userRef.push();
+  let userReference = userRef.child(student.username);
   userReference.set({
       Type: 'Student',
       username:   student.username,

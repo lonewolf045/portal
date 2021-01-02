@@ -388,7 +388,7 @@ button {
 #viewForm {
   width: 100%;
   padding: 2%;
-  height: 25%;
+  min-height: 25%;
 }
 
 #viewForm label {
@@ -411,9 +411,12 @@ button {
 
 #paraBar {
   height: 5%;
-  max-height: 5%;
+  min-height: 5%;
   width: 100%;
   background-color: lightslategray;
+  display: inline-flex;
+  color: whitesmoke;
+
 }
 
 #list {
@@ -461,4 +464,14 @@ button {
   .element {
     font-size: 15px;
   }
+}
+
+.sectionElement {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  display: inline;
+  text-align: justify;
+  padding-left: 2.5%;
+  text-decoration: underline;
+  cursor: pointer;
 }

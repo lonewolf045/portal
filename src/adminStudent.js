@@ -6,6 +6,10 @@ import { adminPage } from './adminPage';
 import { makeDeptMenu } from './adminDepartment';
 
 
+let listOfData = [];
+let operationalData = [];
+let operations = [];
+
 const studentDegNameClick = () => {
     importDegree(adminDept.deptCode).then(()=> {makeDegMenu(adminDeg)});
 }
@@ -35,13 +39,22 @@ const addStudentClick = () => {
 }
 
 const viewStudentClick = () => {
+    operationalData = [];
+    operations = [];
+    listOfData = [...studentDatabase];
+    operationalData.push(listOfData);
+    operations.push({label:'All',value:null});
+    viewDOM();
+}
+
+const viewDOM = () => {
     let workWindow = document.querySelector('#workWindow');
     workWindow.innerHTML = "";
     let bar = selectBar();
     workWindow.appendChild(bar);
     let selector = selectField();
     workWindow.appendChild(selector);
-    let listOfData = [...studentDatabase];
+
     let list = listOfStudent(listOfData);
     workWindow.appendChild(list);
 }
@@ -49,6 +62,10 @@ const viewStudentClick = () => {
 const selectBar = () => {
     const bar = document.createElement('div');
     bar.id = 'paraBar';
+    operations.forEach((x,i) => {
+        let sec = makeSection(x,i);
+        bar.appendChild(sec);
+    })
     return bar;
 }
 
@@ -109,6 +126,13 @@ const selectField = () => {
     goButton.innerHTML = 'Go';
     goButton.id = 'btnGo';
     goButton.name = "btnGo";
+    goButton.addEventListener('click', () => {
+        let param = {label: dropDown.value,value: paraInput.value};
+        operateOnList(param);
+        let workWindow = document.querySelector('#workWindow');
+        workWindow.innerHTML = '';
+        viewDOM();
+    });
     paraInput.addEventListener('change',()=> {
         goButton.style.display = "block";
     });
@@ -206,6 +230,30 @@ const makeListRow = (x) => {
     element.appendChild(dept);
     element.appendChild(degree);
     return element;
+}
+
+const makeSection = (x,i) => {
+   const sec = document.createElement('p');
+   sec.classList.add('sectionElement');
+   let label = x.label;
+   label = label.toLowerCase();
+   label = label.charAt(0).toUpperCase() + label.slice(1);
+   let write;
+   if(x.value === null) {
+       write = `${label} >`;
+   } else {
+       write = `${label}(${x.value}) >`;
+   }
+   sec.innerHTML = write;
+   sec.indexOfOperation = i;
+   return sec;
+}
+
+const operateOnList = (parameter) => {
+    listOfData = listOfData.filter(x => x[parameter.label] == parameter.value);
+    operations.push(parameter);
+    operationalData.push(listOfData);
+    console.log(listOfData,parameter,operations);
 }
 
 const makeDegMenu = (deg) => {

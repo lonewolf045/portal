@@ -8,3 +8,13 @@
     transform: translate(-50%, -50%);
     
 }
+
+#success {
+    font-size: 30px;
+    font-family: "Montserrat", sans-serif;
+}
+
+#fail {
+    font-size: 30px;
+    font-family: "Montserrat", sans-serif;
+}

@@ -1,18 +1,15 @@
 import { adminBatch, adminDeg, adminDept } from "./index";
 import { importUsers, userDatabase, db, importStudents, studentDatabase, storeStudent } from "./connectToFirebase";
 
-const student = (firstName,lastName,batch,degree,dept,username,password,enroll) => {
+const student = (enroll,firstName,lastName,batch,degree,dept,username,password) => {
     return {firstName,lastName,batch,degree,username,dept,password,enroll};
 };
 
-const createStudent = (firstName,lastName,enroll = 11) => {
+const createStudent = (enroll,firstName,lastName,batch,degree,dept) => {
     let password = "student123";
-    let username = firstName.toLowerCase()+lastName+adminBatch.batchCode;
-    let newStudent = student(firstName,lastName,adminBatch.batchName,adminDeg.degName,adminDept.deptName,username,password,enroll);
-    let degCode = adminDeg.degShort.split(".").join("");
+    let username = firstName.toLowerCase().split(' ').join('')+lastName+enroll;
+    let newStudent = student(enroll,firstName,lastName,batch,degree,dept,username,password);
     storeStudent(newStudent);
-    importUsers();
-    importStudents(adminDept.deptCode,adminDeg.degShort,adminBatch.batchCode);
     //console.log(userDatabase,studentDatabase);
 }
 

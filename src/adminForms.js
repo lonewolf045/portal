@@ -7,6 +7,7 @@ import { createStudent } from "./student";
 import {createDegree} from "./degree";
 import {createDepartment} from "./department";
 import {makeDeptMenu} from './adminDepartment';
+import { importFail, importSuccess, loader } from "./randomFeatures";
 
 const addDegMenu = () => {
     //console.log('Menu Open');
@@ -218,6 +219,13 @@ const addStudentMenu = () => {
     const formHeading = document.createElement('h1');
     formHeading.id = 'formHeading';
     formHeading.innerHTML = "Student:";
+    const enrollLabel = document.createElement('label');
+    enrollLabel.htmlFor = "enrollName";
+    enrollLabel.innerHTML = "<b>Enrollment Number:</b>";
+    const enrollField = document.createElement('input');
+    enrollField.type = "text";
+    enrollField.name = "enrollName";
+    enrollField.required = true;
     const firstNameLabel = document.createElement('label');
     const lastNameLabel = document.createElement('label');
     //const userName = document.createElement('label');
@@ -233,10 +241,39 @@ const addStudentMenu = () => {
     lastNameField.name = "lastName";
     firstNameField.required = true;
     lastNameField.required = true;
+    const degreeLabel = document.createElement('label');
+    degreeLabel.htmlFor = "degreeName";
+    degreeLabel.innerHTML = "<b>Degree:</b>";
+    const degreeField = document.createElement('input');
+    degreeField.type = "text";
+    degreeField.name = "degreeName";
+    degreeField.required = true;
+    const departmentLabel = document.createElement('label');
+    departmentLabel.htmlFor = "departmentName";
+    departmentLabel.innerHTML = "<b>Department:</b>";
+    const departmentField = document.createElement('input');
+    departmentField.type = "text";
+    departmentField.name = "departmentName";
+    departmentField.required = true;
+    const batchLabel = document.createElement('label');
+    batchLabel.htmlFor = "batchName";
+    batchLabel.innerHTML = "<b>Batch:</b>";
+    const batchField = document.createElement('input');
+    batchField.type = "text";
+    batchField.name = "batchName";
+    batchField.required = true;
+    form.appendChild(enrollLabel);
+    form.appendChild(enrollField);
     form.appendChild(firstNameLabel);
     form.appendChild(firstNameField);
     form.appendChild(lastNameLabel);
     form.appendChild(lastNameField);
+    form.appendChild(degreeLabel);
+    form.appendChild(degreeField);
+    form.appendChild(departmentLabel);
+    form.appendChild(departmentField);
+    form.appendChild(batchLabel);
+    form.appendChild(batchField);
     const btnClose = document.createElement('button');
     btnClose.type = 'button';
     btnClose.innerHTML = "Close";
@@ -253,10 +290,16 @@ const addStudentMenu = () => {
     btnAdd.addEventListener('click',() => {
         console.log('Clicked');
         if(firstNameField.value && lastNameField.value) {
-            Promise.resolve(createStudent(firstNameField.value,lastNameField.value)).then(() => {importStudents(adminDept.deptCode,adminDeg.degShort,adminBatch.batchCode)}).then(makeStudentMenu);
+            Promise.resolve(33).then(() => {
+                createStudent(enrollField.value,firstNameField.value,lastNameField.value,batchField.value,degreeField.value,departmentField.value);
+                document.querySelector('.student-form-popup').remove();
+                document.querySelector('.blacklayer').appendChild(loader());  
+            }).then(() => {
+                document.querySelector("#loader").remove();
+                document.querySelector(".blacklayer").appendChild(importSuccess());
+            });
             console.log('Here');
-            
-            btnClose.click();
+
         }
         else {
             window.alert('Fill missing details');

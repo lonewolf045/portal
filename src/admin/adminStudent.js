@@ -239,16 +239,16 @@ const makeListRow = (x) => {
 }
 
 const makeSection = (x,i) => {
-   const sec = document.createElement('p');
+   const sec = document.createElement('div');
    sec.classList.add('sectionElement');
    let label = x.label;
    label = label.toLowerCase();
    label = label.charAt(0).toUpperCase() + label.slice(1);
    let write;
    if(x.value === null) {
-       write = `${label} >`;
+       write = `${label}>`;
    } else {
-       write = `${label}(${x.value}) >`;
+       write = `${label}(${x.value})>`;
    }
    sec.innerHTML = write;
    sec.indexOfOperation = i;

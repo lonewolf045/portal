@@ -74,6 +74,13 @@ const profileAdmin = (user) => {
 const sideMenu = () => {
     const sideMenuDiv = document.createElement('div');
     sideMenuDiv.id= "sideMenu";
+    const student = studentMenu();
+    sideMenuDiv.appendChild(student);
+    return sideMenuDiv;
+}
+
+const studentMenu = () => {
+    const sideMenuDiv = document.createElement('div');
     const studentTab = document.createElement('div');
     studentTab.innerHTML = "Student";
     const studentMenu = document.createElement('div');
@@ -103,7 +110,6 @@ const sideMenu = () => {
     });
     sideMenuDiv.appendChild(studentMenuTab);
     sideMenuDiv.appendChild(studentMenu);
-    sideMenuDiv.id = "sideMenuDiv";
     return sideMenuDiv;
 }
 

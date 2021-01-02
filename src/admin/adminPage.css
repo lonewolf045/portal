@@ -11,7 +11,8 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -383,7 +384,7 @@ button {
   content: "\2212";
 }
 
-#sideMenuDiv {
+#sideMenu {
   width: 20%;
   height: 90vh;
   background-color: #777777;
@@ -459,7 +460,7 @@ button {
   min-height: 5%;
   min-width: 100%;
   background-color: lightslategray;
-  display: inline-flex;
+  display: flex;
   color: whitesmoke;
   overflow-x: scroll;
 }
@@ -514,9 +515,8 @@ button {
 .sectionElement {
   font-family: 'Courier New', Courier, monospace;
   font-style: italic;
-  display: inline;
-  text-align: justify;
   padding-left: 2.5%;
   text-decoration: underline;
   cursor: pointer;
+  padding-top: 1.5%;
 }

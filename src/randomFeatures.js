@@ -45,4 +45,21 @@ const importSuccess = () => {
     return failedContainer;
 }
 
-export {loader,importFail,importSuccess};
+const backArrow = (menuFunction) => {
+    const backArrowDiv = document.createElement('button');
+    const backArrowImage = document.createElement('img');
+    backArrowDiv.id = "backArrow";
+    backArrowImage.id = "backArrowImage";
+    backArrowImage.src = "https://www.pinclipart.com/picdir/big/130-1304091_left-svg-icon-free-icon-back-arrow-png.png";
+    backArrowImage.width = "60";
+    backArrowImage.height = "40";
+    backArrowDiv.appendChild(backArrowImage);
+    backArrowDiv.addEventListener('click',() => {
+        
+        menuFunction();
+        console.log('Clicked back');
+    });
+    return backArrowDiv;
+}
+
+export {backArrow,loader,importFail,importSuccess};

@@ -1,12 +1,5 @@
-
-import { reject } from "lodash";
-import { importCourses } from "./connectToFirebase";
-//myStorage = window.sessionStorage;
-import {user} from './index';
 import { adminLogin, studentLogin, teacherLogin } from "./login";
 import { openingPage } from "./openingPage";
-import { loginStudentDOM } from "./studentLoginPage";
-import { loginTeacherDOM } from "./teacherLoginPage";
 
 const setAdmin = (username,password) => {
     let user = {};

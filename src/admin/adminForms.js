@@ -1,13 +1,12 @@
-import { createBatch } from "./batch";
+import { createBatch } from "../batch";
 import {makeDegMenu,makeBatchMenu, makeStudentMenu} from './adminStudent';
-import { importDegreeBatches, importStudents,importDegree,importDepartment, handleFileUploadChange, handleFileUploadSubmit } from "./connectToFirebase";
-import {adminBatch, adminDeg,adminDept} from './index';
-import { studentLogin } from "./login";
-import { createStudent } from "./student";
-import {createDegree} from "./degree";
-import {createDepartment} from "./department";
+import { importDegreeBatches, importStudents,importDegree,importDepartment, handleFileUploadChange, handleFileUploadSubmit } from "../connectToFirebase";
+import {adminBatch, adminDeg,adminDept} from '../index';
+import { createStudent } from "../student";
+import {createDegree} from "../degree";
+import {createDepartment} from "../department";
 import {makeDeptMenu} from './adminDepartment';
-import { importFail, importSuccess, loader } from "./randomFeatures";
+import { importFail, importSuccess, loader } from "../randomFeatures";
 
 const addDegMenu = () => {
     //console.log('Menu Open');

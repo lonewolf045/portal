@@ -1,4 +1,4 @@
-import { loadGroupList } from "./adminFunctionality";
+import { loadGroupList } from "./admin/adminFunctionality";
 import { assignmentDatabase, courseDatabase, importAssignments, updateCourse } from "./connectToFirebase";
 import { loadAssignList, loadCourseList } from "./teacherFunctionality";
 import {course,user} from './index';

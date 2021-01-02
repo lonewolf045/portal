@@ -1,13 +1,12 @@
-import { adminDeg, adminDept,adminBatch } from './index';
-import {batchDegreeDatabase, degreeDatabase, departmentDatabase, importDegree, importDegreeBatches, importDepartment, importStudents, studentDatabase} from './connectToFirebase';
+import { adminDeg, adminDept,adminBatch } from '../index';
+import {batchDegreeDatabase, degreeDatabase, departmentDatabase, importDegree, importDegreeBatches, importDepartment, importStudents, studentDatabase} from '../connectToFirebase';
 import {addBatchMenu, addDegMenu,addDeptMenu,addStudentMenu} from './adminForms';
 import {backArrow} from './adminFunctionality';
 import { adminPage } from './adminPage';
-import { studentDegNameClick } from './adminStudent';
 
 
 
-const makeDeptMenu = () => {
+const makeDeptMenuTeach = () => {
     console.log('Open');
     const adminMenuDiv = document.querySelector('#adminMenu');
     adminMenuDiv.innerHTML = "";
@@ -25,8 +24,7 @@ const makeDeptMenu = () => {
         let deptMenu = addDeptMenu();
         document.querySelector('#container').appendChild(deptMenu);
     });
-    adminMenuDiv.appendChild(deptAddButton);
-    
+    adminMenuDiv.appendChild(deptAddButton);    
 }
 
 const deptListMaker = (dept) => {
@@ -49,41 +47,15 @@ const deptListMaker = (dept) => {
 }
 
 const deptNameClick = (dept) => {
-    importDegree(dept.deptCode).then(()=> {studentTeacherOptionMenu()});
+    importDegree(dept.deptCode).then(()=> {makeDegMenuTeach(dept)});
 }
 
-const studentTeacherOptionMenu = () => {
-    const adminMenuDiv = document.querySelector('#adminMenu');
-    adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeDeptMenu);
-    adminMenuDiv.appendChild(backButton);
-    let tileList = [{name:'Student',functionName:studentDegNameClick},{name:'Teacher'}];
-    let tileDOM = tileList.map(x => makeCard(x));
-    tileDOM.forEach(x => {
-        adminMenuDiv.appendChild(x);
-    })
-}
-
-const makeCard = (x) => {
-    const card = document.createElement('div');
-    card.classList.add('info-card');
-    const cardHeading = document.createElement('div');
-    cardHeading.classList.add('info-detail');
-    cardHeading.innerHTML = x.name;
-    card.appendChild(cardHeading);
-    card.addEventListener('click',() => {
-        x.functionName();
-    });
-    return card;
-}
-
-const makeDegMenu = () => {
+const makeDegMenuTeach = (deg) => {
     console.log('Open');
     const adminMenuDiv = document.querySelector('#adminMenu');
     adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeDeptMenu);
+    let backButton = backArrow(makeDeptMenuTeach);
     adminMenuDiv.appendChild(backButton);
-    
     let degList = [...degreeDatabase];
     let degDOM = degList.map(x => degListMaker(x));
     degDOM.forEach(function(x) {
@@ -119,14 +91,14 @@ const degListMaker = (deg) => {
 }
 
 const degNameClick = () => {
-    importDegreeBatches(adminDept.deptCode,adminDeg.degShort).then(() => {makeBatchMenu()});
+    importDegreeBatches(adminDept.deptCode,adminDeg.degShort).then(() => {makeBatchMenuTeach()});
 
 }
 
-const makeBatchMenu = () => {
+const makeBatchMenuTeach = () => {
     const adminMenuDiv = document.querySelector('#adminMenu');
     adminMenuDiv.innerHTML = "";
-    let backButton = backArrow(makeDegMenu);
+    let backButton = backArrow(makeDegMenuTeach);
     adminMenuDiv.appendChild(backButton);
     let batchList = [...batchDegreeDatabase];
     let batchDOM = batchList.map(x => batchListMaker(x));
@@ -162,4 +134,6 @@ const batchListMaker = (batch) => {
     return card;
 }
 
-export {makeDeptMenu};
+export {makeDeptMenuTeach};
+
+

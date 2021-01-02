@@ -1,5 +1,4 @@
 import './teacherPage.css';
-import {user} from './index';
 
 
 

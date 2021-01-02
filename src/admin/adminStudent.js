@@ -1,4 +1,4 @@
-import {studentDatabase} from './connectToFirebase';
+import {studentDatabase} from '../connectToFirebase';
 import {addStudentMenu, uploadStudentForm} from './adminForms';
 
 let listOfData = [];
@@ -9,6 +9,8 @@ const addStudentClick = () => {
     let workWindow = document.querySelector('#workWindow');
     workWindow.innerHTML = "";
     
+    let studentAdd = document.createElement('div');
+    studentAdd.id = 'add';
     let studentAddButton = document.createElement('div');
     studentAddButton.id = 'addButton';
     studentAddButton.innerHTML = `<i class="fas fa-plus"></i>`;
@@ -16,7 +18,13 @@ const addStudentClick = () => {
         let studentMenu = addStudentMenu();
         document.querySelector('#container').appendChild(studentMenu);
     });
-
+    let addSpan = document.createElement('span');
+    addSpan.innerHTML = `Add an individual entry`;
+    studentAdd.appendChild(studentAddButton)
+    studentAdd.appendChild(addSpan);
+    
+    let studentUpload = document.createElement('div');
+    studentUpload.id = 'upload';
     let studentUploadButton = document.createElement('div');
     studentUploadButton.id = "uploadButton";
     studentUploadButton.innerHTML = `<i class="fas fa-file-upload"></i>`;
@@ -24,9 +32,16 @@ const addStudentClick = () => {
         let uploadMenu = uploadStudentForm();
         document.querySelector('#container').appendChild(uploadMenu);
     });
+    let uploadSpan = document.createElement('span');
+    uploadSpan.innerHTML = `Upload a csv file`;
+    studentUpload.appendChild(studentUploadButton);
+    studentUpload.appendChild(uploadSpan);
 
-    workWindow.appendChild(studentAddButton);
-    workWindow.appendChild(studentUploadButton);
+    let buttonContainer = document.createElement('div');
+    buttonContainer.id = 'buttonContainer';
+    buttonContainer.appendChild(studentAdd);
+    buttonContainer.appendChild(studentUpload);
+    workWindow.appendChild(buttonContainer);
 }
 
 const viewStudentClick = () => {

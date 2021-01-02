@@ -1,10 +1,8 @@
-import { user } from './index';
+import { user } from '../index';
 import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
-import {makeDeptMenu} from './adminDepartment';
-import { makeDeptMenuTeach } from './adminTeacher';
 import { addStudentClick, viewStudentClick } from './adminStudent';
-import { importStudents } from './connectToFirebase';
+import { importStudents } from '../connectToFirebase';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -73,22 +71,6 @@ const profileAdmin = (user) => {
     return profilePicDiv;
 }
 
-const adminMenu = () => {
-    const adminMenuDiv = document.createElement('div');
-    adminMenuDiv.id = "adminMenu";
-    const studentMenuTab = document.createElement('div');
-    studentMenuTab.innerHTML = 'View Departments';
-    studentMenuTab.id = "department";
-    studentMenuTab.addEventListener('click',makeDeptMenu);
-    // const teachMenuTab = document.createElement('div');
-    // teachMenuTab.innerHTML = 'Teachers';
-    // teachMenuTab.id = "teacher";
-    // teachMenuTab.addEventListener('click',makeDeptMenuTeach);
-    adminMenuDiv.appendChild(studentMenuTab);
-    // adminMenuDiv.appendChild(teachMenuTab);
-    return adminMenuDiv;
-}
-
 const sideMenu = () => {
     const sideMenuDiv = document.createElement('div');
     sideMenuDiv.id= "sideMenu";
@@ -124,24 +106,5 @@ const sideMenu = () => {
     sideMenuDiv.id = "sideMenuDiv";
     return sideMenuDiv;
 }
-
-// const activateSideMenu = () => {
-//     var coll = document.getElementsByClassName("collapsible");
-//     console.log(coll);
-//     var i;
-
-// for (i = 0; i < coll.length; i++) {
-//   coll[i].addEventListener("click", function() {
-//     this.classList.toggle("active");
-//     var content = this.nextElementSibling;
-//     if (content.style.maxHeight){
-//       content.style.maxHeight = null;
-//     } else {
-//       content.style.maxHeight = content.scrollHeight + "px";
-//     } 
-//   });
-// }
-// }
-
 
 export {adminPage};

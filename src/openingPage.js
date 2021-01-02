@@ -1,4 +1,3 @@
-import buttonClass from './button';
 import { formDisplay } from './loginForm';
 import './openingPage.css';
 const openingPage = () => {

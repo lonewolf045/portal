@@ -1,6 +1,7 @@
 import { user,course, adminDept, adminDeg, adminBatch } from "./index";
 import { importFail, importSuccess, loader } from "./randomFeatures";
 import { loadCSVToDataStudent } from "./student";
+import { loadCSVToDataTeacher } from "./teacher";
 
 var firebaseConfig = {
     apiKey: "AIzaSyDI7nXtkFGzhjnvqfPuHm6xIAJoebeK1tA",
@@ -257,8 +258,8 @@ const handleFileUploadChange = (e) => {
 
 const handleFileUploadSubmit = (e) => {
   console.log('Upload Click');
-  const uploadTask = storageRef.child(`csv/${selectedFile.name}`).put(selectedFile).then(() => {
-    storageRef.child(`csv/${selectedFile.name}`).getDownloadURL().then((url) => {
+  const uploadTask = storageRef.child(`csv/student/${selectedFile.name}`).put(selectedFile).then(() => {
+    storageRef.child(`csv/student/${selectedFile.name}`).getDownloadURL().then((url) => {
       document.getElementById('uploadForm').remove();
       document.querySelector('.blacklayer').appendChild(loader());  
       readStudentFile(url)
@@ -272,6 +273,50 @@ const handleFileUploadSubmit = (e) => {
       document.querySelector(".blacklayer").appendChild(importFail());
     });
   })
+}
+
+const handleTeacherChange = (e) => {
+  selectedFile = e.target.files[0];
+}
+
+const handleTeacherSubmit = (e) => {
+  console.log('Upload Click');
+  const uploadTask = storageRef.child(`csv/teacher/${selectedFile.name}`).put(selectedFile).then(() => {
+    storageRef.child(`csv/teacher/${selectedFile.name}`).getDownloadURL().then((url) => {
+      document.getElementById('uploadForm').remove();
+      document.querySelector('.blacklayer').appendChild(loader());  
+      readTeacherFile(url)
+    }).then(() => {
+      console.log('Tata');
+      document.querySelector("#loader").remove();
+      document.querySelector(".blacklayer").appendChild(importSuccess());
+    }).catch(() => {
+      console.log('Shit');
+      document.querySelector("#loader").remove();
+      document.querySelector(".blacklayer").appendChild(importFail());
+    });
+  })
+}
+
+const readTeacherFile = (fileUrl) => {
+  var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", fileUrl);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+              var allText = showData(rawFile.responseText);
+              console.log(allText);
+              loadCSVToDataTeacher(allText);
+              Promise.resolve();
+            } else {
+              Promise.reject();
+            }
+        }
+    }
+    rawFile.send(null);
 }
 
 const readStudentFile = (fileUrl) => {
@@ -309,8 +354,6 @@ function showData(data) {
   return csvData;
 }
 
-
-
 let storeStudent = (student) => {
   dataRefStudents.child(student.enroll).set(student);
   let userRef = db.ref().child('users');
@@ -322,4 +365,15 @@ let storeStudent = (student) => {
   });
 }
 
-export {returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent};
+let storeTeacher = (teacher) => {
+  dataRefTeachers.child(teacher.facId).set(teacher);
+  let userRef = db.ref().child('users');
+  let userReference = userRef.child(teacher.username);
+  userReference.set({
+      Type: 'Teacher',
+      username:   teacher.username,
+      password: 'teacher123'
+  });
+}
+
+export {storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

@@ -3,6 +3,7 @@ import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
 import { addStudentClick, viewStudentClick } from './adminStudent';
 import { importStudents } from '../connectToFirebase';
+import { addTeacherClick } from './adminTeacher';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -76,13 +77,13 @@ const sideMenu = () => {
     sideMenuDiv.id= "sideMenu";
     const student = studentMenu();
     sideMenuDiv.appendChild(student);
+    const teacher = teacherMenu();
+    sideMenuDiv.appendChild(teacher);
     return sideMenuDiv;
 }
 
 const studentMenu = () => {
     const sideMenuDiv = document.createElement('div');
-    const studentTab = document.createElement('div');
-    studentTab.innerHTML = "Student";
     const studentMenu = document.createElement('div');
     //studentMenu.innerHTML = 'Student';
     const studentMenuTab = document.createElement('div');
@@ -110,6 +111,37 @@ const studentMenu = () => {
     });
     sideMenuDiv.appendChild(studentMenuTab);
     sideMenuDiv.appendChild(studentMenu);
+    return sideMenuDiv;
+}
+
+const teacherMenu = () => {
+    const sideMenuDiv = document.createElement('div');
+    const teacherMenu = document.createElement('div');
+    const teacherMenuTab = document.createElement('div');
+    teacherMenuTab.innerHTML = 'Teacher';
+    const addTeacher = document.createElement('div');
+    const viewTeacher = document.createElement('div');
+    addTeacher.innerHTML = "Add Teacher";
+    viewTeacher.innerHTML= "View Teachers";
+    addTeacher.classList.add('option');
+    viewTeacher.classList.add('option');
+    addTeacher.addEventListener('click',addTeacherClick);
+    viewTeacher.addEventListener('click',() => {importStudents().then(viewStudentClick)});
+    teacherMenu.appendChild(addTeacher);
+    teacherMenu.appendChild(viewTeacher);
+    teacherMenu.classList.add('content');
+    teacherMenuTab.classList.add('collapsible');
+    teacherMenuTab.addEventListener('click', (e) => {
+            e.target.classList.toggle("active");
+            var content = e.target.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+    });
+    sideMenuDiv.appendChild(teacherMenuTab);
+    sideMenuDiv.appendChild(teacherMenu);
     return sideMenuDiv;
 }
 

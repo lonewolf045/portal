@@ -1,24 +1,24 @@
-const { importUsers, importTeachers, db } = require("./connectToFirebase");
+import {storeTeacher} from './connectToFirebase';
 
-const teacher = (firstName,lastName,teacherCode,username) => {
-    return {firstName,lastName,teacherCode,username};
+const teacher = (firstName,lastName,asCode,facId,position,dept,username,password) => {
+    return {firstName,lastName,asCode,facId,position,dept,username,password};
 }
 
-const createTeacher = (firstName,lastName,teacherCode) => {
-    let username = firstName.toLowerCase() + lastName + teacherCode;
-    let newTeacher = teacher(firstName,lastName,teacherCode,username);
-    let dataRef = db.ref().child('Teachers');
-    let newReference = dataRef.push();
-    newReference.set(newTeacher);
-    let userRef = db.ref().child('users');
-    let userReference = userRef.push();
-    userReference.set({
-        Type: 'Teacher',
-        username:   newTeacher.username,
-        password: 'teacher123'
+const createTeacher = (firstName,lastName,asCode,facId,position,dept) => {
+    let username = firstName.toLowerCase().split(' ').join('') + lastName + facId;
+    let password = 'teacher123';
+    let newTeacher = teacher(firstName,lastName,asCode,facId,position,dept,username,password);
+    storeTeacher(newTeacher);
+}
+
+const loadCSVToDataTeacher = (csvData) => {
+    let csvObject = csvData.map(x => {
+        let password = "teacher123";
+        let username = x[1].toLowerCase().split(' ').join('')+x[2]+x[0];
+        let newTeacher = teacher(x[1],x[2],x[3],x[0],x[4],x[5],username,password);
+        return newTeacher;
     });
-    importUsers();
-    importTeachers();
+    csvObject.forEach(x => {storeTeacher(x)});    
 }
 
-export {createTeacher};
+export {createTeacher,loadCSVToDataTeacher};

@@ -9,7 +9,6 @@ const createStudent = (enroll,firstName,lastName,batch,degree,dept) => {
     let username = firstName.toLowerCase().split(' ').join('')+lastName+enroll;
     let newStudent = student(enroll,firstName,lastName,batch,degree,dept,username,password);
     storeStudent(newStudent);
-    //console.log(userDatabase,studentDatabase);
 }
 
 const loadCSVToDataStudent = (csvData) => {
@@ -22,7 +21,4 @@ const loadCSVToDataStudent = (csvData) => {
     csvObject.forEach(x => {storeStudent(x)});    
 }
 
-
-
 export {createStudent,loadCSVToDataStudent};
-

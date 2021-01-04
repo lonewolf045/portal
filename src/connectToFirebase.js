@@ -390,4 +390,8 @@ let adminTeacherUpdate = (teacher) => {
   dataRefTeachers.child(teacher.facId).update(teacher);
 }
 
-export {adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};
+let adminStudentUpdate = (student) => {
+  dataRefStudents.child(student.enroll).update(student);
+}
+
+export {adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

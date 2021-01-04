@@ -1,4 +1,4 @@
-import {deleteStudent, importStudents, studentDatabase} from '../connectToFirebase';
+import {adminStudentUpdate, deleteStudent, importStudents, studentDatabase} from '../connectToFirebase';
 import {addStudentMenu, uploadStudentForm} from './adminForms';
 
 let listOfData = [];
@@ -298,8 +298,8 @@ const optionSetup = (x) => {
         executeDeleteStudent(x);
     });
     editButton.addEventListener('click',() => {
-        const sure = areYouSure();
-        document.querySelector('#workWindow').appendChild(sure);
+        console.log(editButton.parentElement.parentElement);
+        editableMaker(editButton.parentElement.parentElement,x);
     });
     options.appendChild(editButton);
     options.appendChild(deleteButton);
@@ -309,5 +309,85 @@ const optionSetup = (x) => {
 const executeDeleteStudent = (x) => {
     Promise.resolve(deleteStudent(x)).then(importStudents).then(viewStudentClick);
 }
+
+const editableMaker = (ele,x) => {
+    ele.innerHTML = "";
+    ele.appendChild(editableRow(x));
+}
+
+const editableRow = (x) => {
+    const enroll = document.createElement('input');
+    const firstName = document.createElement('input');
+    const lastName = document.createElement('input');
+    const batch = document.createElement('input');
+    const dept = document.createElement('input');
+    const degree = document.createElement('input');
+    const options = editableOptions();
+    
+    enroll.classList.add('element');
+    firstName.classList.add('element');
+    lastName.classList.add('element');
+    batch.classList.add('element');
+    dept.classList.add('element');
+    degree.classList.add('element');
+
+    enroll.classList.add('enroll');
+    firstName.classList.add('firstName');
+    lastName.classList.add('lastName');
+    batch.classList.add('batch');
+    dept.classList.add('dept');
+    degree.classList.add('degree');
+    
+    enroll.value = x.enroll;
+    enroll.disabled = true;
+    firstName.value = x.firstName;
+    lastName.value = x.lastName;
+    batch.value = x.batch;
+    dept.value = x.dept;
+    degree.value = x.degree;
+    
+    const element = document.createElement('div');
+    element.id = 'elementRow';
+    element.appendChild(enroll);
+    element.appendChild(firstName);
+    element.appendChild(lastName);
+    element.appendChild(batch);
+    element.appendChild(dept);
+    element.appendChild(degree);
+    element.appendChild(options);
+
+    return element;
+}
+
+const editableOptions = () => {
+    const options = document.createElement('div');
+    options.classList.add('options');
+    //options.innerHTML = `<button></button><button></button>`;
+    options.classList.add('element');
+    const deleteButton = document.createElement('button');
+    const editButton = document.createElement('button');
+    deleteButton.innerHTML = `<i class="fas fa-times"></i>`;
+    editButton.innerHTML = `<i class="fas fa-check"></i>`;
+    deleteButton.addEventListener('click',() => {
+        viewStudentClick();
+    });
+    editButton.addEventListener('click',() => {
+        let ele = editButton.parentNode.parentNode;
+        let x = {
+            'enroll': ele.querySelector('.enroll').value,
+            'firstName': ele.querySelector('.firstName').value,
+            'lastName': ele.querySelector('.lastName').value,
+            'batch': ele.querySelector('.batch').value,
+            'degree': ele.querySelector('.degree').value,
+            'dept': ele.querySelector('.dept').value 
+        }
+        Promise.resolve(adminStudentUpdate(x)).then(importStudents).then(viewStudentClick);
+    });
+    options.appendChild(editButton);
+    options.appendChild(deleteButton);
+    return options;
+}
+
+
 
 export {addStudentClick,viewStudentClick};

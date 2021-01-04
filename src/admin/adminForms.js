@@ -58,6 +58,7 @@ const addStudentMenu = () => {
     batchField.type = "text";
     batchField.name = "batchName";
     batchField.required = true;
+    form.appendChild(formHeading);
     form.appendChild(enrollLabel);
     form.appendChild(enrollField);
     form.appendChild(firstNameLabel);
@@ -209,6 +210,7 @@ const addTeacherMenu = () => {
     positionField.type = "text";
     positionField.name = "position";
     positionField.required = true;
+    form.appendChild(formHeading);
     form.appendChild(facIdLabel);
     form.appendChild(facIdField);
     form.appendChild(firstNameLabel);

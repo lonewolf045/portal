@@ -2,8 +2,8 @@ import { user } from '../index';
 import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
 import { addStudentClick, viewStudentClick } from './adminStudent';
-import { importStudents } from '../connectToFirebase';
-import { addTeacherClick } from './adminTeacher';
+import { importStudents,importTeachers } from '../connectToFirebase';
+import { addTeacherClick, viewTeacherClick } from './adminTeacher';
 
 const adminPage = () => {
     let header = headingAdminPage(user);
@@ -126,7 +126,7 @@ const teacherMenu = () => {
     addTeacher.classList.add('option');
     viewTeacher.classList.add('option');
     addTeacher.addEventListener('click',addTeacherClick);
-    viewTeacher.addEventListener('click',() => {importStudents().then(viewStudentClick)});
+    viewTeacher.addEventListener('click',() => {importTeachers().then(viewTeacherClick)});
     teacherMenu.appendChild(addTeacher);
     teacherMenu.appendChild(viewTeacher);
     teacherMenu.classList.add('content');

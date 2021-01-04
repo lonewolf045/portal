@@ -32,7 +32,6 @@
   background: #555;
 }
 
-
 body {
   box-sizing: border-box;
   margin: 0;
@@ -274,7 +273,7 @@ body {
 }
 
 .form-container #btnAdd {
-  background-color: lightsalmon;
+  background-color: #4caf50;
   color: white;
   padding: 16px 20px;
   border: none;
@@ -453,8 +452,6 @@ button {
   font-size: 1.125rem;
 }
 
-
-
 #paraBar {
   height: 5%;
   min-height: 5%;
@@ -471,6 +468,7 @@ button {
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  padding: 2%;
 }
 
 #titleRow {
@@ -500,15 +498,25 @@ button {
   font-weight: lighter;
 }
 
+.options button {
+  box-shadow: none;
+}
+
 @media only screen and (max-width: 1600px) {
   .none {
     display: none;
   }
   .title {
     font-size: 15px;
+    max-width: 15%;
+    padding: 1%;
+    word-wrap: break-word;
   }
   .element {
-    font-size: 15px;
+    font-size: 14px;
+    max-width:15%;
+    padding: 1%;
+    word-wrap: break-word;
   }
 }
 

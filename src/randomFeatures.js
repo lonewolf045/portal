@@ -62,4 +62,42 @@ const backArrow = (menuFunction) => {
     return backArrowDiv;
 }
 
-export {backArrow,loader,importFail,importSuccess};
+const areYouSure = () => {
+    const sureMenu = document.createElement('div');
+    sureMenu.classList.add('blacklayer');
+    const formContainer = document.createElement('div');
+    formContainer.id = "sureForm";
+    formContainer.classList.add("sure-form-popup");
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+    form.name = "sureForm";
+    const formHeading = document.createElement('h1');
+    formHeading.id = 'formHeading';
+    formHeading.innerHTML = "Are you sure??";
+    form.appendChild(formHeading);
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        sureMenu.remove();
+    });
+    const btnAdd = document.createElement('button');
+    btnAdd.type = "button";
+    btnAdd.innerHTML = "Sure";
+    btnAdd.id = "btnAdd";
+    btnAdd.classList.add('btnAdd');
+    btnAdd.addEventListener('click',() => {
+        btnClose.click();
+        return 'sure';
+    });
+
+    form.appendChild(btnAdd);
+    form.appendChild(btnClose);
+    formContainer.appendChild(form);
+    sureMenu.appendChild(formContainer);
+    document.querySelector('#workWindow').appendChild(sureMenu);
+}
+
+export {backArrow,loader,importFail,importSuccess,areYouSure};

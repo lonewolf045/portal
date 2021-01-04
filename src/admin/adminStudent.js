@@ -1,4 +1,4 @@
-import {studentDatabase} from '../connectToFirebase';
+import {deleteStudent, importStudents, studentDatabase} from '../connectToFirebase';
 import {addStudentMenu, uploadStudentForm} from './adminForms';
 
 let listOfData = [];
@@ -173,24 +173,28 @@ const makeListHeader = () =>{
     const batch = document.createElement('div');
     const dept = document.createElement('div');
     const degree = document.createElement('div');
+    const options = document.createElement('div');
     enroll.classList.add('title');
     firstName.classList.add('title');
     lastName.classList.add('title');
     batch.classList.add('title');
     dept.classList.add('title');
     degree.classList.add('title');
+    options.classList.add('title');
     enroll.classList.add('enroll');
     firstName.classList.add('firstName');
     lastName.classList.add('lastName');
     batch.classList.add('batch');
     dept.classList.add('dept');
     degree.classList.add('degree');
-    enroll.innerHTML = 'Enrollment No.';
+    options.classList.add('options');
+    enroll.innerHTML = 'Enroll No.';
     firstName.innerHTML = 'First Name';
     lastName.innerHTML = 'Last Name';
     batch.innerHTML = 'Batch';
     dept.innerHTML = 'Department';
     degree.innerHTML = 'Degree';
+    options.innerHTML = 'Options';
     const title = document.createElement('div');
     title.id = 'titleRow';
     title.appendChild(enroll);
@@ -199,6 +203,7 @@ const makeListHeader = () =>{
     title.appendChild(batch);
     title.appendChild(dept);
     title.appendChild(degree);
+    title.appendChild(options);
     return title;
 }
 
@@ -209,24 +214,29 @@ const makeListRow = (x) => {
     const batch = document.createElement('div');
     const dept = document.createElement('div');
     const degree = document.createElement('div');
+    const options = optionSetup(x);
+    
     enroll.classList.add('element');
     firstName.classList.add('element');
     lastName.classList.add('element');
     batch.classList.add('element');
     dept.classList.add('element');
     degree.classList.add('element');
+
     enroll.classList.add('enroll');
     firstName.classList.add('firstName');
     lastName.classList.add('lastName');
     batch.classList.add('batch');
     dept.classList.add('dept');
     degree.classList.add('degree');
+    
     enroll.innerHTML = x.enroll;
     firstName.innerHTML = x.firstName;
     lastName.innerHTML = x.lastName;
     batch.innerHTML = x.batch;
     dept.innerHTML = x.dept;
     degree.innerHTML = x.degree;
+    
     const element = document.createElement('div');
     element.id = 'elementRow';
     element.appendChild(enroll);
@@ -235,6 +245,8 @@ const makeListRow = (x) => {
     element.appendChild(batch);
     element.appendChild(dept);
     element.appendChild(degree);
+    element.appendChild(options);
+
     return element;
 }
 
@@ -271,6 +283,31 @@ const barClick = (e) => {
     operationalData = operationalData.slice(0,index+1);
     operations = operations.slice(0,index+1);
     viewDOM();
+}
+
+const optionSetup = (x) => {
+    const options = document.createElement('div');
+    options.classList.add('options');
+    //options.innerHTML = `<button></button><button></button>`;
+    options.classList.add('element');
+    const deleteButton = document.createElement('button');
+    const editButton = document.createElement('button');
+    deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+    editButton.innerHTML = `<i class="fas fa-edit"></i>`;
+    deleteButton.addEventListener('click',() => {
+        executeDeleteStudent(x);
+    });
+    editButton.addEventListener('click',() => {
+        const sure = areYouSure();
+        document.querySelector('#workWindow').appendChild(sure);
+    });
+    options.appendChild(editButton);
+    options.appendChild(deleteButton);
+    return options;
+}
+
+const executeDeleteStudent = (x) => {
+    Promise.resolve(deleteStudent(x)).then(importStudents).then(viewStudentClick);
 }
 
 export {addStudentClick,viewStudentClick};

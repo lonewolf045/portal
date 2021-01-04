@@ -1,4 +1,5 @@
-import {teacherDatabase} from '../connectToFirebase'
+import {deleteTeacher, importTeachers, teacherDatabase} from '../connectToFirebase'
+import { areYouSure } from '../randomFeatures';
 import {addTeacherMenu,uploadTeacherForm} from './adminForms'; 
 
 let listOfData = [];
@@ -96,16 +97,16 @@ const selectField = () => {
             label: 'By Department'
         },
         {
-            value: 'degree',
-            label: 'By Degree'
+            value: 'position',
+            label: 'By Position'
         },
         {
-            value: 'batch',
-            label: 'By Batch'
+            value: 'asCode',
+            label: 'By Faculty Code'
         },
         {
-            value: 'enroll',
-            label: 'By Enrollment Number'
+            value: 'facId',
+            label: 'By Faculty Id'
         }
     ];
     const dropDown = document.createElement('select');
@@ -159,7 +160,7 @@ const listOfTeacher = (listOfTeachers) => {
     list .id = 'list';
     let listTitle = makeListHeader();
     list.appendChild(listTitle);
-    listOfteachers.forEach(x => {
+    listOfTeachers.forEach(x => {
         let element = makeListRow(x);
         list.appendChild(element);
     });
@@ -167,74 +168,84 @@ const listOfTeacher = (listOfTeachers) => {
 }
 
 const makeListHeader = () =>{
-    const enroll = document.createElement('div');
+    const facId = document.createElement('div');
     const firstName = document.createElement('div');
     const lastName = document.createElement('div');
-    const batch = document.createElement('div');
+    const asCode = document.createElement('div');
     const dept = document.createElement('div');
-    const degree = document.createElement('div');
-    enroll.classList.add('title');
+    const position = document.createElement('div');
+    const options = document.createElement('div');
+    facId.classList.add('title');
     firstName.classList.add('title');
     lastName.classList.add('title');
-    batch.classList.add('title');
+    asCode.classList.add('title');
     dept.classList.add('title');
-    degree.classList.add('title');
-    enroll.classList.add('enroll');
+    position.classList.add('title');
+    options.classList.add('title');
+    facId.classList.add('facId');
     firstName.classList.add('firstName');
     lastName.classList.add('lastName');
-    batch.classList.add('batch');
+    asCode.classList.add('asCode');
     dept.classList.add('dept');
-    degree.classList.add('degree');
-    enroll.innerHTML = 'Enrollment No.';
+    position.classList.add('position');
+    options.classList.add('options');
+    facId.innerHTML = 'Faculty Id.';
     firstName.innerHTML = 'First Name';
     lastName.innerHTML = 'Last Name';
-    batch.innerHTML = 'Batch';
+    asCode.innerHTML = 'Faculty Code';
     dept.innerHTML = 'Department';
-    degree.innerHTML = 'Degree';
+    position.innerHTML = 'Faculty Post';
+    options.innerHTML = 'Options';
     const title = document.createElement('div');
     title.id = 'titleRow';
-    title.appendChild(enroll);
+    title.appendChild(facId);
     title.appendChild(firstName);
     title.appendChild(lastName);
-    title.appendChild(batch);
+    title.appendChild(asCode);
+    title.appendChild(position);
     title.appendChild(dept);
-    title.appendChild(degree);
+    title.appendChild(options);
     return title;
 }
 
 const makeListRow = (x) => {
-    const enroll = document.createElement('div');
+    const facId = document.createElement('div');
     const firstName = document.createElement('div');
     const lastName = document.createElement('div');
-    const batch = document.createElement('div');
+    const asCode = document.createElement('div');
     const dept = document.createElement('div');
-    const degree = document.createElement('div');
-    enroll.classList.add('element');
+    const position = document.createElement('div');
+    const options = optionSetup(x);
+    
+    facId.classList.add('element');
     firstName.classList.add('element');
     lastName.classList.add('element');
-    batch.classList.add('element');
+    asCode.classList.add('element');
     dept.classList.add('element');
-    degree.classList.add('element');
-    enroll.classList.add('enroll');
+    position.classList.add('element');
+    
+    facId.classList.add('facId');
     firstName.classList.add('firstName');
     lastName.classList.add('lastName');
-    batch.classList.add('batch');
+    asCode.classList.add('asCode');
     dept.classList.add('dept');
-    degree.classList.add('degree');
-    enroll.innerHTML = x.enroll;
+    position.classList.add('position');
+    
+    facId.innerHTML = x.facId;
     firstName.innerHTML = x.firstName;
     lastName.innerHTML = x.lastName;
-    batch.innerHTML = x.batch;
+    asCode.innerHTML = x.asCode;
     dept.innerHTML = x.dept;
-    degree.innerHTML = x.degree;
+    position.innerHTML = x.position;
     const element = document.createElement('div');
     element.id = 'elementRow';
-    element.appendChild(enroll);
+    element.appendChild(facId);
     element.appendChild(firstName);
     element.appendChild(lastName);
-    element.appendChild(batch);
+    element.appendChild(asCode);
+    element.appendChild(position);
     element.appendChild(dept);
-    element.appendChild(degree);
+    element.appendChild(options);
     return element;
 }
 
@@ -271,6 +282,31 @@ const barClick = (e) => {
     operationalData = operationalData.slice(0,index+1);
     operations = operations.slice(0,index+1);
     viewDOM();
+}
+
+const optionSetup = (x) => {
+    const options = document.createElement('div');
+    options.classList.add('options');
+    //options.innerHTML = `<button></button><button></button>`;
+    options.classList.add('element');
+    const deleteButton = document.createElement('button');
+    const editButton = document.createElement('button');
+    deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+    editButton.innerHTML = `<i class="fas fa-edit"></i>`;
+    deleteButton.addEventListener('click',() => {
+        executeDeleteTeacher(x);
+    });
+    editButton.addEventListener('click',() => {
+        const sure = areYouSure();
+        document.querySelector('#workWindow').appendChild(sure);
+    });
+    options.appendChild(editButton);
+    options.appendChild(deleteButton);
+    return options;
+}
+
+const executeDeleteTeacher = (x) => {
+    Promise.resolve(deleteTeacher(x)).then(importTeachers).then(viewTeacherClick);
 }
 
 export {addTeacherClick,viewTeacherClick};

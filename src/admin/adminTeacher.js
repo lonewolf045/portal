@@ -1,4 +1,4 @@
-import {deleteTeacher, importTeachers, teacherDatabase} from '../connectToFirebase'
+import {adminTeacherUpdate, deleteTeacher, importTeachers, teacherDatabase} from '../connectToFirebase'
 import { areYouSure } from '../randomFeatures';
 import {addTeacherMenu,uploadTeacherForm} from './adminForms'; 
 
@@ -297,8 +297,8 @@ const optionSetup = (x) => {
         executeDeleteTeacher(x);
     });
     editButton.addEventListener('click',() => {
-        const sure = areYouSure();
-        document.querySelector('#workWindow').appendChild(sure);
+        console.log(editButton.parentElement.parentElement);
+        editableMaker(editButton.parentElement.parentElement,x);
     });
     options.appendChild(editButton);
     options.appendChild(deleteButton);
@@ -307,6 +307,82 @@ const optionSetup = (x) => {
 
 const executeDeleteTeacher = (x) => {
     Promise.resolve(deleteTeacher(x)).then(importTeachers).then(viewTeacherClick);
+}
+
+const editableMaker = (ele,x) => {
+    ele.innerHTML = "";
+    ele.appendChild(editableRow(x));
+}
+
+const editableRow = (x) => {
+    const facId = document.createElement('input');
+    const firstName = document.createElement('input');
+    const lastName = document.createElement('input');
+    const asCode = document.createElement('input');
+    const dept = document.createElement('input');
+    const position = document.createElement('input');
+    const options = editableOptions();
+    
+    facId.classList.add('element');
+    firstName.classList.add('element');
+    lastName.classList.add('element');
+    asCode.classList.add('element');
+    dept.classList.add('element');
+    position.classList.add('element');
+    
+    facId.classList.add('facId');
+    firstName.classList.add('firstName');
+    lastName.classList.add('lastName');
+    asCode.classList.add('asCode');
+    dept.classList.add('dept');
+    position.classList.add('position');
+    
+    facId.value = x.facId;
+    facId.disabled = true;
+    firstName.value = x.firstName;
+    lastName.value = x.lastName;
+    asCode.value = x.asCode;
+    dept.value = x.dept;
+    position.value = x.position;
+    const element = document.createElement('div');
+    element.id = 'elementRow';
+    element.appendChild(facId);
+    element.appendChild(firstName);
+    element.appendChild(lastName);
+    element.appendChild(asCode);
+    element.appendChild(position);
+    element.appendChild(dept);
+    element.appendChild(options);
+    return element;
+}
+
+const editableOptions = () => {
+    const options = document.createElement('div');
+    options.classList.add('options');
+    //options.innerHTML = `<button></button><button></button>`;
+    options.classList.add('element');
+    const deleteButton = document.createElement('button');
+    const editButton = document.createElement('button');
+    deleteButton.innerHTML = `<i class="fas fa-times"></i>`;
+    editButton.innerHTML = `<i class="fas fa-check"></i>`;
+    deleteButton.addEventListener('click',() => {
+        viewTeacherClick();
+    });
+    editButton.addEventListener('click',() => {
+        let ele = editButton.parentNode.parentNode;
+        let x = {
+            'facId': ele.querySelector('.facId').value,
+            'firstName': ele.querySelector('.firstName').value,
+            'lastName': ele.querySelector('.lastName').value,
+            'asCode': ele.querySelector('.asCode').value,
+            'position': ele.querySelector('.position').value,
+            'dept': ele.querySelector('.dept').value 
+        }
+        Promise.resolve(adminTeacherUpdate(x)).then(importTeachers).then(viewTeacherClick);
+    });
+    options.appendChild(editButton);
+    options.appendChild(deleteButton);
+    return options;
 }
 
 export {addTeacherClick,viewTeacherClick};

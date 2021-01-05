@@ -4,7 +4,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -43,6 +44,7 @@ body {
   height: 10vh;
   display: flex;
   align-items: center;
+  border-bottom: 2px solid whitesmoke;
 }
 
 #headingContainer {
@@ -86,7 +88,6 @@ body {
   border-radius: 50%;
   background-color: plum;
   color: white;
-  padding: 7.5px;
   font-size: 40px;
   width: 60px;
   height: 60px;
@@ -94,7 +95,7 @@ body {
 }
 
 #profilePicDiv {
-  padding-right: 5%;
+  padding-right: 2.5%;
   display: flex;
   width: 20%;
   flex-direction: row-reverse;
@@ -354,7 +355,8 @@ button {
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 25px;
+  font-weight: 700;
   border-bottom: 2px solid whitesmoke;
 }
 
@@ -369,6 +371,7 @@ button {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
+  font-size: 23px;
 }
 
 .collapsible:after {
@@ -397,7 +400,7 @@ button {
 
 .option {
   padding: 2.5%;
-  font-size: 15px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -453,13 +456,15 @@ button {
 }
 
 #paraBar {
-  height: 5%;
   min-height: 5%;
+  max-height: 5%;
   min-width: 100%;
   background-color: lightslategray;
   display: flex;
   color: whitesmoke;
   overflow-x: scroll;
+  overflow-y: hidden;
+  padding-bottom: 3.5%;
 }
 
 #list {
@@ -483,20 +488,34 @@ button {
   flex-direction: row;
 }
 
-.title {
+div.title {
   font-size: 18px;
   padding: 2%;
   width: 16.66%;
-  border: 2px solid black;
+  border: 1.5px solid black;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
 }
 
-.element {
+div.element {
   font-size: 18px;
   padding: 2%;
   width: 16.66%;
-  border: 2px solid black;
+  border: 1.5px solid black;
+  font-weight: lighter;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+input.element {
+  font-size: 18px;
+  padding: 2%;
+  width: 16.66%;
+  border: 1.5px solid black;
   font-weight: lighter;
 }
+
+
+
 
 .options button {
   box-shadow: none;

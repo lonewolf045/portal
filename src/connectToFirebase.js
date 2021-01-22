@@ -1,5 +1,6 @@
 import { user,course, adminDept, adminDeg, adminBatch } from "./index";
 import { importFail, importSuccess, loader } from "./randomFeatures";
+import { updatePwd } from "./session";
 import { loadCSVToDataStudent } from "./student";
 import { loadCSVToDataTeacher } from "./teacher";
 
@@ -394,4 +395,11 @@ let adminStudentUpdate = (student) => {
   dataRefStudents.child(student.enroll).update(student);
 }
 
-export {adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};
+let updateAdminPassword = (newPassword) => {
+  dataRefUsers.child(user.username).update({'password':newPassword}).then(() => {
+    user.password = newPassword
+    updatePwd(newPassword);
+  });
+}
+
+export {updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

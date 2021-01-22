@@ -306,10 +306,11 @@ body {
 .default {
   display: none;
   position: fixed;
+  
   top: 11vh;
   right: 1vw;
-  max-width: 200px;
-  padding: 3%;
+  width: 150px;
+  /* padding: 3%; */
   background-color: rgba(155, 255, 255, 0.5);
   border: 3px solid rgba(145, 245, 240, 0.5);
   margin: 0;
@@ -317,7 +318,13 @@ body {
 }
 
 .visible {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileButton {
+  padding: 15%;
+  border: 1px solid rgba(145, 245, 240, 0.5);
 }
 
 button {

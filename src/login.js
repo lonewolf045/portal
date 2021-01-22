@@ -1,4 +1,3 @@
-
 import {importCourses, userDatabase} from './connectToFirebase';
 import {loginStudentDOM} from './studentLoginPage';
 import {user,course} from './index';
@@ -9,10 +8,10 @@ import { teacherPage } from './teacherPage';
 
 const adminLogin = (username,password) => {
     for(let i = 0; i < userDatabase.length; i++) {
-        console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
+        //console.log(userDatabase[i].Type,userDatabase[i].username,username, userDatabase[i].password,password);
         if(userDatabase[i].Type === 'Admin') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
-                console.log('Success');
+                //console.log('Success');
                 user = userDatabase[i];
                 setAdmin(username,password);
                 //loginAdminDOM(username);

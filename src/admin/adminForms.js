@@ -1,7 +1,8 @@
 import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit } from "../connectToFirebase";
 import { createStudent } from "../student";
-import { importFail, importSuccess, loader } from "../randomFeatures";
+import { importFail, importSuccess, loader, successMessage } from "../randomFeatures";
 import { createTeacher } from "../teacher";
+import { updatePassword } from "./adminFunctionality";
 
 const addStudentMenu = () => {
     const studentMenu = document.createElement('div');
@@ -274,6 +275,7 @@ const uploadTeacherForm = () => {
     const formHeading = document.createElement('h1');
     formHeading.id = 'formHeading';
     formHeading.innerHTML = "Upload Teacher";
+    
     const uploadLabel = document.createElement('label');
     uploadLabel.htmlFor = "uploadInput";
     uploadLabel.innerHTML = "<b>File:</b>";
@@ -308,4 +310,75 @@ const uploadTeacherForm = () => {
     return uploadMenu;
 }
 
-export {addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};
+const changePasswordForm = () => {
+    const changeMenu = document.createElement('div');
+    changeMenu.classList.add('blacklayer');
+    const formContainer = document.createElement('div');
+    formContainer.id = "changeForm";
+    formContainer.classList.add("change-form-popup");
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+    form.name = "changeForm";
+    const formHeading = document.createElement('h1');
+    formHeading.id = 'formHeading';
+    formHeading.innerHTML = "Change Password";
+
+    const currentPwdLabel = document.createElement('label');
+    currentPwdLabel.htmlFor = "currentPassword";
+    currentPwdLabel.innerHTML = "Current Password:";
+    const currentPwdField = document.createElement('input');
+    currentPwdField.type = "password";
+    currentPwdField.name = "currentPassword";
+    currentPwdField.id = "currentPwd";
+
+    const newPwdLabel = document.createElement('label');
+    newPwdLabel.htmlFor = "newPassword";
+    newPwdLabel.innerHTML = "New Password:";
+    const newPwdField = document.createElement('input');
+    newPwdField.type = "password";
+    newPwdField.name = "newPassword";
+    newPwdField.id = "newPwd";
+
+    form.appendChild(currentPwdLabel);
+    form.appendChild(currentPwdField);
+    form.appendChild(newPwdLabel);
+    form.appendChild(newPwdField);
+
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        changeMenu.remove();
+    });
+
+    const btnAdd = document.createElement('button');
+    btnAdd.type = "button";
+    btnAdd.innerHTML = "Add";
+    btnAdd.id = "btnAdd";
+    btnAdd.classList.add('btnAdd');
+    btnAdd.addEventListener('click',() => {
+        //console.log('Clicked');
+        if(currentPwdField.value && newPwdField.value) {
+            Promise.resolve(33).then(() => {
+                document.querySelector('.change-form-popup').remove();
+                document.querySelector('.blacklayer').appendChild(loader());
+                updatePassword(currentPwdField.value,newPwdField.value);  
+            });
+            console.log('Here');
+
+        }
+        else {
+            window.alert('Fill missing details');
+        }
+    });
+    
+    form.appendChild(btnAdd);
+    form.appendChild(btnClose);
+    formContainer.appendChild(form);
+    changeMenu.appendChild(formContainer);
+    return changeMenu;
+}
+
+export {changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};

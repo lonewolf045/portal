@@ -45,6 +45,43 @@ const importSuccess = () => {
     return failedContainer;
 }
 
+const failureMessage = () => {
+    const failDiv = document.createElement('div');
+    failDiv.innerHTML = `Process Failed!!!!!!!`;
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        document.querySelector('.blacklayer').remove();
+    });
+    const failedContainer = document.createElement('div');
+    failedContainer.classList.add('form-container');
+    failedContainer.id = 'fail';
+    failedContainer.appendChild(failDiv);
+    failedContainer.appendChild(btnClose);
+    return failedContainer;
+}
+const successMessage = () => {
+    const failDiv = document.createElement('div');
+    failDiv.innerHTML = `Process Successful!!!!!!!`;
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        document.querySelector('.blacklayer').remove();
+    });
+    const failedContainer = document.createElement('div');
+    failedContainer.classList.add('form-container');
+    failedContainer.id = 'success';
+    failedContainer.appendChild(failDiv);
+    failedContainer.appendChild(btnClose);
+    return failedContainer; 
+}
+
 const backArrow = (menuFunction) => {
     const backArrowDiv = document.createElement('button');
     const backArrowImage = document.createElement('img');
@@ -100,4 +137,4 @@ const areYouSure = () => {
     document.querySelector('#workWindow').appendChild(sureMenu);
 }
 
-export {backArrow,loader,importFail,importSuccess,areYouSure};
+export {backArrow,loader,importFail,importSuccess,areYouSure,successMessage,failureMessage};

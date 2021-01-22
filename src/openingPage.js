@@ -57,36 +57,6 @@ const homePageForm = () => {
     passwordField.type = "password";
     passwordField.name = "password";
     passwordField.required = true;
-
-    // formContainer.innerHTML = `<div class="login-form-popup" id="loginForm">
-    // <form action="/action_page.php" class="form-container-login" name = "loginForm">
-    //     <h1>Login</h1>
-
-    //     <label for="username"><b>Username</b></label>
-    //     <input type="text" name="username" required>
-
-    //     <label for="password"><b>Password</b></label>
-    //     <input type="password" name="password" required>
-
-    //     <div id = "radio">
-    //         <b>Access Type:</b>
-    //         <div>
-    //             <input type="radio" id="admin" name="type" value="Admin" checked>
-    //             <label for="admin">Admin</label><br>
-    //         </div>
-    //         <div>
-    //             <input type="radio" id="teacher" name="type" value="Teacher">
-    //             <label for="teacher">Teacher</label><br>
-    //         </div>
-    //         <div>
-    //             <input type="radio" id="student" name="type" value="Student">
-    //             <label for="student">Student</label><br>
-    //         </div>
-    //     </div>
-
-    //     <button type="button" class="btnLogin" id = "btnLogin">Login</button>
-    // </form>
-    // </div>`;
     form.appendChild(formHeading);
     form.appendChild(usernameLabel);
     form.appendChild(usernameField);

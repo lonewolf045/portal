@@ -29,16 +29,22 @@ const resetCurrentUser = () => {
     sessionStorage.removeItem('currentUser');
 }
 
+const updatePwd = (newPwd) => {
+    let curruser = JSON.parse(sessionStorage.currentUser);
+    curruser.password = newPwd;
+    sessionStorage.currentUser = JSON.stringify(curruser);
+}
+
 const loadCurrentSession = () => {
     if(sessionStorage.currentUser === undefined) {
         openingPage();
         return;
     }
-        //reject();
+    //reject();
     let curruser = JSON.parse(sessionStorage.currentUser);
-    console.log(curruser);
+    //console.log(curruser);
     if(curruser.type === 'admin') {
-        console.log('admin');
+        //console.log('admin');
         adminLogin(curruser.username,curruser.password);
     } else if (curruser.type === 'teacher') {
         //user = curruser.username;
@@ -50,4 +56,4 @@ const loadCurrentSession = () => {
 }
 
 
-export {setAdmin,setTeach,setStudent,resetCurrentUser,loadCurrentSession};
+export {updatePwd,setAdmin,setTeach,setStudent,resetCurrentUser,loadCurrentSession};

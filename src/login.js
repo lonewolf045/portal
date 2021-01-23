@@ -1,5 +1,5 @@
 import {importCourses, userDatabase} from './connectToFirebase';
-import {loginStudentDOM} from './studentLoginPage';
+import {loginStudentDOM} from './student/studentLoginPage';
 import {user,course} from './index';
 import { setAdmin, setStudent, setTeach } from './session';
 import { adminPage } from './admin/adminPage';

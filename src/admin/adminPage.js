@@ -79,6 +79,8 @@ const sideMenu = () => {
     sideMenuDiv.appendChild(student);
     const teacher = teacherMenu();
     sideMenuDiv.appendChild(teacher);
+    const group = groupMenu();
+    sideMenuDiv.appendChild(group);
     return sideMenuDiv;
 }
 
@@ -142,6 +144,37 @@ const teacherMenu = () => {
     });
     sideMenuDiv.appendChild(teacherMenuTab);
     sideMenuDiv.appendChild(teacherMenu);
+    return sideMenuDiv;
+}
+
+const groupMenu = () => {
+    const sideMenuDiv = document.createElement('div');
+    const groupMenu = document.createElement('div');
+    const groupMenuTab = document.createElement('div');
+    groupMenuTab.innerHTML = 'Group';
+    const addGroup = document.createElement('div');
+    const viewGroup = document.createElement('div');
+    addGroup.innerHTML = "Add Group";
+    viewGroup.innerHTML= "View Group";
+    addGroup.classList.add('option');
+    viewGroup.classList.add('option');
+    addGroup.addEventListener('click',() => {});
+    viewGroup.addEventListener('click',() => {});
+    groupMenu.appendChild(addGroup);
+    groupMenu.appendChild(viewGroup);
+    groupMenu.classList.add('content');
+    groupMenuTab.classList.add('collapsible');
+    groupMenuTab.addEventListener('click', (e) => {
+            e.target.classList.toggle("active");
+            var content = e.target.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+    });
+    sideMenuDiv.appendChild(groupMenuTab);
+    sideMenuDiv.appendChild(groupMenu);
     return sideMenuDiv;
 }
 

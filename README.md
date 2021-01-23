@@ -1,4 +1,4 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 Welcome to our new awesome project, Omega!!!!!!!
 
 When you will clone this repo, **first** run the following command in the directory,
 

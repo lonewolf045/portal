@@ -1,4 +1,4 @@
-import { resetCurrentUser } from "./session";
+import { resetCurrentUser } from "../session";
 
 const loginBtn = document.querySelector(".open-login-button");
 const btnLogout = document.querySelector("#logout-button-teach");

@@ -1,4 +1,4 @@
-import {storeStudent } from "./connectToFirebase";
+import {storeStudent } from "../connectToFirebase";
 
 const student = (enroll,firstName,lastName,batch,degree,dept,username,password) => {
     return {firstName,lastName,batch,degree,username,dept,password,enroll};

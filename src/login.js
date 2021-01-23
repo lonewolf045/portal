@@ -3,7 +3,7 @@ import {loginStudentDOM} from './studentLoginPage';
 import {user,course} from './index';
 import { setAdmin, setStudent, setTeach } from './session';
 import { adminPage } from './admin/adminPage';
-import { teacherPage } from './teacherPage';
+import { teacherPage } from './teacher/teacherPage';
 
 
 const adminLogin = (username,password) => {

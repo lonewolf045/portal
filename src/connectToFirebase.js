@@ -1,8 +1,8 @@
 import { user,course, adminDept, adminDeg, adminBatch } from "./index";
 import { importFail, importSuccess, loader } from "./randomFeatures";
 import { updatePwd } from "./session";
-import { loadCSVToDataStudent } from "./student";
-import { loadCSVToDataTeacher } from "./teacher";
+import { loadCSVToDataStudent } from "./student/student";
+import { loadCSVToDataTeacher } from "./teacher/teacher";
 
 var firebaseConfig = {
     apiKey: "AIzaSyDI7nXtkFGzhjnvqfPuHm6xIAJoebeK1tA",

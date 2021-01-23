@@ -1,4 +1,4 @@
-import {storeTeacher} from './connectToFirebase';
+import {storeTeacher} from '../connectToFirebase';
 
 const teacher = (firstName,lastName,asCode,facId,position,dept,username,password) => {
     return {firstName,lastName,asCode,facId,position,dept,username,password};

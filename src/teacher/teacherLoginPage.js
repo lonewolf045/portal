@@ -1,7 +1,7 @@
-import { loadGroupList } from "./admin/adminFunctionality";
-import { assignmentDatabase, courseDatabase, importAssignments, updateCourse } from "./connectToFirebase";
+import { loadGroupList } from "../admin/adminFunctionality";
+import { assignmentDatabase, courseDatabase, importAssignments, updateCourse } from "../connectToFirebase";
 import { loadAssignList, loadCourseList } from "./teacherFunctionality";
-import {course,user} from './index';
+import {course,user} from '../index';
 
 const btnLogout = document.querySelector("#logout-button-teach");
 const loginBtn = document.querySelector(".open-login-button");

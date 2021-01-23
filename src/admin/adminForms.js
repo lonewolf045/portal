@@ -1,7 +1,7 @@
 import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit } from "../connectToFirebase";
-import { createStudent } from "../student";
+import { createStudent } from "../student/student";
 import { importFail, importSuccess, loader, successMessage } from "../randomFeatures";
-import { createTeacher } from "../teacher";
+import { createTeacher } from "../teacher/teacher";
 import { updatePassword } from "./adminFunctionality";
 
 const addStudentMenu = () => {

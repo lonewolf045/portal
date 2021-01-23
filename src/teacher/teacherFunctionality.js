@@ -1,7 +1,7 @@
-import { createAssignment } from "./assignment";
-import { assignmentDatabase, courseDatabase } from "./connectToFirebase";
+import { createAssignment } from "../assignment";
+import { assignmentDatabase, courseDatabase } from "../connectToFirebase";
 
-const { createCourse } = require("./course");
+const { createCourse } = require("../course");
 
 const courseClose = document.querySelector('#courseClose');
 const assignmentClose = document.querySelector('#assignmentClose');

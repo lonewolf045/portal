@@ -156,7 +156,7 @@ const selectField = () => {
 
 const listOfStudent = (listOfStudents) => {
     let list = document.createElement('div');
-    list .id = 'list';
+    list.id = 'list';
     let listTitle = makeListHeader();
     list.appendChild(listTitle);
     listOfStudents.forEach(x => {

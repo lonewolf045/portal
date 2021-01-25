@@ -36,6 +36,8 @@ let courseDatabase = [];
 let courseDatabaseData = "";
 let groupDatabase = [];
 let groupDatabaseData = "";
+let particularGroupDatabase = [];
+let particularGroupDatabaseData = "";
 let assignmentDatabase = [];
 let assignmentDatabaseData = "";
 let departmentDatabase = [];
@@ -47,9 +49,9 @@ let batchDegreeDatabaseData = "";
 
 const onDataUser = (snapshot) => {
   userDatabaseData = snapshot.val();
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
   userDatabase = Object.values(userDatabaseData);
-  console.log(userDatabase);
+  //console.log(userDatabase);
 }
 
 const onErrorUser = () => {
@@ -59,9 +61,9 @@ const onErrorUser = () => {
 
 const onDataStudent = (snapshot) => {
   studentDatabaseData = snapshot.val();
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
   studentDatabase = Object.values(studentDatabaseData);
-  console.log(studentDatabase);
+  //console.log(studentDatabase);
 }
 
 const onErrorStudent = () => {
@@ -71,9 +73,9 @@ const onErrorStudent = () => {
 
 const onDataTeacher = (snapshot) => {
   teacherDatabaseData = snapshot.val();
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
   teacherDatabase = Object.values(teacherDatabaseData);
-  console.log(teacherDatabase);
+  //console.log(teacherDatabase);
 }
 
 const onErrorTeacher = () => {
@@ -83,9 +85,9 @@ const onErrorTeacher = () => {
 
 const onDataCourses = (snapshot) => {
   courseDatabaseData = snapshot.val();
-    console.log(snapshot.val());
+    //console.log(snapshot.val());
     courseDatabase = Object.values(courseDatabaseData);
-    console.log(courseDatabase);
+    //console.log(courseDatabase);
 }
 
 const onErrorCourses = () => {
@@ -95,14 +97,27 @@ const onErrorCourses = () => {
 
 const onDataGroups = (snapshot) => {
   groupDatabaseData = snapshot.val();
-    console.log(snapshot.val());
+    //console.log(snapshot.val());
     groupDatabase = Object.values(groupDatabaseData);
-    console.log(groupDatabase);
+    //console.log(groupDatabase);
 }
 
 const onErrorGroups = () => {
-  groupDatabaseData = "";
-  groupDatabase = [];
+  particularGroupDatabaseData = "";
+  particularGroupDatabase = [];
+  console.log('Error');
+}
+
+const onDataParticularGroups = (snapshot) => {
+  particularGroupDatabaseData = snapshot.val();
+    console.log(snapshot.val());
+  particularGroupDatabase = Object.values(particularGroupDatabaseData);
+    //console.log(groupDatabase);
+}
+
+const onErrorParticularGroups = () => {
+  particularGroupDatabaseData = "";
+  particularGroupDatabase = [];
 }
 
 const onDataAssignment = (snapshot) => {
@@ -179,6 +194,11 @@ const importCourses = (uname) => {
 }
 const importGroups = () => {
   return getData(dataRefGroups).then(onDataGroups).catch(onErrorGroups);
+}
+
+const importParticularGroups = (groupCode) => {
+  console.log('Importing',groupCode);
+  return getData(db.ref().child(groupCode)).then(onDataParticularGroups).catch(onErrorParticularGroups);
 }
 
 const importAssignments = (uname,cname) => {
@@ -377,6 +397,16 @@ let storeTeacher = (teacher) => {
   });
 }
 
+let storeGroup = (group) => {
+  dataRefGroups.child(group.groupCode).set(group);
+};
+
+let addStudentToGroup = (groupCode,x) => {
+  let grDB = db.ref().child(`${groupCode}`);
+  grDB.child(x.enroll).set({enroll:x.enroll});
+  console.log('Done');
+}
+
 let deleteTeacher = (teacher) => {
   dataRefTeachers.child(teacher.facId).remove();
   db.ref().child('users').child(teacher.username).remove();
@@ -386,6 +416,12 @@ let deleteStudent = (student) => {
   dataRefStudents.child(student.enroll).remove();
   db.ref().child('users').child(student.username).remove();
 }
+
+let deleteGroup = (group) => {
+
+}
+
+
 
 let adminTeacherUpdate = (teacher) => {
   dataRefTeachers.child(teacher.facId).update(teacher);
@@ -402,4 +438,4 @@ let updateAdminPassword = (newPassword) => {
   });
 }
 
-export {updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};
+export {addStudentToGroup,particularGroupDatabase,importParticularGroups,storeGroup,updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,groupDatabaseData,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

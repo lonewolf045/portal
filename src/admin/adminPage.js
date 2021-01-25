@@ -2,10 +2,15 @@ import { user } from '../index';
 import './adminPage.css';
 import { profileMenu } from './adminProfileMenu';
 import { addStudentClick, viewStudentClick } from './adminStudent';
-import { importStudents,importTeachers } from '../connectToFirebase';
+import { importGroups, importStudents,importTeachers } from '../connectToFirebase';
 import { addTeacherClick, viewTeacherClick } from './adminTeacher';
+import { clickF } from './adminGroup';
+
+let addGroupClick = clickF.addGroupClick;
+let viewGroupClick = clickF.viewGroupClick;
 
 const adminPage = () => {
+    
     let header = headingAdminPage(user);
     let profilePic = profileAdmin(user);
     header.appendChild(profilePic);
@@ -148,6 +153,7 @@ const teacherMenu = () => {
 }
 
 const groupMenu = () => {
+  console.log(clickF);
     const sideMenuDiv = document.createElement('div');
     const groupMenu = document.createElement('div');
     const groupMenuTab = document.createElement('div');
@@ -158,8 +164,8 @@ const groupMenu = () => {
     viewGroup.innerHTML= "View Group";
     addGroup.classList.add('option');
     viewGroup.classList.add('option');
-    addGroup.addEventListener('click',() => {});
-    viewGroup.addEventListener('click',() => {});
+    addGroup.addEventListener('click',() => {addGroupClick();});
+    viewGroup.addEventListener('click',() => {importGroups().then(viewGroupClick)});
     groupMenu.appendChild(addGroup);
     groupMenu.appendChild(viewGroup);
     groupMenu.classList.add('content');

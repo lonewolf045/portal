@@ -1,8 +1,10 @@
-import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit } from "../connectToFirebase";
+import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit, importGroups, groupDatabaseData } from "../connectToFirebase";
 import { createStudent } from "../student/student";
 import { importFail, importSuccess, loader, successMessage } from "../randomFeatures";
 import { createTeacher } from "../teacher/teacher";
 import { updatePassword } from "./adminFunctionality";
+import { reject } from "lodash";
+import { createGroup } from "../group";
 
 const addStudentMenu = () => {
     const studentMenu = document.createElement('div');
@@ -381,4 +383,82 @@ const changePasswordForm = () => {
     return changeMenu;
 }
 
-export {changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};
+const addGroupForm = () => {
+    
+    const groupMenu = document.createElement('div');
+    groupMenu.classList.add('blacklayer');
+    
+    const formContainer = document.createElement('div');
+    formContainer.id = "groupForm";
+    formContainer.classList.add("group-form-popup");
+    const form = document.createElement('form');
+    form.classList.add('form-container');
+    form.name = "groupForm";
+    const formHeading = document.createElement('h1');
+    formHeading.id = 'formHeading';
+    formHeading.innerHTML = "Group:";
+    
+    const groupCodeLabel = document.createElement('label');
+    groupCodeLabel.htmlFor = "groupCode";
+    groupCodeLabel.innerHTML = "<b>Group Code:</b>";
+    const groupCodeField = document.createElement('input');
+    groupCodeField.type = "text";
+    groupCodeField.name = "groupCode";
+    groupCodeField.required = true;
+
+    const groupNameLabel = document.createElement('label');
+    groupNameLabel.htmlFor = "groupName";
+    groupNameLabel.innerHTML = "<b>Group Name:</b>";
+    const groupNameField = document.createElement('input');
+    groupNameField.type = "text";
+    groupNameField.name = "groupName";
+    groupNameField.required = true;
+   
+
+    form.appendChild(formHeading);
+    form.appendChild(groupCodeLabel);
+    form.appendChild(groupCodeField);
+    form.appendChild(groupNameLabel);
+    form.appendChild(groupNameField);
+
+    const btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.innerHTML = "Close";
+    btnClose.id = "btnClose";
+    btnClose.classList.add('btnClose');
+    btnClose.addEventListener('click',() => {
+        groupMenu.remove();
+    });
+
+    const btnAdd = document.createElement('button');
+    btnAdd.type = "button";
+    btnAdd.innerHTML = "Add";
+    btnAdd.id = "btnAdd";
+    btnAdd.classList.add('btnAdd');
+    btnAdd.addEventListener('click',() => {
+        console.log('Clicked');
+        if(groupCodeField.value && groupNameField.value) {
+            Promise.resolve(importGroups).then(() => {
+                if(Object.keys(groupDatabaseData).includes(groupCodeField.value)) {
+                    window.alert('Group Code Taken');
+                    reject();
+                } else {
+                    createGroup(groupCodeField.value ,groupNameField.value);
+                    document.querySelector('.group-form-popup').remove();
+                }
+            });
+            console.log('Here');
+        }
+        else {
+            window.alert('Fill missing details');
+        }
+    });
+    
+    form.appendChild(btnAdd);
+    form.appendChild(btnClose);
+    formContainer.appendChild(form);
+    groupMenu.appendChild(formContainer);
+    return groupMenu;
+}
+
+export {addGroupForm,changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};

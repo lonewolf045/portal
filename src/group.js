@@ -1,16 +1,13 @@
-const { studentDatabase, db, importGroups } = require("./connectToFirebase");
+//const { storeGroup } = require("./connectToFirebase");
+import {storeGroup} from './connectToFirebase';
 
-const group = (groupName,groupStudents) => {
-    return {groupName,groupStudents};
+const group = (groupCode,groupName,groupStudents) => {
+    return {groupCode,groupName,groupStudents};
 }
 
-const createGroup = (groupName) => {
-    let newGroup = group(groupName,new Array());
-    console.log(newGroup);
-    let dataRef = db.ref().child('Groups');
-    let newRef = dataRef.push();
-    newRef.set(newGroup);
-    importGroups();
+const createGroup = (groupCode,groupName) => {
+    let newGroup = group(groupCode,groupName,new Array());
+    storeGroup(newGroup);
 }
 
 export {createGroup};

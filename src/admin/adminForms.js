@@ -1,8 +1,10 @@
-import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit } from "../connectToFirebase";
+import { handleFileUploadChange, handleFileUploadSubmit, handleTeacherChange, handleTeacherSubmit, importGroups, groupDatabaseData } from "../connectToFirebase";
 import { createStudent } from "../student/student";
 import { importFail, importSuccess, loader, successMessage } from "../randomFeatures";
 import { createTeacher } from "../teacher/teacher";
 import { updatePassword } from "./adminFunctionality";
+import { reject } from "lodash";
+import { createGroup } from "../group";
 
 const addStudentMenu = () => {
     const studentMenu = document.createElement('div');
@@ -382,8 +384,12 @@ const changePasswordForm = () => {
 }
 
 const addGroupForm = () => {
+
+    
     const groupMenu = document.createElement('div');
     groupMenu.classList.add('blacklayer');
+    
+
     const formContainer = document.createElement('div');
     formContainer.id = "groupForm";
     formContainer.classList.add("group-form-popup");
@@ -393,70 +399,40 @@ const addGroupForm = () => {
     const formHeading = document.createElement('h1');
     formHeading.id = 'formHeading';
     formHeading.innerHTML = "Group:";
+    
     const groupCodeLabel = document.createElement('label');
-    groupCodeLabel.htmlFor = "enrollName";
-    groupCodeLabel.innerHTML = "<b>Enrollment Number:</b>";
+    groupCodeLabel.htmlFor = "groupCode";
+    groupCodeLabel.innerHTML = "<b>Group Code:</b>";
     const groupCodeField = document.createElement('input');
     groupCodeField.type = "text";
-    groupCodeField.name = "enrollName";
+    groupCodeField.name = "groupCode";
     groupCodeField.required = true;
+
     const groupNameLabel = document.createElement('label');
-    //const lastNameLabel = document.createElement('label');
-    //const userName = document.createElement('label');
-    groupNameLabel.htmlFor = "firstName";
-    groupNameLabel.innerHTML = "<b>First Name:</b>";
-    //lastNameLabel.htmlFor = "lastName";
-    //lastNameLabel.innerHTML = "<b>Last Name:</b>";
+    groupNameLabel.htmlFor = "groupName";
+    groupNameLabel.innerHTML = "<b>Group Name:</b>";
     const groupNameField = document.createElement('input');
-    //const lastNameField = document.createElement('input');
     groupNameField.type = "text";
-    //lastNameField.type = "text";
-    groupNameField.name = "firstName";
-   
+    groupNameField.name = "groupName";
     groupNameField.required = true;
    
-    const degreeLabel = document.createElement('label');
-    degreeLabel.htmlFor = "degreeName";
-    degreeLabel.innerHTML = "<b>Degree:</b>";
-    const degreeField = document.createElement('input');
-    degreeField.type = "text";
-    degreeField.name = "degreeName";
-    degreeField.required = true;
-    const departmentLabel = document.createElement('label');
-    departmentLabel.htmlFor = "departmentName";
-    departmentLabel.innerHTML = "<b>Department:</b>";
-    const departmentField = document.createElement('input');
-    departmentField.type = "text";
-    departmentField.name = "departmentName";
-    departmentField.required = true;
-    const batchLabel = document.createElement('label');
-    batchLabel.htmlFor = "batchName";
-    batchLabel.innerHTML = "<b>Batch:</b>";
-    const batchField = document.createElement('input');
-    batchField.type = "text";
-    batchField.name = "batchName";
-    batchField.required = true;
+
     form.appendChild(formHeading);
-    form.appendChild(enrollLabel);
-    form.appendChild(enrollField);
-    form.appendChild(firstNameLabel);
-    form.appendChild(firstNameField);
-    //form.appendChild(lastNameLabel);
-    //form.appendChild(lastNameField);
-    form.appendChild(degreeLabel);
-    form.appendChild(degreeField);
-    form.appendChild(departmentLabel);
-    form.appendChild(departmentField);
-    form.appendChild(batchLabel);
-    form.appendChild(batchField);
+    form.appendChild(groupCodeLabel);
+    form.appendChild(groupCodeField);
+    form.appendChild(groupNameLabel);
+    form.appendChild(groupNameField);
+
+
     const btnClose = document.createElement('button');
     btnClose.type = 'button';
     btnClose.innerHTML = "Close";
     btnClose.id = "btnClose";
     btnClose.classList.add('btnClose');
     btnClose.addEventListener('click',() => {
-        studentMenu.remove();
+        groupMenu.remove();
     });
+
     const btnAdd = document.createElement('button');
     btnAdd.type = "button";
     btnAdd.innerHTML = "Add";
@@ -464,14 +440,15 @@ const addGroupForm = () => {
     btnAdd.classList.add('btnAdd');
     btnAdd.addEventListener('click',() => {
         console.log('Clicked');
-        if(firstNameField.value && lastNameField.value) {
-            Promise.resolve(33).then(() => {
-                createStudent(enrollField.value,firstNameField.value,lastNameField.value,batchField.value,degreeField.value,departmentField.value);
-                document.querySelector('.student-form-popup').remove();
-                document.querySelector('.blacklayer').appendChild(loader());  
-            }).then(() => {
-                document.querySelector("#loader").remove();
-                document.querySelector(".blacklayer").appendChild(importSuccess());
+        if(groupCodeField.value && groupNameField.value) {
+            Promise.resolve(importGroups).then(() => {
+                if(Object.keys(groupDatabaseData).includes(groupCodeField.value)) {
+                    window.alert('Group Code Taken');
+                    reject();
+                } else {
+                    createGroup(groupCodeField.value ,groupNameField.value);
+                    document.querySelector('.group-form-popup').remove();
+                }
             });
             console.log('Here');
 
@@ -484,8 +461,10 @@ const addGroupForm = () => {
     form.appendChild(btnAdd);
     form.appendChild(btnClose);
     formContainer.appendChild(form);
-    studentMenu.appendChild(formContainer);
-    return studentMenu;
+
+    groupMenu.appendChild(formContainer);
+    return groupMenu;
 }
 
-export {changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};
+export {addGroupForm,changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};
+

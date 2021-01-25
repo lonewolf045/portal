@@ -384,10 +384,12 @@ const changePasswordForm = () => {
 }
 
 const addGroupForm = () => {
+
     
     const groupMenu = document.createElement('div');
     groupMenu.classList.add('blacklayer');
     
+
     const formContainer = document.createElement('div');
     formContainer.id = "groupForm";
     formContainer.classList.add("group-form-popup");
@@ -421,6 +423,7 @@ const addGroupForm = () => {
     form.appendChild(groupNameLabel);
     form.appendChild(groupNameField);
 
+
     const btnClose = document.createElement('button');
     btnClose.type = 'button';
     btnClose.innerHTML = "Close";
@@ -448,6 +451,7 @@ const addGroupForm = () => {
                 }
             });
             console.log('Here');
+
         }
         else {
             window.alert('Fill missing details');
@@ -457,8 +461,10 @@ const addGroupForm = () => {
     form.appendChild(btnAdd);
     form.appendChild(btnClose);
     formContainer.appendChild(form);
+
     groupMenu.appendChild(formContainer);
     return groupMenu;
 }
 
 export {addGroupForm,changePasswordForm,addStudentMenu,uploadStudentForm,addTeacherMenu,uploadTeacherForm};
+

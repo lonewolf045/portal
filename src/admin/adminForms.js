@@ -447,7 +447,7 @@ const addGroupForm = () => {
                     reject();
                 } else {
                     createGroup(groupCodeField.value ,groupNameField.value);
-                    document.querySelector('.group-form-popup').remove();
+                    groupMenu.remove();
                 }
             });
             console.log('Here');

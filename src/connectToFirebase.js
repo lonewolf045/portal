@@ -423,7 +423,7 @@ let deleteGroup = (group) => {
 }
 
 let deleteStudentFromGroup = (groupCode,enroll) => {
-
+  db.ref().child(groupCode).child(enroll).remove();
 }
 
 let adminTeacherUpdate = (teacher) => {

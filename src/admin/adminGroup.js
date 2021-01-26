@@ -1,4 +1,4 @@
-import { groupDatabase, particularGroupDatabase,importGroups, importParticularGroups, studentDatabase, importStudents, addStudentToGroup, deleteGroup } from '../connectToFirebase';
+import { groupDatabase, particularGroupDatabase,importGroups, importParticularGroups, studentDatabase, importStudents, addStudentToGroup, deleteGroup, deleteStudentFromGroup } from '../connectToFirebase';
 import { backArrow } from '../randomFeatures';
 import { addGroupForm } from './adminForms';
 
@@ -965,6 +965,7 @@ const viewRemove = (() => {
         const batch = document.createElement('div');
         const dept = document.createElement('div');
         const degree = document.createElement('div');
+        const options = optionSetup(x);
         
         enroll.classList.add('element');
         firstName.classList.add('element');
@@ -995,6 +996,7 @@ const viewRemove = (() => {
         element.appendChild(batch);
         element.appendChild(dept);
         element.appendChild(degree);
+        element.appendChild(options);
 
         return element;
     }
@@ -1003,7 +1005,6 @@ const viewRemove = (() => {
         const options = document.createElement('div');
         options.classList.add('options');
         options.classList.add('element');
-
         const removeButton = document.createElement('button');
         removeButton.innerHTML = `<i class="fas fa-minus-circle"></i>`;
         removeButton.addEventListener('click',() => {
@@ -1012,9 +1013,8 @@ const viewRemove = (() => {
             // Promise.resolve(() => {addStudentToGroup(group.groupCode,x)
             //     console.log('DOne 2');
             // }).then(() => {viewClick(group);});
-            Promise.resolve(addStudentToGroup(group.groupCode,x)).then(viewClick(group));
+            Promise.resolve(deleteStudentFromGroup(group.groupCode,x.enroll)).then(viewClick(group));
         });
-
         options.appendChild(removeButton);
         return options;
     }

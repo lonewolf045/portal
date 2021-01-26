@@ -418,10 +418,13 @@ let deleteStudent = (student) => {
 }
 
 let deleteGroup = (group) => {
-
+  dataRefGroups.child(group.groupCode).remove();
+  db.ref().child(group.groupCode);
 }
 
+let deleteStudentFromGroup = (groupCode,enroll) => {
 
+}
 
 let adminTeacherUpdate = (teacher) => {
   dataRefTeachers.child(teacher.facId).update(teacher);
@@ -438,4 +441,4 @@ let updateAdminPassword = (newPassword) => {
   });
 }
 
-export {addStudentToGroup,particularGroupDatabase,importParticularGroups,storeGroup,updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,groupDatabaseData,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};
+export {deleteStudentFromGroup,deleteGroup,addStudentToGroup,particularGroupDatabase,importParticularGroups,storeGroup,updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,groupDatabaseData,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

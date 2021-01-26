@@ -446,21 +446,14 @@ const viewAdd = (() => {
     const optionSetup = (x) => {
         const options = document.createElement('div');
         options.classList.add('options');
-        //options.innerHTML = `<button></button><button></button>`;
         options.classList.add('element');
         const addButton = document.createElement('button');
         addButton.innerHTML = `<i class="fas fa-plus"></i>`;
-        //editButton.innerHTML = `<i class="fas fa-edit"></i>`;
         addButton.addEventListener('click',() => {
             console.log('Click');
-            //executeDeleteStudent(x);
-            // Promise.resolve(() => {addStudentToGroup(group.groupCode,x)
-            //     console.log('DOne 2');
-            // }).then(() => {viewClick(group);});
             Promise.resolve(addStudentToGroup(group.groupCode,x)).then(viewClick(group));
         });
         options.appendChild(addButton);
-        //options.appendChild(deleteButton);
         return options;
     }
     return {viewClick}

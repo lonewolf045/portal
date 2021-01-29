@@ -1,6 +1,6 @@
-import {importCourses, userDatabase} from './connectToFirebase';
+import {importCourses, userDatabase, userDatabaseData} from './connectToFirebase';
 import {loginStudentDOM} from './student/studentLoginPage';
-import {user,course} from './index';
+import {user,course,userId} from './index';
 import { setAdmin, setStudent, setTeach } from './session';
 import { adminPage } from './admin/adminPage';
 import { teacherPage } from './teacher/teacherPage';
@@ -13,6 +13,7 @@ const adminLogin = (username,password) => {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 //console.log('Success');
                 user = userDatabase[i];
+                userId = Object.keys(userDatabaseData)[i];
                 setAdmin(username,password);
                 //loginAdminDOM(username);
                 adminPage(userDatabase[i]);
@@ -31,6 +32,7 @@ const teacherLogin = (username,password) => {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
                 user = username;
+                userId = Object.keys(userDatabaseData)[i];
                 console.log(user);
                 setTeach(username,password);
                 //loginTeacherDOM(username);

@@ -31,6 +31,7 @@ const resetCurrentUser = () => {
 
 const updatePwd = (newPwd) => {
     let curruser = JSON.parse(sessionStorage.currentUser);
+    sessionStorage.removeItem('currentUser');
     curruser.password = newPwd;
     sessionStorage.currentUser = JSON.stringify(curruser);
 }

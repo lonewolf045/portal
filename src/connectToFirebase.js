@@ -378,7 +378,7 @@ function showData(data) {
 let storeStudent = (student) => {
   dataRefStudents.child(student.enroll).set(student);
   let userRef = db.ref().child('users');
-  let userReference = userRef.child(student.username);
+  let userReference = userRef.child(student.enroll);
   userReference.set({
       Type: 'Student',
       username:   student.username,
@@ -389,7 +389,7 @@ let storeStudent = (student) => {
 let storeTeacher = (teacher) => {
   dataRefTeachers.child(teacher.facId).set(teacher);
   let userRef = db.ref().child('users');
-  let userReference = userRef.child(teacher.username);
+  let userReference = userRef.child(teacher.facId);
   userReference.set({
       Type: 'Teacher',
       username:   teacher.username,
@@ -400,6 +400,10 @@ let storeTeacher = (teacher) => {
 let storeGroup = (group) => {
   dataRefGroups.child(group.groupCode).set(group);
 };
+
+let storeCourses = (course) => {
+  dataRefCourses.child(course.courseCode + "_" + course.facultyAssigned).set(course);
+}
 
 let addStudentToGroup = (groupCode,x) => {
   let grDB = db.ref().child(`${groupCode}`);
@@ -441,4 +445,4 @@ let updateAdminPassword = (newPassword) => {
   });
 }
 
-export {deleteStudentFromGroup,deleteGroup,addStudentToGroup,particularGroupDatabase,importParticularGroups,storeGroup,updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,groupDatabaseData,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};
+export {userDatabaseData,storeCourses,deleteStudentFromGroup,deleteGroup,addStudentToGroup,particularGroupDatabase,importParticularGroups,storeGroup,updateAdminPassword,adminStudentUpdate,adminTeacherUpdate,deleteStudent,deleteTeacher,storeTeacher,returnReference,importUsers,userDatabase,db,importStudents,studentDatabase,importTeachers,teacherDatabase,importCourses,courseDatabase,importGroups,groupDatabase,groupDatabaseData,updateGroup,updateCourse,returnCourseKey,importAssignments,assignmentDatabase,importDepartment,departmentDatabase,importDegree,degreeDatabase,importDegreeBatches,batchDegreeDatabase,handleFileUploadSubmit,handleFileUploadChange,storeStudent,handleTeacherChange,handleTeacherSubmit};

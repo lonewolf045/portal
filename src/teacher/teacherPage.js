@@ -1,3 +1,5 @@
+import { userId } from '..';
+import { addCourseForm } from './teacherForm';
 import './teacherPage.css';
 
 
@@ -6,9 +8,11 @@ import './teacherPage.css';
 const teacherPage = (user) => {
     let header = teacherAdminPage(user);
     let profilePic = profileTeacher(user);
+    let addButton = addCourseButton();
     header.appendChild(profilePic);
     document.querySelector('#container').innerHTML = "";
     document.querySelector("#container").appendChild(header);
+    document.querySelector("#container").appendChild(addButton);
 }
 
 const teacherAdminPage = (user) => {
@@ -51,6 +55,16 @@ const profileTeacher = (user) => {
         document.querySelector('.default').classList.toggle('visible');
     });
     return profilePicDiv;
+}
+
+const addCourseButton = () => {
+    const addButton = document.createElement('button');
+    addButton.id = "addCourse";
+    addButton.innerHTML = `<i class="fas fa-plus"></i>`
+    addButton.addEventListener('click',() => {
+        document.querySelector('#container').appendChild(addCourseForm(userId));
+    })
+    return addButton;
 }
 
 export {teacherPage};

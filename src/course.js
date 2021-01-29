@@ -1,19 +1,12 @@
-import { user } from "./index";
+import { storeCourses } from "./connectToFirebase";
 
-const { importCourses, courseDatabase,db, returnReference } = require("./connectToFirebase");
-
-const course = (courseName,courseCode,assignments,students) => {
-    return {courseName,courseCode,assignments,students};
+const course = (courseName,courseCode,facultyAssigned,students) => {
+    return {courseName,courseCode,facultyAssigned,students};
 }
 
-const createCourse = (courseName,courseCode) => {
-    let newCourse = course(courseName,courseCode,{},{});
-    let returnRef = returnReference(user);
-    //let dataRef = db.ref().child('Courses');
-    //let newReference = dataRef.push();
-    db.ref().child('Teachers/'+returnRef+'/Courses').push().set(newCourse); 
-    importCourses(user);
-    //console.log(courseDatabase);
+const createCourse = (courseName,courseCode,facultyAssigned) => {
+    let newCourse = course(courseName,courseCode,facultyAssigned,{});
+    storeCourses(newCourse);
 }
 
 export {createCourse};

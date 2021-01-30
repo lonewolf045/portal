@@ -1,3 +1,6 @@
+import {coursePageTeacher} from '../course/coursePageTeacher';
+import {user} from '../index';
+
 const courseCard = (x) => {
     const card = document.createElement('div');
     const courseCode = document.createElement('div');
@@ -14,6 +17,10 @@ const courseCard = (x) => {
     let i = (x.groupStudents || 0).length || 0;
     courseStudents.innerHTML = i;
     courseSelect.innerHTML = 'Select>';
+    courseSelect.addEventListener('click',() => {
+        console.log(user);
+        coursePageTeacher(user,x);
+    });
     card.appendChild(courseCode);
     card.appendChild(courseName);
     card.appendChild(courseStudents);

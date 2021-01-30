@@ -1,6 +1,7 @@
 import { importCourses } from '../connectToFirebase';
-import {createCourse} from '../course';
-
+import {createCourse} from '../course/course';
+import {loadAgainCourses} from './teacherPage';
+import {user} from '../index';
 
 const addCourseForm = (x) => {
     const courseMenu = document.createElement('div');
@@ -58,9 +59,9 @@ const addCourseForm = (x) => {
             Promise.resolve(importCourses).then(() => {
                     createCourse(courseCodeField.value ,courseNameField.value,x);
                     courseMenu.remove();
-            });
+            }).then(loadAgainCourses);
             console.log('Here');
-
+            
         }
         else {
             window.alert('Fill missing details');

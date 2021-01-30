@@ -187,9 +187,7 @@ const importStudents = () => {
 const importTeachers = () => {
   return getData(dataRefTeachers).then(onDataTeacher).catch(onErrorTeacher);
 }
-const importCourses = (uname) => {
-  let ref = returnReference(uname);
-  dataRefCourses = db.ref().child('Teachers/' + ref + '/Courses');
+const importCourses = () => {
   return getData(dataRefCourses).then(onDataCourses).catch(onErrorCourses);
 }
 const importGroups = () => {

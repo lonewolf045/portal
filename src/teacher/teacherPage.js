@@ -1,18 +1,34 @@
 import { userId } from '..';
 import { addCourseForm } from './teacherForm';
+import {profileMenu} from './teacherProfileMenu';
+import {courseDatabase,importCourses} from '../connectToFirebase';
+import {courseCard} from './teacherCourse';
 import './teacherPage.css';
-
-
-
 
 const teacherPage = (user) => {
     let header = teacherAdminPage(user);
     let profilePic = profileTeacher(user);
-    let addButton = addCourseButton();
+    let addButton = addCourseButton(user);
     header.appendChild(profilePic);
     document.querySelector('#container').innerHTML = "";
     document.querySelector("#container").appendChild(header);
     document.querySelector("#container").appendChild(addButton);
+    let profilePicMenu = profileMenu(); 
+    document.querySelector("#container").appendChild(profilePicMenu);
+    
+    importCourses().then(() => {
+        let cards = displayCourses();
+        document.querySelector("#container").appendChild(cards);
+    });
+    
+}
+
+const loadAgainCourses = () => {
+    document.querySelector('#courses').remove();
+    importCourses().then(() => {
+        let cards = displayCourses();
+        document.querySelector("#container").appendChild(cards);
+    });
 }
 
 const teacherAdminPage = (user) => {
@@ -57,7 +73,7 @@ const profileTeacher = (user) => {
     return profilePicDiv;
 }
 
-const addCourseButton = () => {
+const addCourseButton = (user) => {
     const addButton = document.createElement('button');
     addButton.id = "addCourse";
     addButton.innerHTML = `<i class="fas fa-plus"></i>`
@@ -67,4 +83,16 @@ const addCourseButton = () => {
     return addButton;
 }
 
-export {teacherPage};
+const displayCourses = () => {
+   let takenCourses = courseDatabase.filter(x => x['facultyAssigned'] === userId);
+   console.log(takenCourses);
+   let courses = document.createElement('div');
+   courses.id = 'courses';
+   let takenCourseDOM = takenCourses.forEach(element => {
+        let card = courseCard(element);
+        courses.appendChild(card);
+   }); 
+   return courses;
+}
+
+export {teacherPage,loadAgainCourses};

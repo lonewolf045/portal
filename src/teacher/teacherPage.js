@@ -6,7 +6,7 @@ import {courseCard} from './teacherCourse';
 import './teacherPage.css';
 
 const teacherPage = (user) => {
-    let header = teacherAdminPage(user);
+    let header = teacherHeader(user);
     let profilePic = profileTeacher(user);
     let addButton = addCourseButton(user);
     header.appendChild(profilePic);
@@ -31,7 +31,7 @@ const loadAgainCourses = () => {
     });
 }
 
-const teacherAdminPage = (user) => {
+const teacherHeader = (user) => {
     const header = document.createElement('header');
     const headingContainer = document.createElement('div');
     const omegaIcon = document.createElement('div');

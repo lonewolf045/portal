@@ -31,7 +31,7 @@ const teacherLogin = (username,password) => {
         if(userDatabase[i].Type === 'Teacher') {
             if(userDatabase[i].username === username && userDatabase[i].password === password) {
                 console.log('Success');
-                user = username;
+                user = userDatabase[i];
                 userId = Object.keys(userDatabaseData)[i];
                 console.log(user);
                 setTeach(username,password);
